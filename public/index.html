@@ -9,7 +9,7 @@
   <meta name="author" content="Your Name">
 
   
-  <meta name="description" content="Extend the existing active merchant plug in for extracting transaction report via Date Range or Transactions id.Now u can fetch transactions by date &hellip;">
+  <meta name="description" content="Hi. I&#8217;m Your Name. Here are some thoughts of mine. Jun 30th, 2013 Rails 4 Directory Structure Rails 4 is out. We all are know about new &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,12 +20,16 @@
   
   <link rel="canonical" href="http://yoursite.com">
   <link href="/favicon.png" rel="icon">
+  <link href='http://fonts.googleapis.com/css?family=Quicksand:300,400' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="My Octopress Blog" type="application/atom+xml">
-  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/js/jquery.js"></script>
+  <script src="/js/bootstrap-collapse.js"></script>
+  <script src="/js/modernizr-2.0.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <script src="/js/octopress.js" type="text/javascript"></script>
   <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
 <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
@@ -35,47 +39,51 @@
 </head>
 
 <body   >
-  <header role="banner"><hgroup>
-  <h1><a href="/">My Octopress Blog</a></h1>
-  
-    <h2>A blogging framework for hackers.</h2>
-  
-</hgroup>
-
-</header>
-  <nav role="navigation"><ul class="subscription" data-subscription="rss">
-  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
-  
-</ul>
-  
-<form action="http://google.com/search" method="get">
-  <fieldset role="search">
-    <input type="hidden" name="q" value="site:yoursite.com" />
-    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
-  </fieldset>
-</form>
-  
-<ul class="main-navigation">
-  <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+  <div class="navbar navbar-inverse navbar-static-top">
+  	<div class="navbar-inner">
+  	  <div class="container">
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+          <span class="fui-menu-24"></span>
+        </a>
+  	  	<div class="nav-collapse collapse navbar-responsive-collapse" style="height:0;">
+  	      <ul class="nav">
+    
 </ul>
 
-</nav>
-  <div id="main">
-    <div id="content">
-      <div class="blog-index">
+<ul class="nav pull-right">
+    
+    
+    
+    
+    
+</ul>
+
+  	    </div>
+  	  </div>
+  	</div>
+  </div>
+  <div class="container" id="main">
+    <div class="span12">
+      <div class="row-fluid">
+        <div id="content">
+          <div class="jumbotron">
+  <div class="container">
+    Hi. I&#8217;m Your Name.
+    <h3 class="tagline">Here are some thoughts of mine.</h3>
+  </div>
+</div>
+
+
+<div class="blog-index">
   
   
   
     <article>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2010/08/02/extended-version-of-active-merchant-plugin/">Extended Version of Active Merchant Plugin</a></h1>
-    
-    
-      <p class="meta">
-        
+
+  <div class="row-fluid">
+    <div class="span2">
+		<h1 class="date-time">
 
 
 
@@ -87,57 +95,1652 @@
   
 
 
-<time datetime="2010-08-02T00:00:00+02:00" pubdate data-updated="true">Aug 2<span>nd</span>, 2010</time>
-        
-      </p>
-    
-  </header>
+<i class="icon-calendar-empty"></i> <time datetime="2013-06-30T00:00:00+02:00" pubdate data-updated="true">Jun 30<span>th</span>, 2013</time></h5>
+          <div class="row-fluid">
+          
+          </div>
+          
+          <div class="row-fluid">
+          
+          </div>
+          
+    </div>
+    <div class="span10">
+      <h1 class="link"><a href="/blog/2013/06/30/rails4-directory-structure/">Rails 4 Directory Structure</a></h1>
+      <p>Rails 4 is out. We all are know about new features added in rails 4. What&rsquo;s new in our new rails app directory.</p>
+
+<br/>
 
 
-  <div class="entry-content"><p>Extend the existing <strong>active merchant</strong> plug in for extracting transaction report via Date Range or Transactions id.Now u can fetch transactions by date range and between transaction ids range by using this plug in</p>
+<p>We run following command to create new rails app:</p>
 
-<p><a href="http://github.com/raysrashmi/active_merchant">github.com/raysrashmi/active_merchant</a></p>
-</div>
-  
-  
+<pre class="brush:ruby">
+rails new [app name]
+</pre>
+
+
+<p>
+Rails 4 has added couple of new directories and also removed few. 
+Here we will see what new directories rails 4 added a why they been added.
+</p>
+
+
+<p>
+We will create a sample app in rails 4 so that it will be easy to see the new structure.
+</p>
+
+
+<p>
+I am assuming  you have updated your rails. 
+To check current version of rails run following command:
+<pre class ="brush:ruby">
+rails -v
+</pre>
+It should be Rails 4.0.0
+</p>
+
+
+<p>
+Now create a very simple rails application
+<pre class="brush:ruby">
+rails new  blog
+</pre>
+</p>
+
+
+<p>
+It creats bunch of files and directories. You will see there are some new directories and files.
+Lets go to each one by one</p>
+
+
+<ol>
+<li class='title'> app/</li>
+In this directory you will see new <b>concerns/</b> dir under controllers/ and models/.
+<p>
+Concerns are added to manage your models/controllers in a better way . You will get
+
+1. Make your models ligh-weighted 
+2. Cross sharing of modules code.
+
+It means mixins and modules code can be put under this dir.
+
+Lets say in our blog application we have user model and post model and we require to add commets for both model
+so we created a commentable module in our concerns/ dir and included in both model.
+<pre class ="brush:ruby">
+  module CommentTable
+    extend ActiveSupport::Concern
+    def comments
+      comments.map(&:text)
+    end
+  end
+  class User < ActiveRecord::Base
+    include Commentable
+  end
+
+  class Post < ActiveRecord::Base
+    include Commentable
+  end
+</pre>
+Now suppose we need to add one more module notable to our model post. 
+<pre class="brush:ruby">
+  module Noteable
+    extend ActiveSupport::Concern
+    included do
+      has_many :notes
+      validated :note, presence: true
+    end
+  end
+  class Post < ActiveRecord::Base
+    include Commentable
+    include Noteable
+  end
+</pre>
+Now you can include Commentable to Noteable
+<pre class="brush:ruby">
+  module Noteable
+    extend ActiveSupport::Concern
+    include Commentable
+    included do
+      has_many :notes
+      validated :note, presence: true
+    end
+  end
+  class Post < ActiveRecord::Base
+    include Noteable
+  end
+</pre>
+Now both Commentabel and Notebale are accesible for Post class.
+</p>
+
+<li class='title'> bin/</li>
+App executable bundle, rails and rake are under this dir. So dont need to run &#8216;bundle exec&#8217; before any rails command.
+<a href='https://github.com/sstephenson/rbenv/wiki/Understanding-binstubs'>Binstubs</a> can also be generated using bundle command ,bundle 1.3 add spports for generating binstubs.
+What Binstubs are exceutables required to prepare the enviroment original executable. 
+<br/>
+When we do 
+<pre  class="brush:ruby">gem install cucmber</pre>
+a excecutable file is genarte in gems//cucumber-1.3.2/bin dir(i am using rvm here)
+<pre>~/.rvm/gems/ruby-1.9.3-p448/gems/cucumber-1.3.2/bin</pre>
+<p>
+Now we can generate using command
+<pre  class="brush:ruby"> bundle binstubs cucumber</pre>
+It wil genrate executale in bin/. Having executables within your app ensures they are using app ruby and gems.
+</p>
+
+<li class='title'>initializers/filter_parameter_logging.rb</li>
+<p>
+Now we can specify all filter parameters in this files instead of config/application.rb
+Lets say we have a attribute customer_id of custome model and we want to filter in our log files then just write
+</p>
+<pre class="brush:ruby">
+Rails.application.config.filter_parameters += [:customer_id]
+</pre>
+<p>
+After retarting your server if there is any request having customer_id parameter. 
+it will filtered the value of customer_id.
+<br/>
+<%= image_tag "filtered_params.png"%>
+</p>
+
+<li class='title' > doc/</li>
+Doc has been removed from rails directory. 
+Its is extracted in &#8220;sdoc&#8221; gem and is added to Gemfile by default so still you can generate docs by running following rake task
+
+<pre class="brush:ruby">bundle exec rake doc:rails</pre>
+
+<li class='title'> script/</li> Its removed and rails executable is moved to bin/ dir
+
+
+<li class='title'> test/</li>
+This directory has been changed differrntly. 
+<ul>
+  <li>Now we have controller and models in place of functionals and units</li>
+
+  <li>We have helpers and mailers dir under test</li>
+
+  <li>Performance test has been extracted to a new <a href='https://github.com/rails/rails-perftest'>Gem</a>. So perforance dir is not under test by default
+  </li>
+</ul>
+Corresponding rake task for test are also changed -:
+<pre>
+rake test:controllers
+rake test:models
+rake test:helpers
+rake test:mailers
+</pre>
+
+<li class='title'>vendor/</li> Rails plugins are already gone away so this dir is no more needed.
+<li>scaffold</li>
+<p>Our favorite rails command &#8216;scaffold&#8217; gives us more new.
+Lets create new scaffold
+<pre class='"brush:ruby'>
+rails generate scaffold list title:string 
+</pre>
+You will see there are two new files 
+<div>index.json.builder</div>
+<div>show.json.builder</div>
+These files can be used for responding data in JSON format.
+These are generated by <a href='https://github.com/rails/jbuilder'jbuilder></a><a href='http://rubygems.org/'>Gem</a>. It is included in Gemfile by default.
+</p>
+</ol>
+
+
+<p>
+TODO wrap up
+</p>
+
+
+      
+      
+    </div>
+  </div>
+
 
 
     </article>
+    
+    <hr>
+    
+  
+  
+    <article>
+      
+
+  <div class="row-fluid">
+    <div class="span2">
+		<h1 class="date-time">
+
+
+
+
+
+
+
+
+  
+
+
+<i class="icon-calendar-empty"></i> <time datetime="2013-04-06T00:00:00+02:00" pubdate data-updated="true">Apr 6<span>th</span>, 2013</time></h5>
+          <div class="row-fluid">
+          
+          </div>
+          
+          <div class="row-fluid">
+          
+          </div>
+          
+    </div>
+    <div class="span10">
+      <h1 class="link"><a href="/blog/2013/04/06/the-basics-of-caching-and-cache-digestes/">The Basics of Caching and Cache Digests</a></h1>
+      <p>Recently posted a blog about basics of caching and cache digests on Rubysource. If you are going to apply caching in your app this blog will help you.</p>
+
+<p>You can find blog on <a href="http://rubysource.com/caching-cache-digest/"> RubySource</a></p>
+
+      
+      
+    </div>
+  </div>
+
+
+
+    </article>
+    
+    <hr>
+    
+  
+  
+    <article>
+      
+
+  <div class="row-fluid">
+    <div class="span2">
+		<h1 class="date-time">
+
+
+
+
+
+
+
+
+  
+
+
+<i class="icon-calendar-empty"></i> <time datetime="2012-12-09T00:00:00+01:00" pubdate data-updated="true">Dec 9<span>th</span>, 2012</time></h5>
+          <div class="row-fluid">
+          
+          </div>
+          
+          <div class="row-fluid">
+          
+          </div>
+          
+    </div>
+    <div class="span10">
+      <h1 class="link"><a href="/blog/2012/12/09/rails-4-quick-look-strong-parameters/">Rails 4 Quick Look Strong Parameters</a></h1>
+      <p>Strong Parameters is a new feature coming with Rails4.
+Its about Mass-assignment protection in controller instead of model.
+If you are keen to know more about it- <a href="http://rubysource.com/rails-4-quick-look-strong-parameters/">read it on RubySource</a>.</p>
+
+      
+      
+    </div>
+  </div>
+
+
+
+    </article>
+    
+    <hr>
+    
+  
+  
+    <article>
+      
+
+  <div class="row-fluid">
+    <div class="span2">
+		<h1 class="date-time">
+
+
+
+
+
+
+
+
+  
+
+
+<i class="icon-calendar-empty"></i> <time datetime="2012-06-07T00:00:00+02:00" pubdate data-updated="true">Jun 7<span>th</span>, 2012</time></h5>
+          <div class="row-fluid">
+          
+          </div>
+          
+          <div class="row-fluid">
+          
+          </div>
+          
+    </div>
+    <div class="span10">
+      <h1 class="link"><a href="/blog/2012/06/07/polymorphic-association-has_many-through/">Polymorphic Association with has_many :through</a></h1>
+      <p>Hi Folks,</p>
+
+<p>
+In Rails we have Ploymorphic Association whenever we need to connect one model to more than one model.
+I had a situation where i need polymorphic association with has_many :through
+Here I am showing an simple example of <b>polymorphic association with <code>has_many :through</code></b>
+</p>
+
+
+<p>
+We have <code>Contact</code> , <code>Plan</code> and <code>Template</code> as a <code>ActiveRecord</code> Classes.
+</p>
+
+
+<p>
+We have following scenarios.
+ <ol>
+   <li><code>Plan has_many Contacts</code></li>
+   <li><code> Contant has_many Plans </code> which is vice versa of 1.</li>
+   <li><code>Template has_many Contacts</code></li>
+   <li><code>Contact has_many Templates</code> which is vice versa of 3.</li>
+ </ol>
+</p>
+
+
+<p><strong>So here is the main problem. Here to solve this we need two more tables other then <code>Plans</code> , <code>Contants</code>  and <code>Templates</code>. </strong></p>
+
+
+
+
+<p>My <code> Plan </code> Model looks like:</p>
+
+
+
+
+<pre class="brush:ruby">
+class Plan < ActiveRecord::Base
+  has_many :plan_contacts
+  has_many :contacts ,:through => :plan_contacts
+end
+</pre>
+
+
+
+
+<p>My <code> Template </code> Model looks like:</p>
+
+
+
+
+<pre class="brush:ruby">
+class Template < ActiveRecord::Base
+  has_many :template_contacts
+  has_many :contacts ,:through => :template_contacts
+end
+</pre>
+
+
+
+
+<p>My <code> Contact </code> Model looks like:</p>
+
+
+
+
+<pre class="brush:ruby">
+class Contact < ActiveRecord::Base
+  has_many :template_contacts
+  has_many :plan_contacts
+
+  has_many :templates ,:through => :template_contacts
+  has_many :plans ,:through => :plan_contacts
+
+end
+</pre>
+
+
+<p>
+And here are two different tables for handling <code>many_to_many</code>
+</p>
+
+
+<p>
+Handling <code>Plan</code> and <code> Contact</code> here.
+</p>
+
+
+
+
+<pre class="brush:ruby">
+class PlanContact < ActiveRecord::Base
+  belongs_to :plan
+  belongs_to :contact
+end
+</pre>
+
+
+<p>Handling <code>Template</code> and <code> Contact</code> here.</p>
+
+
+
+
+<pre class="brush:ruby">
+class TemplateContact < ActiveRecord::Base
+  belongs_to :template
+  belongs_to :contact
+end
+</pre>
+
+
+<p><strong>This problem can be solved using only one table. Just we need to mark that table as a polymorphic.</strong></p>
+
+
+
+
+<p>We are calling that tables as <code> contact_details</code>. Here is class looks like.</p>
+
+
+
+
+<pre class="brush:ruby">
+class ContactDetail < ActiveRecord::Base
+  belongs_to :contactable, :polymorphic => true
+  belongs_to :contact
+end
+</pre>
+
+
+
+
+<p>Migration should look like:</p>
+
+
+
+
+<pre class="brush:ruby">
+class CreateContactDetails < ActiveRecord::Migration
+  def change
+    create_table :contact_details do |t|
+      t.integer :contact_id
+      t.integer :contactable_id
+      t.string :contactable_type
+      t.timestamps
+    end
+  end
+end
+
+</pre>
+
+
+
+
+<p>Now change your <code> Contact </code> model like:</p>
+
+
+
+
+<pre class="brush:ruby">
+class Contact < ActiveRecord::Base
+  has_many :plans ,:through => :contact_details, :source => :contactable, :source_type => 'Plan'
+  has_many :templates ,:through => :contact_details, :source => :contactable, :source_type => 'Template'
+  has_many :contact_details
+  accepts_nested_attributes_for :plans,:templates
+end
+</pre>
+
+
+
+
+<p>Now change your <code> Plan </code> model like:</p>
+
+
+
+
+<pre class="brush:ruby">
+  class Plan < ActiveRecord::Base
+    has_many :contacts,:through => :contact_details
+    has_many :contact_details, :as => :contactable
+  end
+</pre>
+
+
+
+
+<p>Same way <code> Template </code> model like:</p>
+
+
+
+
+<pre class="brush:ruby">
+  class Template < ActiveRecord::Base
+    has_many :contacts,:through => :contact_details
+    has_many :contact_details, :as => :contactable
+  end
+</pre>
+
+
+
+
+<p>So you can see we can use one table(contact_details) for both plan and template</p>
+
+
+<pre class="brush:ruby">
+ contact  = Contact.create(:name => 'Rays')
+ template = Template.create(:name => 'template 1')
+ plan = Plan.create(:name =>'plan')
+
+ contact.plans << plan
+ contact.templates << template
+
+ template.contacts => [contact]
+ plan.contacts => [contact]
+ contact.templates => [template]
+ contact.plans => [plans]
+</pre>
+
+
+<p>so if you have <strong>accepts_nested_attributes_for :template</strong> then you can create template for contact in a form</p>
+
+
+<pre class="brush:ruby">
+ Contact.create(:name => 'abc',:templates_attributes => {'0' => {'name' => 'Tech'}})
+</pre>
+
+
+
+
+<p> it will create an entry in templates table and and entry in contact_details</p>
+
+
+<p>So in this way we dont need to write much code.we can reduce tables number </p>
+
+
+
+
+<p>I hope it will be helpful for you</p>
+
+
+
+
+<p><strong>Reference links :</strong>
+ <ul>
+   <li><a href="http://guides.rubyonrails.org/association_basics.html#the-has_many-through-association" title="http://guides.rubyonrails.org/association_basics.html#the-has_many-through-association">http://guides.rubyonrails.org/association_basics.html#the-has_many-through-association</a></li>
+   <li><a href="http://railscasts.com/episodes/154-polymorphic-association" title="http://railscasts.com/episodes/154-polymorphic-association">http://railscasts.com/episodes/154-polymorphic-association</a></li>
+ </ul>
+
+
+</p>
+
+
+      
+      
+    </div>
+  </div>
+
+
+
+    </article>
+    
+    <hr>
+    
+  
+  
+    <article>
+      
+
+  <div class="row-fluid">
+    <div class="span2">
+		<h1 class="date-time">
+
+
+
+
+
+
+
+
+  
+
+
+<i class="icon-calendar-empty"></i> <time datetime="2012-05-05T00:00:00+02:00" pubdate data-updated="true">May 5<span>th</span>, 2012</time></h5>
+          <div class="row-fluid">
+          
+          </div>
+          
+          <div class="row-fluid">
+          
+          </div>
+          
+    </div>
+    <div class="span10">
+      <h1 class="link"><a href="/blog/2012/05/05/enhance-rails-models/">Enhance Rails Models</a></h1>
+      <p>In Rails Models play a important part in our Rails App.We should keep are model pretty,not having dirty code
+Here i am just reminding you some basic points to refactor a model.</p>
+
+<p>READMORE</p>
+
+<p><p>
+  <strong>1. Follow law of Demeter(In rails it means use only one dot)</strong></p>
+
+<p><pre class="brush:ruby">
+class Author  &lt; ActiveRecord::Base
+  has_many :books
+  has_one  :address
+end</p>
+
+<p>class Book &lt; ActiveRecord::Base
+  belongs_to :author
+end</p>
+
+<p>class Address &lt; ActiveRecord::Base
+  belongs_to :author
+end
+</pre>
+  <p>So if in a view we have something like</p>
+  <pre class="brush:ruby"></p>
+
+<pre><code>@book.author.name
+@book.author.address.street
+@book.author.address.city
+@book.author.address.state
+</code></pre>
+
+<p>  </pre>
+  Here we are calling an object&rsquo;s related object using a third(book &ndash;> customer &ndash;> address)</p>
+
+<p>  Luckily in Rails we have Delegate that can escape us from this situation</p>
+
+<p><pre class="brush:ruby">
+class Author  &lt; ActiveRecord::Base
+  has_many :books
+  has_one  :address
+end</p>
+
+<p>class Book &lt; ActiveRecord::Base
+  belongs_to :author'
+  delegate :name,</p>
+
+<pre><code>       :street,
+       :city,
+       :state,
+       :to =&gt; :author, :prefix =&gt; true, :allow_nil =&gt; true
+</code></pre>
+
+<p>end</p>
+
+<p>class Address &lt; ActiveRecord::Base
+  belongs_to :author
+  delegate :street,:city,:state, :to => :address ,:allow_nil => true
+end</p>
+
+<p></pre>
+<p>So if in a view we have something like</p>
+<pre class="brush:ruby">
+  @book.author_name
+  @book.author_street
+  @book.author_city
+  @book.author_state
+</pre>
+<p>Now we have just only dot.Here :allow_nil option prevents the error call method on nil object</p></p>
+
+<p></p>
+<p>
+<strong>2. Use callback and validation.instead of writing large code in your method</strong></p>
+
+<p><pre class="brush:ruby">
+class User &lt; ActiveRecord::Base
+  email_confirmation
+  attr_accessor :email_confirmation</p>
+
+<p>  def user_save</p>
+
+<pre><code>if email &amp;&amp; email_confirmation &amp;&amp; save
+ #send_email
+end
+</code></pre>
+
+<p>  end
+end
+</pre></p>
+
+<p>Instead of doing that you can use a call back after_create
+<pre class="brush:ruby">
+class User &lt; ActiveRecord::Base
+  validates :email, :confirmation => true
+  validates :email_confirmation, :presence => true</p>
+
+<p>  after_create :send_email</p>
+
+<p>  private</p>
+
+<p>  def send_email
+   #send_email
+  end
+end
+</pre></p>
+
+<p>So now when you create user it validates if email and email_confirmation attribute is there will send email just after saving the user
+(here you don&rsquo;t need to define attr_accessor :email_confirmation and don&rsquo;t need to tae attr email_confirmation in db table )
+</p>
+<p>
+<strong>3. Include Modules</strong>
+<pre class="brush:ruby">
+class Order &lt; ActiveRecord::Base
+  def self.find_purchased</p>
+
+<pre><code># ...
+</code></pre>
+
+<p>  end</p>
+
+<p>  def self.find_waiting_for_review</p>
+
+<pre><code> # ...
+</code></pre>
+
+<p>  end</p>
+
+<p>  def self.find_waiting_for_sign_off</p>
+
+<pre><code>#.....
+</code></pre>
+
+<p>  end</p>
+
+<p>  def self.find_waiting_for_sign_off
+   #&hellip;
+  end</p>
+
+<p>  def self.advanced_search(fields, options = {})
+   #&hellip;
+  end</p>
+
+<p>  def self.simple_search(terms)
+   #&hellip;
+  end</p>
+
+<p>  def to_xml
+   #&hellip;
+  end</p>
+
+<p>  def to_json
+   #&hellip;
+  end</p>
+
+<p>  def to_csv</p>
+
+<pre><code>#...
+</code></pre>
+
+<p>  end</p>
+
+<p>  def to_pdf</p>
+
+<pre><code>#...
+</code></pre>
+
+<p>  end
+end
+</pre></p>
+
+<p>Modules allow you to extract behavior into separate files.Modules also serve to group related information into labeled namespaces.Its improve readability of code
+<pre class="brush:ruby">
+class Order &lt; ActiveRecord::Base
+  extend OrderStateFinders
+  extend OrderSearchers
+  include OrderExporters
+end</p>
+
+<h1>lib/order_state_finders.rb</h1>
+
+<p>module OrderStateFinders
+  def find_purchased</p>
+
+<pre><code>#...
+</code></pre>
+
+<p>  end</p>
+
+<p>  def find_waiting_for_review</p>
+
+<pre><code>#...
+</code></pre>
+
+<p>  end</p>
+
+<p>  def find_waiting_for_sign_off</p>
+
+<pre><code>#...
+</code></pre>
+
+<p>  end
+end</p>
+
+<h1>lib/order_searchers.rb</h1>
+
+<p>module OrderSearchers
+  def advanced_search(fields, options = {})</p>
+
+<pre><code># ...
+</code></pre>
+
+<p>  end</p>
+
+<p>  def simple_search(terms)</p>
+
+<pre><code># ...
+</code></pre>
+
+<p>  end
+end</p>
+
+<h1>lib/order_exporters.rb</h1>
+
+<p>module OrderExporters
+  def to_xml</p>
+
+<pre><code># ...
+</code></pre>
+
+<p>  end</p>
+
+<p>  def to_json</p>
+
+<pre><code># ...
+</code></pre>
+
+<p>  end</p>
+
+<p>  def to_csv
+   # &hellip;
+  end</p>
+
+<p>  def to_pdf</p>
+
+<pre><code># ...
+</code></pre>
+
+<p>  end
+end
+</pre></p>
+
+<p>So in extend module&rsquo;s method are class method on that calling class.include module&rsquo;s methods are instance method for object of calling class</p>
+
+<p></p>
+<p>
+<strong>4.Use active record association</strong></p>
+
+<p>Rails provides us association very nicely.
+<pre class="brush:ruby">
+class User &lt; ActiveRecord::Base
+  has_many :blogs
+end</p>
+
+<p>class blog &lt; ActiveRecord::Base
+  belongs_to :user
+end</p>
+
+<p>@user = User.find(params[:id])
+@blogs = Blog.where(:user_id => params[:user_id])
+</pre></p>
+
+<p><p>Instead of doing this.do</p></p>
+
+<p><pre>
+@user = User.find(params[:id])
+@blogs = @user.blogs
+</pre>
+</p>
+<p>
+<strong>5. Use Scope rather than writing complex finders</strong>
+<pre class="brush:ruby">
+class Book &lt; ActiveRecord::Base
+  def search_books(params={})</p>
+
+<pre><code>where('name like ? and price &gt; ? and published_date &gt; =?', "%#{params[:name]}%", 100,Date.today)
+</code></pre>
+
+<p>  end
+end
+</pre></p>
+
+<p>Now suppose if you just need to find books based on published date you will create another method.That will duplicate your code
+<pre class="brush:ruby">
+class Book &lt; ActiveRecord::Base
+  def search_books(params={})</p>
+
+<pre><code>where('name like ? and price &gt; ? and published_date &gt; =?', "%#{params[:name]}%", 100,Date.today)
+</code></pre>
+
+<p>  end</p>
+
+<p>  def search_by_published_date(date)</p>
+
+<pre><code>where('published_date &gt; =?',date)
+</code></pre>
+
+<p>  end
+end
+</pre></p>
+
+<p>In this case you can use scope
+<pre class="brush:ruby">
+class Book &lt; ActiveRecord::Base
+  scope :by_published_date,lambda{|d|{:where => [&lsquo;published_date >= ?&rsquo;,d]}}
+  scope :by_name,lambda{|n|{:where => [&lsquo;name like ?&rsquo;,&ldquo;%#{n}%&rdquo;]}}
+  scope :by_price,lambda{|p|{:where => [&lsquo;price =?&rsquo;,p}}
+end
+</pre></p>
+
+<p>Now you can use scope like
+<pre class="brush:ruby">
+Book.by_published_date(Date.today).by_name(&lsquo;rails&rsquo;).by_price(100)
+</pre>
+</p>
+<p>
+<strong>6. Do Metaprogramming</strong></p>
+
+<p><pre class="brush:ruby">
+class Plan &lt; ActiveRecord::Base
+  ACTIVE=&lsquo;active&rsquo;
+  INACTIVE = &lsquo;inactive&rsquo;
+  IN_PROGRESS = &lsquo;in progress&rsquo;
+  def active?</p>
+
+<pre><code>status == ACTIVE
+</code></pre>
+
+<p>  end</p>
+
+<p>  def inactive?</p>
+
+<pre><code>status == INACTIVE
+</code></pre>
+
+<p>  end</p>
+
+<p>  def in_progress?</p>
+
+<pre><code>status == IN_PROGRESS
+</code></pre>
+
+<p>  end
+end
+</pre>
+now reduce code with meta programming
+<pre class="brush:ruby">
+class Plan &lt; ActiveRecord::Base
+  ACTIVE=&lsquo;active&rsquo;
+  INACTIVE = &lsquo;inactive&rsquo;
+  IN_PROGRESS = &lsquo;in progress&rsquo;</p>
+
+<p>  [ACTIVE, INACTIVE,IN_PROGRESS].each do |s|</p>
+
+<pre><code>plan_status = &lt;&lt;-EOF
+  def is_#{s}?
+    self.status ==  '#{s}'
+  end
+EOF
+class_eval plan_status, __FILE__, __LINE__
+</code></pre>
+
+<p>  end
+end
+</pre>
+</p>
+<p>
+<strong>7. Use full text search engine</strong>
+  <p>
+if you app require search based on all the attribute on model or something like that then writing messy code is not an good idea.
+Better way is to use any search engine like Solr, Sphinx
+ </p></p>
+
+<p><p>Search engine indexed the data.so it gives you results based on search query against any full words in the indexed data</p>
+</p>
+<p>
+  I have covered most of the steps here to enhance your Rails Models and keep your Rails Models clean,
+  Here are some links to read more about these things.</p>
+
+<p>  Reference links :
+</p>
+<ul>
+  <li><a href="http://blog.rubybestpractices.com/posts/gregory/008-decorator-delegator-disco.html"><a href="http://blog.rubybestpractices.com/posts/gregory/008-decorator-delegator-disco.html">http://blog.rubybestpractices.com/posts/gregory/008-decorator-delegator-disco.html</a></a></li>
+  <li><a href="http://khelll.com/blog/ruby/delegation-in-ruby/"><a href="http://khelll.com/blog/ruby/delegation-in-ruby/">http://khelll.com/blog/ruby/delegation-in-ruby/</a></a></li>
+  <li><a href="http://sunspot.github.com/"><a href="http://sunspot.github.com/">http://sunspot.github.com/</a></a></li>
+  <li><a href="http://freelancing-god.github.com/ts/en/"><a href="http://freelancing-god.github.com/ts/en/">http://freelancing-god.github.com/ts/en/</a></a></li>
+</ul></p>
+
+<p>Thanks for reading this post :&ndash;)</p>
+
+      
+      
+    </div>
+  </div>
+
+
+
+    </article>
+    
+    <hr>
+    
+  
+  
+    <article>
+      
+
+  <div class="row-fluid">
+    <div class="span2">
+		<h1 class="date-time">
+
+
+
+
+
+
+
+
+  
+
+
+<i class="icon-calendar-empty"></i> <time datetime="2012-05-03T00:00:00+02:00" pubdate data-updated="true">May 3<span>rd</span>, 2012</time></h5>
+          <div class="row-fluid">
+          
+          </div>
+          
+          <div class="row-fluid">
+          
+          </div>
+          
+    </div>
+    <div class="span10">
+      <h1 class="link"><a href="/blog/2012/05/03/background-processing-using-rails-runner/">Background Processing Using Rails Runner</a></h1>
+      <p>Rails comes with a built-in tool for running tasks independent of the web cycle. The <code>rails runner</code> command simply loads the default Rails environment and then executes some specified Ruby code.</p>
+
+
+<p>READMORE</p>
+
+<p>Some of use cases :</p>
+
+<ol>
+  <li>Data import</li>
+  <li>Execute methods of your models.</li>
+  <li>Sending batch emails</li>
+  <li>Nightly report generation</li>
+</ol>
+
+
+
+
+<p>Showing here some code example for</p>
+
+
+
+
+<p>Let&#8217;s say you want to generate a nightly report and send it out to multiple users</p>
+
+
+
+
+<pre class="brush:ruby">
+rails runner DailyReport.send_me!
+</pre>
+
+
+
+
+<p>This will execute <code> send_me! </code> method for <code> DailyReport </code> class.</p>
+
+
+
+
+<p><code> rails runner </code> will give us access to all rails environment so we can even use the Active Record finder methods to extract data from our application.</p>
+
+
+
+
+<pre class="brush:ruby">
+rails runner 'User.all.map(&:email).each {|e| puts e }'
+</pre>
+
+
+
+
+<p>Here we are just listing out emails of all users in our system.</p>
+
+
+
+
+<pre class="brush:ruby">
+rails runner -h
+</pre>
+
+
+
+
+<p>Output will be</p>
+
+
+
+
+<pre class="brush:ruby">
+Usage: runner [options] ('Some.ruby(code)' or a filename)
+
+    -e, --environment=name           Specifies the environment for the runner to operate under (test/development/production).
+                                     Default: development
+
+    -h, --help                       Show this help message.
+
+You can also use runner as a shebang line for your scripts like this:
+-------------------------------------------------------------
+#!/usr/bin/env /Users/raysrashmi/checkouts/foobar/script/rails runner
+
+Product.find(:all).each { |p| p.price *= 2 ; p.save! }
+-------------------------------------------------------------
+</pre>
+
+
+<p>A sample crontab to run that script might look like</p>
+
+<pre class="brush:ruby">
+  @daily  /Users/raysrashmi/checkouts/foobar/script/rails runner -e production 'DailyReport.send_me!'
+</pre>
+
+
+
+
+<p>This script will run daily to send out daily report.
+
+The Rails Runner is useful for short tasks that need to run infrequently.
+
+But jobs that require more heavy work are best handled by other libraries.
+
+I use <code> rails runner </code> whenever I need to run a small task.
+</p>
+
+
+<p>Reference links :</p>
+
+<ul>
+  <li><a href="http://www.ameravant.com/posts/recurring-tasks-in-ruby-on-rails-using-runner-and-cron-jobs">http://www.ameravant.com/posts/recurring-tasks-in-ruby-on-rails-using-runner-and-cron-jobs</a></li>
+</ul>
+
+
+<p>There are other better library available for handling background process. But here I wanted to talk about <code>rails runner</code></p>
+
+      
+      
+    </div>
+  </div>
+
+
+
+    </article>
+    
+    <hr>
+    
+  
+  
+    <article>
+      
+
+  <div class="row-fluid">
+    <div class="span2">
+		<h1 class="date-time">
+
+
+
+
+
+
+
+
+  
+
+
+<i class="icon-calendar-empty"></i> <time datetime="2012-05-01T00:00:00+02:00" pubdate data-updated="true">May 1<span>st</span>, 2012</time></h5>
+          <div class="row-fluid">
+          
+          </div>
+          
+          <div class="row-fluid">
+          
+          </div>
+          
+    </div>
+    <div class="span10">
+      <h1 class="link"><a href="/blog/2012/05/01/rails-3-responders/">Rails 3 Responders</a></h1>
+      <p>So we have a problem here in Controllers.
+
+As our application grows our controllers grows. We will be in trouble when we have alternative formats in our controllers like JSON, XML.
+</p>
+
+
+<p>You might need to respond both in JSON and XML or might be only JSON in your controller.</p>
+
+<pre class="brush:ruby">
+class BlogsController &lt; ApplicationController
+   def index
+     @blogs = Blog.all
+     respond_to do |format|
+     format.html
+     format.xml { render :xml =&gt; @blogs }
+    end
+  end
+
+  def show
+    @blog = Blog.find(params[:id])
+    respond_to do |format|
+      format.html
+      format.xml { render :xml =&gt; @blog }
+    end
+  end
+end
+</pre>
+
+
+<p>You can see here that in both the action we are responding with HTML and XML.
+
+Rails 3 introduced a new set of methods called <code>responders</code> that abstract the code so that the controller becomes much simpler.
+</p>
+
+
+<p>Here is our example written using <code>responders</code></p>
+
+<pre class="brush:ruby">
+  class BlogsController &lt; ApplicationController
+  respond_to :html, :xml
+
+  def index
+    @blogs = Blog.all
+    respond_with(@blogs)
+  end
+
+  def show
+    @blog = Blog.find(params[:id])
+    respond_with(@blog)
+  end
+end</pre>
+
+
+<p>This looks more cleaner No ?
+
+The entire <code>respond_to</code> block is gone now.
+</p>
+
+
+
+
+<p></p>
+
+
+<p><strong>I know this feature is very old. But it&rsquo;s very important to use this feature for more cleaner code.</strong></p></p>
+
+<p>Reference links :</p>
+
+<ul>
+  <li><a href="http://archives.ryandaigle.com/articles/2009/8/6/what-s-new-in-edge-rails-cleaner-restful-controllers-w-respond_with">http://archives.ryandaigle.com/articles/2009/8/6/what-s-new-in-edge-rails-cleaner-restful-controllers-w-respond_with</a></li>
+  <li><a href="http://blog.plataformatec.com.br/tag/respond_with/">http://blog.plataformatec.com.br/tag/respond_with/</a></li>
+</ul>
+
+
+
+
+      
+      
+    </div>
+  </div>
+
+
+
+    </article>
+    
+    <hr>
+    
+  
+  
+    <article>
+      
+
+  <div class="row-fluid">
+    <div class="span2">
+		<h1 class="date-time">
+
+
+
+
+
+
+
+
+  
+
+
+<i class="icon-calendar-empty"></i> <time datetime="2012-04-22T00:00:00+02:00" pubdate data-updated="true">Apr 22<span>nd</span>, 2012</time></h5>
+          <div class="row-fluid">
+          
+          </div>
+          
+          <div class="row-fluid">
+          
+          </div>
+          
+    </div>
+    <div class="span10">
+      <h1 class="link"><a href="/blog/2012/04/22/oauth-omniauth-github/">OAuth with OmniAuth and Github</a></h1>
+      <p>
+If you want to authenticate your user in your app with Github  use omniauth-github strategy for that.
+Here I am describing how you can do that very quickly.
+
+OmniAuth provides list of  strategies to use many OAuth for your application. Here is the 
+<a href="https://github.com/intridea/omniauth/wiki/List-of-Strategies">List of Strategies</a>.
+</p>
+
+
+<p>READMORE</p>
+
+<p>
+  Github uses the OAuth2 flow.
+
+  First of all you have to register your app with Github <a href="https://github.com/settings/applications">GitHub Applications Page</a>. Create a new application here and get Client ID and Secret.
+
+  Here is how can you obtain Client ID and Secret from Github.
+</p>
+
+
+
+
+<p>
+  <a href="http://raysrashmi.com/wp-content/uploads/2012/04/github_app.jpg"><img class="aligncenter size-full wp-image-279" title="github_app" src="http://raysrashmi.com/wp-content/uploads/2012/04/github_app.jpg" alt="" width="678" height="498" /></a>
+</p>
+
+
+
+
+<p>
+Steps to use these in your app.
+<pre class="brush:ruby">rails new GithubAuthApp</pre>
+Update your Gemfile add <code> omniauth-github </code>
+<pre class="brush:ruby">gem "omniauth-github"</pre>
+Create a config/initializers/omniauth.rb file.
+Paste your key instead of XXXX, and secret instead of YYYY
+<pre class="brush:ruby">
+use OmniAuth::Builder do
+  provider :github, XXXX, YYYY
+end
+</pre>
+</p>
+
+
+
+
+<p>
+All done start you server</p>
+
+
+<pre class="brush:ruby">bundle exec rails server</pre>
+
+
+<p>Just open your app in browser with URL</p>
+
+<pre class="brush:ruby">http://localhost:3000/auth/github</pre>
+
+
+<p>You will be redirecting to Github for authentication.</p>
+
+<p>After success your app will redirect to your given callback URL with information and token!</p>
+
+<p>At <a href="http://www.omniauth.org/">OmniAuth.org</a> you can try out different -2 Strategies.</p>
+
+
+<p>Useful links :</p>
+
+<ul>
+    <li><a href="http://www.omniauth.org/">OmniAuth.org</a> One page for all you need.</li>
+    <li><a href="https://github.com/intridea/omniauth-github">omniauth-github</a> gem.</li>
+</ul>
+
+
+      
+      
+    </div>
+  </div>
+
+
+
+    </article>
+    
+    <hr>
+    
+  
+  
+    <article>
+      
+
+  <div class="row-fluid">
+    <div class="span2">
+		<h1 class="date-time">
+
+
+
+
+
+
+
+
+  
+
+
+<i class="icon-calendar-empty"></i> <time datetime="2012-02-19T00:00:00+01:00" pubdate data-updated="true">Feb 19<span>th</span>, 2012</time></h5>
+          <div class="row-fluid">
+          
+          </div>
+          
+          <div class="row-fluid">
+          
+          </div>
+          
+    </div>
+    <div class="span10">
+      <h1 class="link"><a href="/blog/2012/02/19/basic-difference-between-proc-and-lambda-in-ruby/">Basic Difference between Proc and Lambda in Ruby</a></h1>
+      <p><strong>Proc</strong> =&gt; <tt><a href="http://www.ruby-doc.org/core-1.9.3/Proc.html">Proc</a></tt> objects are blocks of code that have been bound to a set of local variables. Once bound, the code may be called in different contexts and still access those variables.</p>
+
+<pre class="brush:ruby">
+my_proc = proc do |a|
+  puts "number is #{a}"
+end
+my_proc.call(10 ) # number is 10
+</pre>
+
+
+<p><strong>lambda</strong></p>
+
+<pre class="brush:ruby">
+my_lambda = lambda do|a|
+  puts "number is #{a}"
+end
+my_lambda.call(10 ) # number is 10
+</pre>
+
+
+<p><strong>Difference between both of them</strong>in Ruby-1.9.3</p>
+
+<ol>
+  <li>
+    lambda is very specific for parameters passing to it but proc not -:
+    <pre class="brush:ruby">
+    my_proc = proc do|a|
+      puts "this is proc"
+    end
+    my_proc.call #this is proc
+    </pre>
+    <pre class="brush:ruby">
+    my_lambda =lambda do |a|
+      puts "this is lambda"
+    end
+    my_lambda.call #will throw error "wrong number of arguments"
+    </pre>
+
+    In ruby-1.8.7 it just give you warning not error
+  </li>
+  <li>
+    Second is about return mean -:
+    <pre class="brush:ruby">
+    def run_a_proc(p)
+      puts "starting proc"
+      p.call
+      puts "Ending proc"
+    end
+
+    def test_proc
+      run_a_proc lambda{puts 'this is lambda'; return}
+      run_a_proc proc{puts 'this is proc'; return}
+    end
+    test_proc
+    </pre>
+    the output is -:
+
+    <pre class="brush:ruby">
+    starting proc
+    this is lambda
+    Ending proc
+    starting proc
+    this is proc
+    </pre>
+
+  </li>
+</ol>
+
+
+
+
+<p>
+so difference is lambda return within it but the proc return from where it is called
+
+if we modified test_proc method like
+</p>
+
+
+<pre class="brush:ruby">
+def test_proc
+  run_a_proc proc{puts 'this is proc'; return}
+  run_a_proc lambda{puts 'this is lambda'; return}
+end
+</pre>
+
+
+<p>now the output will be &ndash;:</p>
+
+<pre class="brush:ruby">
+starting proc
+this is proc
+</pre>
+
+
+
+
+      
+      
+    </div>
+  </div>
+
+
+
+    </article>
+    
+    <hr>
+    
+  
+  
+    <article>
+      
+
+  <div class="row-fluid">
+    <div class="span2">
+		<h1 class="date-time">
+
+
+
+
+
+
+
+
+  
+
+
+<i class="icon-calendar-empty"></i> <time datetime="2012-02-18T00:00:00+01:00" pubdate data-updated="true">Feb 18<span>th</span>, 2012</time></h5>
+          <div class="row-fluid">
+          
+          </div>
+          
+          <div class="row-fluid">
+          
+          </div>
+          
+    </div>
+    <div class="span10">
+      <h1 class="link"><a href="/blog/2012/02/18/call-proc-in-ruby-1-9.3/">Proc call in ruby1.9.3</a></h1>
+      <p>
+  Call a proc in different ways
+</p>
+
+
+<pre class="brush:ruby">
+my_proc = Proc.new do|name|
+  "this is #{name}"
+end
+</pre>
+
+
+<p>READMORE
+You can call this proc by 4 ways</p>
+
+<pre class="brush:ruby">
+my_proc.call('rays')
+my_proc.('rashmi')
+my_proc.("rita")
+my_proc === "richa"
+</pre>
+
+
+
+
+      
+      
+    </div>
+  </div>
+
+
+
+    </article>
+    
   
   <div class="pagination">
     
-    <a href="/blog/archives">Blog Archives</a>
+    <a class="prev" href="/blog/page/2/">&larr; Older</a>
+    
+
     
   </div>
 </div>
-<aside class="sidebar">
-  
-    <section>
-  <h1>Recent Posts</h1>
-  <ul id="recent_posts">
-    
-      <li class="post">
-        <a href="/blog/2010/08/02/extended-version-of-active-merchant-plugin/">Extended Version of Active Merchant Plugin</a>
-      </li>
-    
-  </ul>
-</section>
 
 
-
-
-
-  
-</aside>
-
-    </div>
-  </div>
-  <footer role="contentinfo"><p>
+        </div>
+      </div>
+      <div class="row-fluid">
+        <footer class="footer-page" role="contentinfo">
+          <p>
   Copyright &copy; 2013 - Your Name -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span> - Theme by <a href="http://alexgaribay.com">Alex Garibay</a>
 </p>
 
-</footer>
+
+        </footer>
+      </div>
+    </div>
+  </div>
   
 
 
@@ -151,7 +1754,7 @@
       var twitterWidgets = document.createElement('script');
       twitterWidgets.type = 'text/javascript';
       twitterWidgets.async = true;
-      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
       document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
     })();
   </script>

@@ -1,0 +1,397 @@
+<p>In Rails Models play a important part in our Rails App.We should keep are model pretty,not having dirty code
+Here i am just reminding you some basic points to refactor a model.</p>
+
+<p>READMORE</p>
+
+<p><p>
+  <strong>1. Follow law of Demeter(In rails it means use only one dot)</strong></p>
+
+<p><pre class="brush:ruby">
+class Author  &lt; ActiveRecord::Base
+  has_many :books
+  has_one  :address
+end</p>
+
+<p>class Book &lt; ActiveRecord::Base
+  belongs_to :author
+end</p>
+
+<p>class Address &lt; ActiveRecord::Base
+  belongs_to :author
+end
+</pre>
+  <p>So if in a view we have something like</p>
+  <pre class="brush:ruby"></p>
+
+<pre><code>@book.author.name
+@book.author.address.street
+@book.author.address.city
+@book.author.address.state
+</code></pre>
+
+<p>  </pre>
+  Here we are calling an object&rsquo;s related object using a third(book &ndash;> customer &ndash;> address)</p>
+
+<p>  Luckily in Rails we have Delegate that can escape us from this situation</p>
+
+<p><pre class="brush:ruby">
+class Author  &lt; ActiveRecord::Base
+  has_many :books
+  has_one  :address
+end</p>
+
+<p>class Book &lt; ActiveRecord::Base
+  belongs_to :author'
+  delegate :name,</p>
+
+<pre><code>       :street,
+       :city,
+       :state,
+       :to =&gt; :author, :prefix =&gt; true, :allow_nil =&gt; true
+</code></pre>
+
+<p>end</p>
+
+<p>class Address &lt; ActiveRecord::Base
+  belongs_to :author
+  delegate :street,:city,:state, :to => :address ,:allow_nil => true
+end</p>
+
+<p></pre>
+<p>So if in a view we have something like</p>
+<pre class="brush:ruby">
+  @book.author_name
+  @book.author_street
+  @book.author_city
+  @book.author_state
+</pre>
+<p>Now we have just only dot.Here :allow_nil option prevents the error call method on nil object</p></p>
+
+<p></p>
+<p>
+<strong>2. Use callback and validation.instead of writing large code in your method</strong></p>
+
+<p><pre class="brush:ruby">
+class User &lt; ActiveRecord::Base
+  email_confirmation
+  attr_accessor :email_confirmation</p>
+
+<p>  def user_save</p>
+
+<pre><code>if email &amp;&amp; email_confirmation &amp;&amp; save
+ #send_email
+end
+</code></pre>
+
+<p>  end
+end
+</pre></p>
+
+<p>Instead of doing that you can use a call back after_create
+<pre class="brush:ruby">
+class User &lt; ActiveRecord::Base
+  validates :email, :confirmation => true
+  validates :email_confirmation, :presence => true</p>
+
+<p>  after_create :send_email</p>
+
+<p>  private</p>
+
+<p>  def send_email
+   #send_email
+  end
+end
+</pre></p>
+
+<p>So now when you create user it validates if email and email_confirmation attribute is there will send email just after saving the user
+(here you don&rsquo;t need to define attr_accessor :email_confirmation and don&rsquo;t need to tae attr email_confirmation in db table )
+</p>
+<p>
+<strong>3. Include Modules</strong>
+<pre class="brush:ruby">
+class Order &lt; ActiveRecord::Base
+  def self.find_purchased</p>
+
+<pre><code># ...
+</code></pre>
+
+<p>  end</p>
+
+<p>  def self.find_waiting_for_review</p>
+
+<pre><code> # ...
+</code></pre>
+
+<p>  end</p>
+
+<p>  def self.find_waiting_for_sign_off</p>
+
+<pre><code>#.....
+</code></pre>
+
+<p>  end</p>
+
+<p>  def self.find_waiting_for_sign_off
+   #&hellip;
+  end</p>
+
+<p>  def self.advanced_search(fields, options = {})
+   #&hellip;
+  end</p>
+
+<p>  def self.simple_search(terms)
+   #&hellip;
+  end</p>
+
+<p>  def to_xml
+   #&hellip;
+  end</p>
+
+<p>  def to_json
+   #&hellip;
+  end</p>
+
+<p>  def to_csv</p>
+
+<pre><code>#...
+</code></pre>
+
+<p>  end</p>
+
+<p>  def to_pdf</p>
+
+<pre><code>#...
+</code></pre>
+
+<p>  end
+end
+</pre></p>
+
+<p>Modules allow you to extract behavior into separate files.Modules also serve to group related information into labeled namespaces.Its improve readability of code
+<pre class="brush:ruby">
+class Order &lt; ActiveRecord::Base
+  extend OrderStateFinders
+  extend OrderSearchers
+  include OrderExporters
+end</p>
+
+<h1>lib/order_state_finders.rb</h1>
+
+<p>module OrderStateFinders
+  def find_purchased</p>
+
+<pre><code>#...
+</code></pre>
+
+<p>  end</p>
+
+<p>  def find_waiting_for_review</p>
+
+<pre><code>#...
+</code></pre>
+
+<p>  end</p>
+
+<p>  def find_waiting_for_sign_off</p>
+
+<pre><code>#...
+</code></pre>
+
+<p>  end
+end</p>
+
+<h1>lib/order_searchers.rb</h1>
+
+<p>module OrderSearchers
+  def advanced_search(fields, options = {})</p>
+
+<pre><code># ...
+</code></pre>
+
+<p>  end</p>
+
+<p>  def simple_search(terms)</p>
+
+<pre><code># ...
+</code></pre>
+
+<p>  end
+end</p>
+
+<h1>lib/order_exporters.rb</h1>
+
+<p>module OrderExporters
+  def to_xml</p>
+
+<pre><code># ...
+</code></pre>
+
+<p>  end</p>
+
+<p>  def to_json</p>
+
+<pre><code># ...
+</code></pre>
+
+<p>  end</p>
+
+<p>  def to_csv
+   # &hellip;
+  end</p>
+
+<p>  def to_pdf</p>
+
+<pre><code># ...
+</code></pre>
+
+<p>  end
+end
+</pre></p>
+
+<p>So in extend module&rsquo;s method are class method on that calling class.include module&rsquo;s methods are instance method for object of calling class</p>
+
+<p></p>
+<p>
+<strong>4.Use active record association</strong></p>
+
+<p>Rails provides us association very nicely.
+<pre class="brush:ruby">
+class User &lt; ActiveRecord::Base
+  has_many :blogs
+end</p>
+
+<p>class blog &lt; ActiveRecord::Base
+  belongs_to :user
+end</p>
+
+<p>@user = User.find(params[:id])
+@blogs = Blog.where(:user_id => params[:user_id])
+</pre></p>
+
+<p><p>Instead of doing this.do</p></p>
+
+<p><pre>
+@user = User.find(params[:id])
+@blogs = @user.blogs
+</pre>
+</p>
+<p>
+<strong>5. Use Scope rather than writing complex finders</strong>
+<pre class="brush:ruby">
+class Book &lt; ActiveRecord::Base
+  def search_books(params={})</p>
+
+<pre><code>where('name like ? and price &gt; ? and published_date &gt; =?', "%#{params[:name]}%", 100,Date.today)
+</code></pre>
+
+<p>  end
+end
+</pre></p>
+
+<p>Now suppose if you just need to find books based on published date you will create another method.That will duplicate your code
+<pre class="brush:ruby">
+class Book &lt; ActiveRecord::Base
+  def search_books(params={})</p>
+
+<pre><code>where('name like ? and price &gt; ? and published_date &gt; =?', "%#{params[:name]}%", 100,Date.today)
+</code></pre>
+
+<p>  end</p>
+
+<p>  def search_by_published_date(date)</p>
+
+<pre><code>where('published_date &gt; =?',date)
+</code></pre>
+
+<p>  end
+end
+</pre></p>
+
+<p>In this case you can use scope
+<pre class="brush:ruby">
+class Book &lt; ActiveRecord::Base
+  scope :by_published_date,lambda{|d|{:where => [&lsquo;published_date >= ?&rsquo;,d]}}
+  scope :by_name,lambda{|n|{:where => [&lsquo;name like ?&rsquo;,&ldquo;%#{n}%&rdquo;]}}
+  scope :by_price,lambda{|p|{:where => [&lsquo;price =?&rsquo;,p}}
+end
+</pre></p>
+
+<p>Now you can use scope like
+<pre class="brush:ruby">
+Book.by_published_date(Date.today).by_name(&lsquo;rails&rsquo;).by_price(100)
+</pre>
+</p>
+<p>
+<strong>6. Do Metaprogramming</strong></p>
+
+<p><pre class="brush:ruby">
+class Plan &lt; ActiveRecord::Base
+  ACTIVE=&lsquo;active&rsquo;
+  INACTIVE = &lsquo;inactive&rsquo;
+  IN_PROGRESS = &lsquo;in progress&rsquo;
+  def active?</p>
+
+<pre><code>status == ACTIVE
+</code></pre>
+
+<p>  end</p>
+
+<p>  def inactive?</p>
+
+<pre><code>status == INACTIVE
+</code></pre>
+
+<p>  end</p>
+
+<p>  def in_progress?</p>
+
+<pre><code>status == IN_PROGRESS
+</code></pre>
+
+<p>  end
+end
+</pre>
+now reduce code with meta programming
+<pre class="brush:ruby">
+class Plan &lt; ActiveRecord::Base
+  ACTIVE=&lsquo;active&rsquo;
+  INACTIVE = &lsquo;inactive&rsquo;
+  IN_PROGRESS = &lsquo;in progress&rsquo;</p>
+
+<p>  [ACTIVE, INACTIVE,IN_PROGRESS].each do |s|</p>
+
+<pre><code>plan_status = &lt;&lt;-EOF
+  def is_#{s}?
+    self.status ==  '#{s}'
+  end
+EOF
+class_eval plan_status, __FILE__, __LINE__
+</code></pre>
+
+<p>  end
+end
+</pre>
+</p>
+<p>
+<strong>7. Use full text search engine</strong>
+  <p>
+if you app require search based on all the attribute on model or something like that then writing messy code is not an good idea.
+Better way is to use any search engine like Solr, Sphinx
+ </p></p>
+
+<p><p>Search engine indexed the data.so it gives you results based on search query against any full words in the indexed data</p>
+</p>
+<p>
+  I have covered most of the steps here to enhance your Rails Models and keep your Rails Models clean,
+  Here are some links to read more about these things.</p>
+
+<p>  Reference links :
+</p>
+<ul>
+  <li><a href="http://blog.rubybestpractices.com/posts/gregory/008-decorator-delegator-disco.html"><a href="http://blog.rubybestpractices.com/posts/gregory/008-decorator-delegator-disco.html">http://blog.rubybestpractices.com/posts/gregory/008-decorator-delegator-disco.html</a></a></li>
+  <li><a href="http://khelll.com/blog/ruby/delegation-in-ruby/"><a href="http://khelll.com/blog/ruby/delegation-in-ruby/">http://khelll.com/blog/ruby/delegation-in-ruby/</a></a></li>
+  <li><a href="http://sunspot.github.com/"><a href="http://sunspot.github.com/">http://sunspot.github.com/</a></a></li>
+  <li><a href="http://freelancing-god.github.com/ts/en/"><a href="http://freelancing-god.github.com/ts/en/">http://freelancing-god.github.com/ts/en/</a></a></li>
+</ul></p>
+
+<p>Thanks for reading this post :&ndash;)</p>

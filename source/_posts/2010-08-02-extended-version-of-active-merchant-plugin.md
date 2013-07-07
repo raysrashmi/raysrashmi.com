@@ -2,7 +2,7 @@
 layout: post
 title: Extended Version of Active Merchant Plugin
 date: 02/08/2010
-categories: ActiveMerchant,PaymentGatewayPlugin
+categories: ActiveMerchant, PaymentGatewayPlugin
 ---
 
 

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: ActiveMerchant,PaymentGatewayPlugin | My Octopress Blog]]></title>
-  <link href="http://yoursite.com/blog/categories/activemerchant-paymentgatewayplugin/atom.xml" rel="self"/>
+  <title><![CDATA[Category: ActiveMerchant, | My Octopress Blog]]></title>
+  <link href="http://yoursite.com/blog/categories/activemerchant/atom.xml" rel="self"/>
   <link href="http://yoursite.com/"/>
-  <updated>2013-07-07T00:12:51+02:00</updated>
+  <updated>2013-07-07T20:03:11+02:00</updated>
   <id>http://yoursite.com/</id>
   <author>
     <name><![CDATA[Your Name]]></name>
