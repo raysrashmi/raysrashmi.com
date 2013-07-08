@@ -1,4 +1,5 @@
 ---
+layout: post
 title: Enhance Rails Models
 date: 05/05/2012
 tags: activerecord,association,polymorphic 

@@ -1,4 +1,5 @@
 ---
+layout: post
 title: The Basics of Caching and Cache Digests
 date: 06/04/2013
 tags: RubyOnRails,Rails4, cache, cache digests

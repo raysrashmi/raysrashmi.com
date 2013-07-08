@@ -1,4 +1,5 @@
 ---
+layout: post
 title: Asset Pipeline with Rails 3.1
 date: 29/11/2011
 tags: Asset Pipeline,Rails3

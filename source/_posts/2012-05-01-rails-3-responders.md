@@ -1,4 +1,5 @@
 ---
+layout: post
 title: Rails 3 Responders
 date: 1/05/2012
 tags: Rails3,RailsResponders

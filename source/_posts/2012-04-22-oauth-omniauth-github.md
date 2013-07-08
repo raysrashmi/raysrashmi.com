@@ -1,4 +1,5 @@
 ---
+layout: post
 title: OAuth with OmniAuth and Github
 date: 22/04/2012
 tags: Github,OAuth,OmniAuth

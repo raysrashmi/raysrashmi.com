@@ -1,4 +1,5 @@
 ---
+layout: post
 title: Basic Difference between Proc and Lambda in Ruby
 date: 19/02/2012
 tags: Proc,Lambda,Ruby

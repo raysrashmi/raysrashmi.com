@@ -1,4 +1,5 @@
 ---
+layout: post
 title: Background Processing Using Rails Runner
 date: 3/05/2012
 tags: RailsRunner,Backgroundtask,Ruby,RubyOnRails

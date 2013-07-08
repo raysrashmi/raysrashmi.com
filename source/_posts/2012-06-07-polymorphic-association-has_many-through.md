@@ -1,4 +1,5 @@
 ---
+layout: post
 title: Polymorphic Association with has_many :through
 date: 7/06/2012
 tags: activerecord,association,polymorphic

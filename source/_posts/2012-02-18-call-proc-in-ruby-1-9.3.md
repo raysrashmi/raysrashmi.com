@@ -1,4 +1,5 @@
 ---
+layout: post
 title: Proc call in ruby1.9.3
 date: 18/02/2012
 tags: Proc In Ruby,Ruby

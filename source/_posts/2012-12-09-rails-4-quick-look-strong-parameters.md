@@ -1,4 +1,5 @@
 ---
+layout: post
 title: Rails 4 Quick Look Strong Parameters
 date: 09/12/2012
 tags: RubyOnRails,Rails4
