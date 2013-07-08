@@ -14,39 +14,40 @@ OmniAuth provides list of  strategies to use many OAuth for your application. H
 <a href="https://github.com/intridea/omniauth/wiki/List-of-Strategies">List of Strategies</a>.
 </p>
 
-READMORE
+<!--more-->
 
 <p>
   Github uses the OAuth2 flow.
 
-  First of all you have to register your app with Github <a href="https://github.com/settings/applications">GitHub Applications Page</a>. Create a new application here and get Client ID and Secret.
+  First of all you have to register your app with Github <a href="https://github.com/settings/applications">GitHub Applications Page</a>.
+  Create a new application here and get Client ID and Secret.
 
   Here is how can you obtain Client ID and Secret from Github.
 </p>
 
 <p>
-  <a href="http://raysrashmi.com/wp-content/uploads/2012/04/github_app.jpg"><img class="aligncenter size-full wp-image-279" title="github_app" src="http://raysrashmi.com/wp-content/uploads/2012/04/github_app.jpg" alt="" width="678" height="498" /></a>
+  {%img http://farm4.staticflickr.com/3716/9240891751_409f794720_m.jpg%}
 </p>
 
 <p>
 Steps to use these in your app.
-<pre class="brush:ruby">rails new GithubAuthApp</pre>
+{% codeblock lang:ruby%} rails new GithubAuthApp{% endcodeblock %} 
 Update your Gemfile add <code> omniauth-github </code>
-<pre class="brush:ruby">gem "omniauth-github"</pre>
+{% codeblock lang:ruby%} gem "omniauth-github"{% endcodeblock %} 
 Create a config/initializers/omniauth.rb file.
 Paste your key instead of XXXX, and secret instead of YYYY
-<pre class="brush:ruby">
+{% codeblock lang:ruby%} 
 use OmniAuth::Builder do
   provider :github, XXXX, YYYY
 end
-</pre>
+{% endcodeblock %} 
 </p>
 
 <p>
 All done start you server</p>
-<pre class="brush:ruby">bundle exec rails server</pre>
+{% codeblock lang:ruby%} bundle exec rails server{% endcodeblock %} 
 Just open your app in browser with URL
-<pre class="brush:ruby">http://localhost:3000/auth/github</pre>
+{% codeblock lang:ruby%} http://localhost:3000/auth/github{% endcodeblock %} 
 You will be redirecting to Github for authentication.
 
 After success your app will redirect to your given callback URL with information and token!

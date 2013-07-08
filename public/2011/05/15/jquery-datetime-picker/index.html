@@ -1,0 +1,225 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>jQuery Date/Time picker - Rashmi Yadav</title>
+  <meta name="author" content="Rashmi Yadav">
+
+  
+  <meta name="description" content="jQuery Date/Time Picker May 15th, 2011 To handle date and time both in calender use jQuery date time picker add-on you need to inlcude javascript &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://yoursite.com/2011/05/15/jquery-datetime-picker">
+  <link href="/favicon.png" rel="icon">
+  <link href='http://fonts.googleapis.com/css?family=Quicksand:300,400' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Rashmi Yadav" type="application/atom+xml">
+  <script src="/js/jquery.js"></script>
+  <script src="/js/bootstrap-collapse.js"></script>
+  <script src="/js/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/js/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <div class="navbar navbar-inverse navbar-static-top">
+  	<div class="navbar-inner">
+  	  <div class="container">
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+          <span class="fui-menu-24"></span>
+        </a>
+  	  	<div class="nav-collapse collapse navbar-responsive-collapse" style="height:0;">
+  	      <ul class="nav">
+    
+        <li ><a href="/index.html">Home</a></li>
+    
+        <li ><a href="/about.html">About</a></li>
+    
+</ul>
+
+<ul class="nav pull-right">
+    
+    
+    
+    
+    
+</ul>
+
+  	    </div>
+  	  </div>
+  	</div>
+  </div>
+  <div class="container" id="main">
+    <div class="span12">
+      <div class="row-fluid">
+        <div id="content">
+          <div>
+<article class="hentry" role="article">
+  
+
+  <header>
+  <div class="jumbotron">
+    jQuery Date/Time Picker
+	<h5>
+
+
+
+
+
+
+
+
+  
+
+
+<i class="icon-calendar-empty"></i> <time datetime="2011-05-15T00:00:00+02:00" pubdate data-updated="true">May 15<span>th</span>, 2011</time></h5>
+  </div>
+</header>
+  <div class="row-fluid">
+    <div class="span12">
+      <p>To handle date and time both in calender use jQuery date time picker add-on</p>
+
+<p>you need to inlcude javascript files</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">jquery</span><span class="o">-</span><span class="mi">1</span><span class="o">.</span><span class="mi">4</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="n">min</span>
+</span><span class='line'><span class="n">jquery</span><span class="o">-</span><span class="n">ui</span><span class="o">-</span><span class="mi">1</span><span class="o">.</span><span class="mi">8</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="n">custom</span><span class="o">.</span><span class="n">min</span>
+</span><span class='line'><span class="n">jquery</span><span class="o">-</span><span class="n">ui</span><span class="o">-</span><span class="n">timepicker</span><span class="o">-</span><span class="n">addon</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Inclue CSS files</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">jquery</span><span class="o">-</span><span class="n">ui</span><span class="o">-</span><span class="mi">1</span><span class="o">.</span><span class="mi">8</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="n">custom</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&lt;%</span><span class="c1">#= text_field_tag &#39; name&#39;,&#39;&#39;,:class =&gt; &#39;date_value&#39;%&gt;</span>
+</span><span class='line'><span class="n">jQuery</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="n">date_value</span><span class="p">)</span><span class="o">.</span><span class="n">datetimepicker</span><span class="p">({</span>
+</span><span class='line'>  <span class="ss">dateFormat</span><span class="p">:</span> <span class="s1">&#39;MM dd,yy&#39;</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+    </div>
+  </div>
+
+
+
+  <footer>
+    <hr>
+    
+    <div class="row-fluid">
+      
+      <div class="span6">
+        <p class="meta">
+        
+        
+
+
+        </p>
+      </div>
+      
+      <div class="span6 social-sharing">
+        <div class="sharing">
+  <div class="addthis_toolbox addthis_default_style ">
+  
+  
+  <a class="addthis_button_tweet"></a>
+  
+  
+  <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+</div>
+
+      </div>
+      
+      
+    </div>
+    
+    <div class="row-fluid">
+      <div class="span12">
+        <p class="meta">
+          
+            <a class="basic-alignment left" href="/2010/12/31/twitter-client-script-to-retrieves-all-the-unique-http-links-in-the-last-recent-tweets/" title="Previous Post: Twitter Client script to retrieves all the unique http links in the last recent tweets">&laquo; Twitter Client script to retrieves all the unique http links in the last recent tweets</a>
+          
+          
+            <a class="basic-alignment right" href="/2011/11/29/asset-pipeline.html/" title="Next Post: Asset Pipeline with Rails 3.1">Asset Pipeline with Rails 3.1 &raquo;</a>
+          
+        </p>
+      </div>
+    </div>
+  </footer>
+</article>
+
+</div>
+
+
+
+        </div>
+      </div>
+      <div class="row-fluid">
+        <footer class="footer-page" role="contentinfo">
+          <p>
+  Copyright &copy; 2013 - Rashmi Yadav -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span> - Theme by <a href="http://alexgaribay.com">Alex Garibay</a>
+</p>
+
+
+        </footer>
+      </div>
+    </div>
+  </div>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

@@ -7,7 +7,7 @@ tags: RailsRunner,Backgroundtask,Ruby,RubyOnRails
 
 <p>Rails comes with a built-in tool for running tasks independent of the web cycle. The <code>rails runner</code> command simply loads the default Rails environment and then executes some specified Ruby code.</p>
 
-READMORE
+<!--more-->
 
 Some of use cases :
 <ol>
@@ -21,27 +21,27 @@ Some of use cases :
 
 <p>Let's say you want to generate a nightly report and send it out to multiple users</p>
 
-<pre class="brush:ruby">
+{% codeblock lang:ruby%}
 rails runner DailyReport.send_me!
-</pre>
+{% endcodeblock %}
 
 <p>This will execute <code> send_me! </code> method for <code> DailyReport </code> class.</p>
 
 <p><code> rails runner </code> will give us access to all rails environment so we can even use the Active Record finder methods to extract data from our application.</p>
 
-<pre class="brush:ruby">
+{% codeblock lang:ruby%}
 rails runner 'User.all.map(&:email).each {|e| puts e }'
-</pre>
+{% endcodeblock %}
 
 <p>Here we are just listing out emails of all users in our system.</p>
 
-<pre class="brush:ruby">
+{% codeblock lang:ruby%}
 rails runner -h
-</pre>
+{% endcodeblock %}
 
 <p>Output will be</p>
 
-<pre class="brush:ruby">
+{% codeblock lang:ruby%}
 Usage: runner [options] ('Some.ruby(code)' or a filename)
 
     -e, --environment=name           Specifies the environment for the runner to operate under (test/development/production).
@@ -55,13 +55,13 @@ You can also use runner as a shebang line for your scripts like this:
 
 Product.find(:all).each { |p| p.price *= 2 ; p.save! }
 -------------------------------------------------------------
-</pre>
+{% endcodeblock %}
 
 A sample crontab to run that script might look like
 
-<pre class="brush:ruby">
+{% codeblock lang:ruby%}
   @daily  /Users/raysrashmi/checkouts/foobar/script/rails runner -e production 'DailyReport.send_me!'
-</pre>
+{% endcodeblock %}
 
 <p>This script will run daily to send out daily report.
 

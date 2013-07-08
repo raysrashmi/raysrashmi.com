@@ -15,6 +15,8 @@ This is the new very interesting and useful  feature in Rails 3.1.
     <li>It allows you to write these assets in other languages like CoffeeScript, Sass and ERB</li>
     <li>Asset pipeline helpful in production environment cause it will reduce the number of request which browser make.</li>
 </ul>
+<!--more-->
+
 <p>Prior to Rails 3.1 these features were added through third-party Ruby libraries such as Jammit and Sprockets. Rails 3.1 is integrated with Sprockets through Action Pack which depends on the sprockets gem, by default.</p>
 
 <strong>Asset Organization</strong>
@@ -34,7 +36,7 @@ There are three directories
 <p>so if you want to access application.css in app/assets/stylesheets.you can just access the url localhost:3000/assets/application.css</p>
 <p>
 you can add additional path to the pipeline in config/application.rb. For example:
-<pre class="brush:ruby">config.assets.paths &lt;&lt; Rails.root.join("app", "assets", "flash")</pre>
+{% codeblock lang:ruby%}config.assets.paths << Rails.root.join("app", "assets", "flash"){% endcodeblock %}
 </p>
 <strong>Manifest files and Directives</strong>
 <ul>
@@ -45,21 +47,24 @@ you can add additional path to the pipeline in config/application.rb. For exampl
 <p>
 In Development environment all assets are served as individual files
 For Example in app/assets/javascripts/application.js
-</p>
+{% codeblock lang:ruby%}
 
     //= require core
     //= require blogs</blockquote>
+{% endcodeblock %}
 
 
 after converting in HTML it will look like
-
+ {% codeblock lang:ruby%}
     <script src="/assets/core.js?body=1" type="text/javascript"></script>
     <script src="/assets/blogs.js?body=1" type="text/javascript"></script>
 
-
+{% endcodeblock %}
 <p>If turn off debugging by setting config.assets.debug = false in config/environments/development.rb
 above file will generate</p>
+ {% codeblock lang:ruby%}
     <script src="/assets/application.js?body=1" type="text/javascript"></script>
+    {% endcodeblock %}
 
 <strong>In Production</strong>
 <p>
@@ -75,14 +80,15 @@ Prior rails 3.1 a time stamp query string is attached to file name
 </p>
 
 <p>For example -:</p>
+{% codeblock lang:ruby%}
     <%= javascript_include_tag :application%>
     <%= stylesheet_link_tag "application" %>
-
+ {% endcodeblock %}
 It will compile in to
-
+     {% codeblock lang:ruby%}
     <script src="/assets/application-908e25f4bf641868d8683022a5b62f54.js" type ="text/javascript"></script>
     <link href="/assets/application-4dd5b109ee3439da54f5bdfd78a80473.css" media="screen" rel="stylesheet" type="text/css">
-
+  {% endcodeblock %}
 <p>
 The fingerprinting behavior is controlled by the setting of <b>config.assets.digest</b> setting in Rails (which is <b>true</b> for production, <b>false</b> for everything else)
 </p>

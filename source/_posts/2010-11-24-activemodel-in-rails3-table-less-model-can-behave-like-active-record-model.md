@@ -1,4 +1,5 @@
 ---
+layout: post
 title: ActiveModel in Rails3
 date: 24/11/2010
 tags: ActiveModel,Rails
@@ -8,7 +9,7 @@ tags: ActiveModel,Rails
 In Rails3 Active Model feature is added that helps to use feature of active record class for a non active record class.In Active Model you can make Any Ruby Object Feel Like Active Record and can get Rails-style models with validations, serialization, callbacks, dirty tracking, internationalization, attributes, observers and all the other Rails goodness.
 
 Here is the example -:
-<pre class="brush:ruby">
+{% codeblock lang:ruby%}
 class Message
   include ActiveModel::Validations
   include ActiveModel::Conversion
@@ -29,7 +30,7 @@ class Message
 
 end
 
-</pre>
+{% endcodeblock %}
 @message = Message.new({:name =&gt; "rays", :email =&gt; 'abc@example.com', :text_message =&gt; "this my text message"})
 
 @message.valid? =&gt; true

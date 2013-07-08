@@ -1,4 +1,5 @@
 ---
+layout: post
 title: Routes in Rails3
 date: 4/12/2010
 tags: Routes in Rails3,Routes,Rails
@@ -7,42 +8,40 @@ tags: Routes in Rails3,Routes,Rails
 <h1>Rails3 define routes in more efficient way</h1>
 
 Routes for CRUD actions
-<blockquote>
-<code>resources   :users</code>
-</blockquote>
+{% codeblock lang:ruby%}
+     resources   :users     
+{% endcodeblock %}
 
 Also define for multiple resources
-<blockquote>
-<code>resources :users,  :blogs, :books</code>
-</blockquote>
+{% codeblock lang:ruby%}
+     resources :users,  :blogs, :books     
+{% endcodeblock %}
 
 Nested Routes
-<blockquote>
-<code>
-<pre>
+
+     
+{% codeblock lang:ruby%} 
   resources :users do
     resources  :blogs
   end
-</pre>
-</code>
-</blockquote>
+{% endcodeblock %}
+     
 
 Member and collection
-<blockquote>
-<code>
-<pre>
+
+{% codeblock lang:ruby%} 
   resources :blogs do
     :get => :preview, :on =>:member
     :get => :list, :on =>:collection
   end
-</pre>
-</code>
-</blockquote>
+{% endcodeblock %}
+     
+
 
 if  we have more than one collection or member functions
-<blockquote>
-<code>
-<pre>
+
+     
+{% codeblock lang:ruby%} 
 resources  :blogs do
     member do
      :get  :preview
@@ -53,35 +52,32 @@ resources  :blogs do
      :get :detailed_info
    end
 end
-</pre>
-</code>
-</blockquote>
+{% endcodeblock %}
+     
+
 
 
 Named Routes
 
-
-<blockquote>
-<code>
-<pre>
+{% codeblock lang:ruby%} 
   match "history" => "site#index", :as => :history
-</pre>
-</code>
-</blockquote>
+{% endcodeblock %}
 
-Adding :as makes it a named route so that we can use <code>history_path</code> or <code>history</code><code>_url</code> in our application.
+Adding :as makes it a named route so that we can use history_path      or      history_url in our application.
 
 Route for Root
-<blockquote>
-<code>
+{% codeblock lang:ruby%}
+     
   root   :to => "home#index"
-</code>
-</blockquote>
+     
+{% endcodeblock %}
 
 Constraints and Parameters in routes
-<blockquote>
-<code>
+{% codeblock lang:ruby%}
+
+     
   match "search/:email(/:first_name/:last_name)" => "users#search",  :constraints => {:email => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i}
-</code>
-</blockquote>
+     
+
+{% endcodeblock %}
 Here email is mandatory parameter and first_name and last is optional parameter and in constraints email format is defined

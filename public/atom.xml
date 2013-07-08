@@ -1,23 +1,280 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[My Octopress Blog]]></title>
+  <title><![CDATA[Rashmi Yadav]]></title>
   <link href="http://yoursite.com/atom.xml" rel="self"/>
   <link href="http://yoursite.com/"/>
-  <updated>2013-07-08T23:06:43+02:00</updated>
+  <updated>2013-07-09T00:38:56+02:00</updated>
   <id>http://yoursite.com/</id>
   <author>
-    <name><![CDATA[Your Name]]></name>
+    <name><![CDATA[Rashmi Yadav]]></name>
     
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
   
   <entry>
+    <title type="html"><![CDATA[Rails 4 Directory Structure]]></title>
+    <link href="http://yoursite.com/2013/06/30/rails4-directory-structure/"/>
+    <updated>2013-06-30T00:00:00+02:00</updated>
+    <id>http://yoursite.com/2013/06/30/rails4-directory-structure</id>
+    <content type="html"><![CDATA[<p><a href='http://farm6.staticflickr.com/5443/9241313505_ac035bd643_b.jpg'
+target="_blank">
+<img src="http://farm6.staticflickr.com/5443/9241313505_ac035bd643_m_d.jpg">
+</a></p>
+
+<p>Rails 4 is released. Lots of new features has been added to rails.
+Here we will see what and why new directories or files rails 4 added.</p>
+
+<p>  We will create a sample app in rails 4 so that it will be easy to see the new structure.
+  I am assuming  you have updated your rails.
+  To check current version of rails run following command:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">rails</span> <span class="o">-</span><span class="n">v</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>  It should be Rails 4.0.0</p>
+
+<!--more-->
+
+
+<p>  Now create a very simple rails application</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">rails</span> <span class="kp">new</span>  <span class="n">blog</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>  It creates bunch of files and directories. You will see there are some new directories and files.
+  Lets go to each one by one</p>
+
+<h2>app/</h2>
+
+<p>  In this directory you will see new <b>concerns/</b> dir under controllers/ and models/.
+  Concerns are added to manage your models/controllers in a better way . You can</p>
+
+<p>  Make your models ligh-weighted.
+  Cross sharing of modules code.</p>
+
+<p>  Mixins and modules code can be put under this dir.
+  Lets say in our blog application we have user model and post model and we require to add comments for both model
+  so we created a commentable module in our concerns/ dir and included in both model.</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="k">module</span> <span class="nn">CommentTable</span>
+</span><span class='line'>    <span class="kp">extend</span> <span class="ss">ActiveSupport</span><span class="p">:</span><span class="ss">:Concern</span>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">comments</span>
+</span><span class='line'>      <span class="n">comments</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:text</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>  <span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+</span><span class='line'>    <span class="kp">include</span> <span class="no">Commentable</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>  <span class="k">class</span> <span class="nc">Post</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+</span><span class='line'>    <span class="kp">include</span> <span class="no">Commentable</span>
+</span><span class='line'>  <span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>  Now suppose we need to add one more module notable to our model post.</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="k">module</span> <span class="nn">Noteable</span>
+</span><span class='line'>    <span class="kp">extend</span> <span class="ss">ActiveSupport</span><span class="p">:</span><span class="ss">:Concern</span>
+</span><span class='line'>    <span class="n">included</span> <span class="k">do</span>
+</span><span class='line'>      <span class="n">has_many</span> <span class="ss">:notes</span>
+</span><span class='line'>      <span class="n">validated</span> <span class="ss">:note</span><span class="p">,</span> <span class="ss">presence</span><span class="p">:</span> <span class="kp">true</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>  <span class="k">class</span> <span class="nc">Post</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+</span><span class='line'>    <span class="kp">include</span> <span class="no">Commentable</span>
+</span><span class='line'>    <span class="kp">include</span> <span class="no">Noteable</span>
+</span><span class='line'>  <span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now you can include Commentable to Noteable</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">module</span> <span class="nn">Noteable</span>
+</span><span class='line'>  <span class="kp">extend</span> <span class="ss">ActiveSupport</span><span class="p">:</span><span class="ss">:Concern</span>
+</span><span class='line'>  <span class="kp">include</span> <span class="no">Commentable</span>
+</span><span class='line'>  <span class="n">included</span> <span class="k">do</span>
+</span><span class='line'>    <span class="n">has_many</span> <span class="ss">:notes</span>
+</span><span class='line'>    <span class="n">validated</span> <span class="ss">:note</span><span class="p">,</span> <span class="ss">presence</span><span class="p">:</span> <span class="kp">true</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'><span class="k">class</span> <span class="nc">Post</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+</span><span class='line'>  <span class="kp">include</span> <span class="no">Noteable</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now both Commentabel and Notebale are accessible for Post class.
+</p></p>
+
+<p><li class='title'> bin/</li>
+App executable bundle, rails and rake are under this dir. So dont need to run &lsquo;bundle exec&rsquo; before any rails command.
+<a href='https://github.com/sstephenson/rbenv/wiki/Understanding-binstubs'>Binstubs</a> can also be generated using bundle command ,bundle 1.3 add spports for generating binstubs.
+What Binstubs are executables required to prepare the environment original executable.</p>
+
+<br/>
+
+
+<p>When we do</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">gem</span> <span class="n">install</span> <span class="n">cucumber</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>an executable file is genearted in gems//cucumber-1.3.2/bin dir(i am using rvm here)</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">~</span><span class="sr">/.rvm/</span><span class="n">gems</span><span class="o">/</span><span class="n">ruby</span><span class="o">-</span><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">3</span><span class="o">-</span><span class="n">p448</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="n">cucumber</span><span class="o">-</span><span class="mi">1</span><span class="o">.</span><span class="mi">3</span><span class="o">.</span><span class="mi">2</span><span class="o">/</span><span class="n">bin</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<p>
+Now we can generate using command
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'> <span class="n">bundle</span> <span class="n">binstubs</span> <span class="n">cucumber</span>
+</span></code></pre></td></tr></table></div></figure>
+
+It wil genrate executable in bin/. Having executables within your app ensures they are using app ruby and gems.
+</p>
+
+
+<p><li class='title'>initializers/filter_parameter_logging.rb</li></p>
+
+<p>
+Now we can specify all filter parameters in this files instead of config/application.rb
+Lets say we have a attribute customer_id of customer model and we want to filter in our log files then just write
+</p>
+
+
+
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">Rails</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">filter_parameters</span> <span class="o">+=</span> <span class="o">[</span><span class="ss">:customer_id</span><span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<p>
+After restarting your server if there is any request having customer_id parameter. 
+it will filtered the value of customer_id.
+<br/>
+<img src="http://farm6.staticflickr.com/5347/9236715843_335affed17_b.jpg">
+</p>
+
+
+<p><li class='title' > doc/</li>
+Doc has been removed from rails directory.
+Its is extracted in &ldquo;sdoc&rdquo; gem and is added to Gemfile by default so still you can generate docs by running following rake task</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">bundle</span> <span class="nb">exec</span> <span class="n">rake</span> <span class="ss">doc</span><span class="p">:</span><span class="n">rails</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><li class='title'> script/</li> Its removed and rails executable is moved to bin/ dir</p>
+
+<p><li class='title'> test/</li>
+This directory has been changed differently.</p>
+
+<ul>
+<li>Now we have controller and models in place of functionals and units</li>
+
+<li>We have helpers and mailers dir under test</li>
+
+<li>Performance test has been extracted to a new <a href='https://github.com/rails/rails-perftest'>Gem</a>. So performance dir is not under test by default
+</li>
+</ul>
+
+
+<p>Corresponding rake task for test are also changed &ndash;:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">rake</span> <span class="nb">test</span><span class="ss">:controllers</span>
+</span><span class='line'><span class="n">rake</span> <span class="nb">test</span><span class="ss">:models</span>
+</span><span class='line'><span class="n">rake</span> <span class="nb">test</span><span class="ss">:helpers</span>
+</span><span class='line'><span class="n">rake</span> <span class="nb">test</span><span class="ss">:mailers</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><li class='title'>vendor/</li> Rails plugins are already gone away so this dir is no more needed.
+<li>scaffold</li></p>
+
+<p>Our favorite rails command &#8216;scaffold&#8217; gives us more new.
+Lets create new scaffold
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">rails</span> <span class="n">generate</span> <span class="n">scaffold</span> <span class="n">list</span> <span class="ss">title</span><span class="p">:</span><span class="n">string</span>
+</span></code></pre></td></tr></table></div></figure>
+
+You will see there are two new files 
+<div>index.json.builder</div>
+<div>show.json.builder</div>
+These files can be used for responding data in JSON format.
+These are generated by <a href='https://github.com/rails/jbuilder'jbuilder></a><a href='http://rubygems.org/'>Gem</a>. It is included in Gemfile by default.
+</p>
+
+
+<p></ol></p>
+
+<p>
+TODO wrap up
+</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[The Basics of Caching and Cache Digests]]></title>
-    <link href="http://yoursite.com/blog/2013/04/06/the-basics-of-caching-and-cache-digestes/"/>
+    <link href="http://yoursite.com/2013/04/06/the-basics-of-caching-and-cache-digestes/"/>
     <updated>2013-04-06T00:00:00+02:00</updated>
-    <id>http://yoursite.com/blog/2013/04/06/the-basics-of-caching-and-cache-digestes</id>
+    <id>http://yoursite.com/2013/04/06/the-basics-of-caching-and-cache-digestes</id>
     <content type="html"><![CDATA[<p>Recently posted a blog about basics of caching and cache digests on Rubysource. If you are going to apply caching in your app this blog will help you.</p>
 
 <p>You can find blog on <a href="http://rubysource.com/caching-cache-digest/"> RubySource</a></p>
@@ -26,9 +283,9 @@
   
   <entry>
     <title type="html"><![CDATA[Rails 4 Quick Look Strong Parameters]]></title>
-    <link href="http://yoursite.com/blog/2012/12/09/rails-4-quick-look-strong-parameters/"/>
+    <link href="http://yoursite.com/2012/12/09/rails-4-quick-look-strong-parameters/"/>
     <updated>2012-12-09T00:00:00+01:00</updated>
-    <id>http://yoursite.com/blog/2012/12/09/rails-4-quick-look-strong-parameters</id>
+    <id>http://yoursite.com/2012/12/09/rails-4-quick-look-strong-parameters</id>
     <content type="html"><![CDATA[<p>Strong Parameters is a new feature coming with Rails4.
 Its about Mass-assignment protection in controller instead of model.
 If you are keen to know more about it- <a href="http://rubysource.com/rails-4-quick-look-strong-parameters/">read it on RubySource</a>.</p>
@@ -37,14 +294,16 @@ If you are keen to know more about it- <a href="http://rubysource.com/rails-4-qu
   
   <entry>
     <title type="html"><![CDATA[Polymorphic Association with has_many :through]]></title>
-    <link href="http://yoursite.com/blog/2012/06/07/polymorphic-association-has_many-through/"/>
+    <link href="http://yoursite.com/2012/06/07/polymorphic-association-has_many-through/"/>
     <updated>2012-06-07T00:00:00+02:00</updated>
-    <id>http://yoursite.com/blog/2012/06/07/polymorphic-association-has_many-through</id>
+    <id>http://yoursite.com/2012/06/07/polymorphic-association-has_many-through</id>
     <content type="html"><![CDATA[<p>Hi Folks,</p>
 
 <p>
 In Rails we have Ploymorphic Association whenever we need to connect one model to more than one model.
 I had a situation where i need polymorphic association with has_many :through
+<!--more-->
+
 Here I am showing an simple example of <b>polymorphic association with <code>has_many :through</code></b>
 </p>
 
@@ -58,7 +317,7 @@ We have <code>Contact</code> , <code>Plan</code> and <code>Template</code> as a 
 We have following scenarios.
  <ol>
    <li><code>Plan has_many Contacts</code></li>
-   <li><code> Contant has_many Plans </code> which is vice versa of 1.</li>
+   <li><code> Contact has_many Plans </code></li>
    <li><code>Template has_many Contacts</code></li>
    <li><code>Contact has_many Templates</code> which is vice versa of 3.</li>
  </ol>
@@ -75,12 +334,15 @@ We have following scenarios.
 
 
 
-<pre class="brush:ruby">
-class Plan < ActiveRecord::Base
-  has_many :plan_contacts
-  has_many :contacts ,:through => :plan_contacts
-end
-</pre>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Plan</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+</span><span class='line'>  <span class="n">has_many</span> <span class="ss">:plan_contacts</span>
+</span><span class='line'>  <span class="n">has_many</span> <span class="ss">:contacts</span> <span class="p">,</span><span class="ss">:through</span> <span class="o">=&gt;</span> <span class="ss">:plan_contacts</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 
@@ -90,12 +352,15 @@ end
 
 
 
-<pre class="brush:ruby">
-class Template < ActiveRecord::Base
-  has_many :template_contacts
-  has_many :contacts ,:through => :template_contacts
-end
-</pre>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Template</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+</span><span class='line'>  <span class="n">has_many</span> <span class="ss">:template_contacts</span>
+</span><span class='line'>  <span class="n">has_many</span> <span class="ss">:contacts</span> <span class="p">,</span><span class="ss">:through</span> <span class="o">=&gt;</span> <span class="ss">:template_contacts</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 
@@ -105,16 +370,25 @@ end
 
 
 
-<pre class="brush:ruby">
-class Contact < ActiveRecord::Base
-  has_many :template_contacts
-  has_many :plan_contacts
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Contact</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+</span><span class='line'>  <span class="n">has_many</span> <span class="ss">:template_contacts</span>
+</span><span class='line'>  <span class="n">has_many</span> <span class="ss">:plan_contacts</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">has_many</span> <span class="ss">:templates</span> <span class="p">,</span><span class="ss">:through</span> <span class="o">=&gt;</span> <span class="ss">:template_contacts</span>
+</span><span class='line'>  <span class="n">has_many</span> <span class="ss">:plans</span> <span class="p">,</span><span class="ss">:through</span> <span class="o">=&gt;</span> <span class="ss">:plan_contacts</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
 
-  has_many :templates ,:through => :template_contacts
-  has_many :plans ,:through => :plan_contacts
 
-end
-</pre>
 
 
 <p>
@@ -129,12 +403,17 @@ Handling <code>Plan</code> and <code> Contact</code> here.
 
 
 
-<pre class="brush:ruby">
-class PlanContact < ActiveRecord::Base
-  belongs_to :plan
-  belongs_to :contact
-end
-</pre>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">PlanContact</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+</span><span class='line'>  <span class="n">belongs_to</span> <span class="ss">:plan</span>
+</span><span class='line'>  <span class="n">belongs_to</span> <span class="ss">:contact</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
 
 
 <p>Handling <code>Template</code> and <code> Contact</code> here.</p>
@@ -142,12 +421,17 @@ end
 
 
 
-<pre class="brush:ruby">
-class TemplateContact < ActiveRecord::Base
-  belongs_to :template
-  belongs_to :contact
-end
-</pre>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">TemplateContact</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+</span><span class='line'>  <span class="n">belongs_to</span> <span class="ss">:template</span>
+</span><span class='line'>  <span class="n">belongs_to</span> <span class="ss">:contact</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
 
 
 <p><strong>This problem can be solved using only one table. Just we need to mark that table as a polymorphic.</strong></p>
@@ -160,12 +444,15 @@ end
 
 
 
-<pre class="brush:ruby">
-class ContactDetail < ActiveRecord::Base
-  belongs_to :contactable, :polymorphic => true
-  belongs_to :contact
-end
-</pre>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">ContactDetail</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+</span><span class='line'>  <span class="n">belongs_to</span> <span class="ss">:contactable</span><span class="p">,</span> <span class="ss">:polymorphic</span> <span class="o">=&gt;</span> <span class="kp">true</span>
+</span><span class='line'>  <span class="n">belongs_to</span> <span class="ss">:contact</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 
@@ -175,19 +462,27 @@ end
 
 
 
-<pre class="brush:ruby">
-class CreateContactDetails < ActiveRecord::Migration
-  def change
-    create_table :contact_details do |t|
-      t.integer :contact_id
-      t.integer :contactable_id
-      t.string :contactable_type
-      t.timestamps
-    end
-  end
-end
-
-</pre>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">CreateContactDetails</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Migration</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">change</span>
+</span><span class='line'>    <span class="n">create_table</span> <span class="ss">:contact_details</span> <span class="k">do</span> <span class="o">|</span><span class="n">t</span><span class="o">|</span>
+</span><span class='line'>      <span class="n">t</span><span class="o">.</span><span class="n">integer</span> <span class="ss">:contact_id</span>
+</span><span class='line'>      <span class="n">t</span><span class="o">.</span><span class="n">integer</span> <span class="ss">:contactable_id</span>
+</span><span class='line'>      <span class="n">t</span><span class="o">.</span><span class="n">string</span> <span class="ss">:contactable_type</span>
+</span><span class='line'>      <span class="n">t</span><span class="o">.</span><span class="n">timestamps</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 
@@ -197,14 +492,19 @@ end
 
 
 
-<pre class="brush:ruby">
-class Contact < ActiveRecord::Base
-  has_many :plans ,:through => :contact_details, :source => :contactable, :source_type => 'Plan'
-  has_many :templates ,:through => :contact_details, :source => :contactable, :source_type => 'Template'
-  has_many :contact_details
-  accepts_nested_attributes_for :plans,:templates
-end
-</pre>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Contact</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+</span><span class='line'>  <span class="n">has_many</span> <span class="ss">:plans</span> <span class="p">,</span><span class="ss">:through</span> <span class="o">=&gt;</span> <span class="ss">:contact_details</span><span class="p">,</span> <span class="ss">:source</span> <span class="o">=&gt;</span> <span class="ss">:contactable</span><span class="p">,</span> <span class="ss">:source_type</span> <span class="o">=&gt;</span> <span class="s1">&#39;Plan&#39;</span>
+</span><span class='line'>  <span class="n">has_many</span> <span class="ss">:templates</span> <span class="p">,</span><span class="ss">:through</span> <span class="o">=&gt;</span> <span class="ss">:contact_details</span><span class="p">,</span> <span class="ss">:source</span> <span class="o">=&gt;</span> <span class="ss">:contactable</span><span class="p">,</span> <span class="ss">:source_type</span> <span class="o">=&gt;</span> <span class="s1">&#39;Template&#39;</span>
+</span><span class='line'>  <span class="n">has_many</span> <span class="ss">:contact_details</span>
+</span><span class='line'>  <span class="n">accepts_nested_attributes_for</span> <span class="ss">:plans</span><span class="p">,</span><span class="ss">:templates</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 
@@ -214,12 +514,15 @@ end
 
 
 
-<pre class="brush:ruby">
-  class Plan < ActiveRecord::Base
-    has_many :contacts,:through => :contact_details
-    has_many :contact_details, :as => :contactable
-  end
-</pre>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="k">class</span> <span class="nc">Plan</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+</span><span class='line'>    <span class="n">has_many</span> <span class="ss">:contacts</span><span class="p">,</span><span class="ss">:through</span> <span class="o">=&gt;</span> <span class="ss">:contact_details</span>
+</span><span class='line'>    <span class="n">has_many</span> <span class="ss">:contact_details</span><span class="p">,</span> <span class="ss">:as</span> <span class="o">=&gt;</span> <span class="ss">:contactable</span>
+</span><span class='line'>  <span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 
@@ -229,12 +532,15 @@ end
 
 
 
-<pre class="brush:ruby">
-  class Template < ActiveRecord::Base
-    has_many :contacts,:through => :contact_details
-    has_many :contact_details, :as => :contactable
-  end
-</pre>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="k">class</span> <span class="nc">Template</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+</span><span class='line'>    <span class="n">has_many</span> <span class="ss">:contacts</span><span class="p">,</span><span class="ss">:through</span> <span class="o">=&gt;</span> <span class="ss">:contact_details</span>
+</span><span class='line'>    <span class="n">has_many</span> <span class="ss">:contact_details</span><span class="p">,</span> <span class="ss">:as</span> <span class="o">=&gt;</span> <span class="ss">:contactable</span>
+</span><span class='line'>  <span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 
@@ -242,27 +548,43 @@ end
 <p>So you can see we can use one table(contact_details) for both plan and template</p>
 
 
-<pre class="brush:ruby">
- contact  = Contact.create(:name => 'Rays')
- template = Template.create(:name => 'template 1')
- plan = Plan.create(:name =>'plan')
 
- contact.plans << plan
- contact.templates << template
 
- template.contacts => [contact]
- plan.contacts => [contact]
- contact.templates => [template]
- contact.plans => [plans]
-</pre>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'> <span class="n">contact</span>  <span class="o">=</span> <span class="no">Contact</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="ss">:name</span> <span class="o">=&gt;</span> <span class="s1">&#39;Rays&#39;</span><span class="p">)</span>
+</span><span class='line'> <span class="n">template</span> <span class="o">=</span> <span class="no">Template</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="ss">:name</span> <span class="o">=&gt;</span> <span class="s1">&#39;template 1&#39;</span><span class="p">)</span>
+</span><span class='line'> <span class="n">plan</span> <span class="o">=</span> <span class="no">Plan</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="ss">:name</span> <span class="o">=&gt;</span><span class="s1">&#39;plan&#39;</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'> <span class="n">contact</span><span class="o">.</span><span class="n">plans</span> <span class="o">&lt;&lt;</span> <span class="n">plan</span>
+</span><span class='line'> <span class="n">contact</span><span class="o">.</span><span class="n">templates</span> <span class="o">&lt;&lt;</span> <span class="n">template</span>
+</span><span class='line'>
+</span><span class='line'> <span class="n">template</span><span class="o">.</span><span class="n">contacts</span> <span class="o">=&gt;</span> <span class="o">[</span><span class="n">contact</span><span class="o">]</span>
+</span><span class='line'> <span class="n">plan</span><span class="o">.</span><span class="n">contacts</span> <span class="o">=&gt;</span> <span class="o">[</span><span class="n">contact</span><span class="o">]</span>
+</span><span class='line'> <span class="n">contact</span><span class="o">.</span><span class="n">templates</span> <span class="o">=&gt;</span> <span class="o">[</span><span class="n">template</span><span class="o">]</span>
+</span><span class='line'> <span class="n">contact</span><span class="o">.</span><span class="n">plans</span> <span class="o">=&gt;</span> <span class="o">[</span><span class="n">plans</span><span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
 
 
 <p>so if you have <strong>accepts_nested_attributes_for :template</strong> then you can create template for contact in a form</p>
 
 
-<pre class="brush:ruby">
- Contact.create(:name => 'abc',:templates_attributes => {'0' => {'name' => 'Tech'}})
-</pre>
+
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'> <span class="no">Contact</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="ss">:name</span> <span class="o">=&gt;</span> <span class="s1">&#39;abc&#39;</span><span class="p">,</span><span class="ss">:templates_attributes</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="s1">&#39;0&#39;</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Tech&#39;</span><span class="p">}})</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 
@@ -294,404 +616,586 @@ end
   
   <entry>
     <title type="html"><![CDATA[Enhance Rails Models]]></title>
-    <link href="http://yoursite.com/blog/2012/05/05/enhance-rails-models/"/>
+    <link href="http://yoursite.com/2012/05/05/enhance-rails-models/"/>
     <updated>2012-05-05T00:00:00+02:00</updated>
-    <id>http://yoursite.com/blog/2012/05/05/enhance-rails-models</id>
+    <id>http://yoursite.com/2012/05/05/enhance-rails-models</id>
     <content type="html"><![CDATA[<p>In Rails Models play a important part in our Rails App.We should keep are model pretty,not having dirty code
 Here i am just reminding you some basic points to refactor a model.</p>
 
-<p>READMORE</p>
+<!--more-->
 
-<p><p>
-  <strong>1. Follow law of Demeter(In rails it means use only one dot)</strong></p>
 
-<p><pre class="brush:ruby">
-class Author  &lt; ActiveRecord::Base
-  has_many :books
-  has_one  :address
-end</p>
 
-<p>class Book &lt; ActiveRecord::Base
-  belongs_to :author
-end</p>
 
-<p>class Address &lt; ActiveRecord::Base
-  belongs_to :author
-end
-</pre>
-  <p>So if in a view we have something like</p>
-  <pre class="brush:ruby"></p>
-
-<pre><code>@book.author.name
-@book.author.address.street
-@book.author.address.city
-@book.author.address.state
-</code></pre>
-
-<p>  </pre>
-  Here we are calling an object&rsquo;s related object using a third(book &ndash;> customer &ndash;> address)</p>
-
-<p>  Luckily in Rails we have Delegate that can escape us from this situation</p>
-
-<p><pre class="brush:ruby">
-class Author  &lt; ActiveRecord::Base
-  has_many :books
-  has_one  :address
-end</p>
-
-<p>class Book &lt; ActiveRecord::Base
-  belongs_to :author'
-  delegate :name,</p>
-
-<pre><code>       :street,
-       :city,
-       :state,
-       :to =&gt; :author, :prefix =&gt; true, :allow_nil =&gt; true
-</code></pre>
-
-<p>end</p>
-
-<p>class Address &lt; ActiveRecord::Base
-  belongs_to :author
-  delegate :street,:city,:state, :to => :address ,:allow_nil => true
-end</p>
-
-<p></pre>
-<p>So if in a view we have something like</p>
-<pre class="brush:ruby">
-  @book.author_name
-  @book.author_street
-  @book.author_city
-  @book.author_state
-</pre>
-<p>Now we have just only dot.Here :allow_nil option prevents the error call method on nil object</p></p>
-
-<p></p>
 <p>
-<strong>2. Use callback and validation.instead of writing large code in your method</strong></p>
+  <strong>1. Follow law of Demeter(In rails it means use only one dot)</strong>
 
-<p><pre class="brush:ruby">
-class User &lt; ActiveRecord::Base
-  email_confirmation
-  attr_accessor :email_confirmation</p>
 
-<p>  def user_save</p>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Author</span>  <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+</span><span class='line'>  <span class="n">has_many</span> <span class="ss">:books</span>
+</span><span class='line'>  <span class="n">has_one</span>  <span class="ss">:address</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">Book</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+</span><span class='line'>  <span class="n">belongs_to</span> <span class="ss">:author</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">Address</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+</span><span class='line'>  <span class="n">belongs_to</span> <span class="ss">:author</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<pre><code>if email &amp;&amp; email_confirmation &amp;&amp; save
- #send_email
-end
-</code></pre>
+  <p>So if in a view we have something like</p>
+  
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>    <span class="vi">@book</span><span class="o">.</span><span class="n">author</span><span class="o">.</span><span class="n">name</span>
+</span><span class='line'>    <span class="vi">@book</span><span class="o">.</span><span class="n">author</span><span class="o">.</span><span class="n">address</span><span class="o">.</span><span class="n">street</span>
+</span><span class='line'>    <span class="vi">@book</span><span class="o">.</span><span class="n">author</span><span class="o">.</span><span class="n">address</span><span class="o">.</span><span class="n">city</span>
+</span><span class='line'>    <span class="vi">@book</span><span class="o">.</span><span class="n">author</span><span class="o">.</span><span class="n">address</span><span class="o">.</span><span class="n">state</span>
+</span><span class='line'>
+</span></code></pre></td></tr></table></div></figure>
 
-<p>  end
-end
-</pre></p>
+  Here we are calling an object&#8217;s related object using a third(book -> customer -> address)
 
-<p>Instead of doing that you can use a call back after_create
-<pre class="brush:ruby">
-class User &lt; ActiveRecord::Base
-  validates :email, :confirmation => true
-  validates :email_confirmation, :presence => true</p>
+  Luckily in Rails we have Delegate that can escape us from this situation
 
-<p>  after_create :send_email</p>
 
-<p>  private</p>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Author</span>  <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+</span><span class='line'>  <span class="n">has_many</span> <span class="ss">:books</span>
+</span><span class='line'>  <span class="n">has_one</span>  <span class="ss">:address</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">Book</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+</span><span class='line'>  <span class="n">belongs_to</span> <span class="ss">:author</span><span class="err">&#39;</span>
+</span><span class='line'>  <span class="n">delegate</span> <span class="ss">:name</span><span class="p">,</span>
+</span><span class='line'>           <span class="ss">:street</span><span class="p">,</span>
+</span><span class='line'>           <span class="ss">:city</span><span class="p">,</span>
+</span><span class='line'>           <span class="ss">:state</span><span class="p">,</span>
+</span><span class='line'>           <span class="ss">:to</span> <span class="o">=&gt;</span> <span class="ss">:author</span><span class="p">,</span> <span class="ss">:prefix</span> <span class="o">=&gt;</span> <span class="kp">true</span><span class="p">,</span> <span class="ss">:allow_nil</span> <span class="o">=&gt;</span> <span class="kp">true</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">Address</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+</span><span class='line'>  <span class="n">belongs_to</span> <span class="ss">:author</span>
+</span><span class='line'>  <span class="n">delegate</span> <span class="ss">:street</span><span class="p">,</span><span class="ss">:city</span><span class="p">,</span><span class="ss">:state</span><span class="p">,</span> <span class="ss">:to</span> <span class="o">=&gt;</span> <span class="ss">:address</span> <span class="p">,</span><span class="ss">:allow_nil</span> <span class="o">=&gt;</span> <span class="kp">true</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<p>  def send_email
-   #send_email
-  end
-end
-</pre></p>
+<p>So if in a view we have something like</p>
 
-<p>So now when you create user it validates if email and email_confirmation attribute is there will send email just after saving the user
-(here you don&rsquo;t need to define attr_accessor :email_confirmation and don&rsquo;t need to tae attr email_confirmation in db table )
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="vi">@book</span><span class="o">.</span><span class="n">author_name</span>
+</span><span class='line'>  <span class="vi">@book</span><span class="o">.</span><span class="n">author_street</span>
+</span><span class='line'>  <span class="vi">@book</span><span class="o">.</span><span class="n">author_city</span>
+</span><span class='line'>  <span class="vi">@book</span><span class="o">.</span><span class="n">author_state</span>
+</span></code></pre></td></tr></table></div></figure>
+
+<p>Now we have just only dot.Here :allow_nil option prevents the error call method on nil object</p>
+
 </p>
+
+
+<p>
+<strong>2. Use callback and validation.instead of writing large code in your method</strong>
+
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+</span><span class='line'>  <span class="n">email_confirmation</span>
+</span><span class='line'>  <span class="kp">attr_accessor</span> <span class="ss">:email_confirmation</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">user_save</span>
+</span><span class='line'>    <span class="k">if</span> <span class="n">email</span> <span class="o">&amp;&amp;</span> <span class="n">email_confirmation</span> <span class="o">&amp;&amp;</span> <span class="n">save</span>
+</span><span class='line'>     <span class="c1">#send_email</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+Instead of doing that you can use a call back after_create
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+</span><span class='line'>  <span class="n">validates</span> <span class="ss">:email</span><span class="p">,</span> <span class="ss">:confirmation</span> <span class="o">=&gt;</span> <span class="kp">true</span>
+</span><span class='line'>  <span class="n">validates</span> <span class="ss">:email_confirmation</span><span class="p">,</span> <span class="ss">:presence</span> <span class="o">=&gt;</span> <span class="kp">true</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">after_create</span> <span class="ss">:send_email</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kp">private</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">send_email</span>
+</span><span class='line'>   <span class="c1">#send_email</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+So now when you create user it validates if email and email_confirmation attribute is there will send email just after saving the user
+(here you don&#8217;t need to define attr_accessor :email_confirmation and don&#8217;t need to tae attr email_confirmation in db table )
+</p>
+
+
 <p>
 <strong>3. Include Modules</strong>
-<pre class="brush:ruby">
-class Order &lt; ActiveRecord::Base
-  def self.find_purchased</p>
 
-<pre><code># ...
-</code></pre>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Order</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">find_purchased</span>
+</span><span class='line'>    <span class="c1"># ...</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">find_waiting_for_review</span>
+</span><span class='line'>     <span class="c1"># ...</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">find_waiting_for_sign_off</span>
+</span><span class='line'>    <span class="c1">#.....</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">find_waiting_for_sign_off</span>
+</span><span class='line'>   <span class="c1">#...</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">advanced_search</span><span class="p">(</span><span class="n">fields</span><span class="p">,</span> <span class="n">options</span> <span class="o">=</span> <span class="p">{})</span>
+</span><span class='line'>   <span class="c1">#...</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">simple_search</span><span class="p">(</span><span class="n">terms</span><span class="p">)</span>
+</span><span class='line'>   <span class="c1">#...</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">to_xml</span>
+</span><span class='line'>   <span class="c1">#...</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">to_json</span>
+</span><span class='line'>   <span class="c1">#...</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">to_csv</span>
+</span><span class='line'>    <span class="c1">#...</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">to_pdf</span>
+</span><span class='line'>    <span class="c1">#...</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<p>  end</p>
 
-<p>  def self.find_waiting_for_review</p>
+Modules allow you to extract behavior into separate files.Modules also serve to group related information into labeled namespaces.Its improve readability of code
 
-<pre><code> # ...
-</code></pre>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Order</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+</span><span class='line'>  <span class="kp">extend</span> <span class="no">OrderStateFinders</span>
+</span><span class='line'>  <span class="kp">extend</span> <span class="no">OrderSearchers</span>
+</span><span class='line'>  <span class="kp">include</span> <span class="no">OrderExporters</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># lib/order_state_finders.rb</span>
+</span><span class='line'><span class="k">module</span> <span class="nn">OrderStateFinders</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">find_purchased</span>
+</span><span class='line'>    <span class="c1">#...</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">find_waiting_for_review</span>
+</span><span class='line'>    <span class="c1">#...</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">find_waiting_for_sign_off</span>
+</span><span class='line'>    <span class="c1">#...</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># lib/order_searchers.rb</span>
+</span><span class='line'><span class="k">module</span> <span class="nn">OrderSearchers</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">advanced_search</span><span class="p">(</span><span class="n">fields</span><span class="p">,</span> <span class="n">options</span> <span class="o">=</span> <span class="p">{})</span>
+</span><span class='line'>    <span class="c1"># ...</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">simple_search</span><span class="p">(</span><span class="n">terms</span><span class="p">)</span>
+</span><span class='line'>    <span class="c1"># ...</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># lib/order_exporters.rb</span>
+</span><span class='line'><span class="k">module</span> <span class="nn">OrderExporters</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">to_xml</span>
+</span><span class='line'>    <span class="c1"># ...</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">to_json</span>
+</span><span class='line'>    <span class="c1"># ...</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">to_csv</span>
+</span><span class='line'>   <span class="c1"># ...</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">to_pdf</span>
+</span><span class='line'>    <span class="c1"># ...</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<p>  end</p>
 
-<p>  def self.find_waiting_for_sign_off</p>
+So in extend module&#8217;s method are class method on that calling class.include module&#8217;s methods are instance method for object of calling class
 
-<pre><code>#.....
-</code></pre>
-
-<p>  end</p>
-
-<p>  def self.find_waiting_for_sign_off
-   #&hellip;
-  end</p>
-
-<p>  def self.advanced_search(fields, options = {})
-   #&hellip;
-  end</p>
-
-<p>  def self.simple_search(terms)
-   #&hellip;
-  end</p>
-
-<p>  def to_xml
-   #&hellip;
-  end</p>
-
-<p>  def to_json
-   #&hellip;
-  end</p>
-
-<p>  def to_csv</p>
-
-<pre><code>#...
-</code></pre>
-
-<p>  end</p>
-
-<p>  def to_pdf</p>
-
-<pre><code>#...
-</code></pre>
-
-<p>  end
-end
-</pre></p>
-
-<p>Modules allow you to extract behavior into separate files.Modules also serve to group related information into labeled namespaces.Its improve readability of code
-<pre class="brush:ruby">
-class Order &lt; ActiveRecord::Base
-  extend OrderStateFinders
-  extend OrderSearchers
-  include OrderExporters
-end</p>
-
-<h1>lib/order_state_finders.rb</h1>
-
-<p>module OrderStateFinders
-  def find_purchased</p>
-
-<pre><code>#...
-</code></pre>
-
-<p>  end</p>
-
-<p>  def find_waiting_for_review</p>
-
-<pre><code>#...
-</code></pre>
-
-<p>  end</p>
-
-<p>  def find_waiting_for_sign_off</p>
-
-<pre><code>#...
-</code></pre>
-
-<p>  end
-end</p>
-
-<h1>lib/order_searchers.rb</h1>
-
-<p>module OrderSearchers
-  def advanced_search(fields, options = {})</p>
-
-<pre><code># ...
-</code></pre>
-
-<p>  end</p>
-
-<p>  def simple_search(terms)</p>
-
-<pre><code># ...
-</code></pre>
-
-<p>  end
-end</p>
-
-<h1>lib/order_exporters.rb</h1>
-
-<p>module OrderExporters
-  def to_xml</p>
-
-<pre><code># ...
-</code></pre>
-
-<p>  end</p>
-
-<p>  def to_json</p>
-
-<pre><code># ...
-</code></pre>
-
-<p>  end</p>
-
-<p>  def to_csv
-   # &hellip;
-  end</p>
-
-<p>  def to_pdf</p>
-
-<pre><code># ...
-</code></pre>
-
-<p>  end
-end
-</pre></p>
-
-<p>So in extend module&rsquo;s method are class method on that calling class.include module&rsquo;s methods are instance method for object of calling class</p>
-
-<p></p>
-<p>
-<strong>4.Use active record association</strong></p>
-
-<p>Rails provides us association very nicely.
-<pre class="brush:ruby">
-class User &lt; ActiveRecord::Base
-  has_many :blogs
-end</p>
-
-<p>class blog &lt; ActiveRecord::Base
-  belongs_to :user
-end</p>
-
-<p>@user = User.find(params[:id])
-@blogs = Blog.where(:user_id => params[:user_id])
-</pre></p>
-
-<p><p>Instead of doing this.do</p></p>
-
-<p><pre>
-@user = User.find(params[:id])
-@blogs = @user.blogs
-</pre>
 </p>
+
+
+<p>
+<strong>4.Use active record association</strong>
+
+Rails provides us association very nicely.
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+</span><span class='line'>  <span class="n">has_many</span> <span class="ss">:blogs</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="n">blog</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+</span><span class='line'>  <span class="n">belongs_to</span> <span class="ss">:user</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="vi">@user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:id</span><span class="o">]</span><span class="p">)</span>
+</span><span class='line'><span class="vi">@blogs</span> <span class="o">=</span> <span class="no">Blog</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="ss">:user_id</span> <span class="o">=&gt;</span> <span class="n">params</span><span class="o">[</span><span class="ss">:user_id</span><span class="o">]</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Instead of doing this.do</p>
+
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="vi">@user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:id</span><span class="o">]</span><span class="p">)</span>
+</span><span class='line'><span class="vi">@blogs</span> <span class="o">=</span> <span class="vi">@user</span><span class="o">.</span><span class="n">blogs</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</p>
+
+
 <p>
 <strong>5. Use Scope rather than writing complex finders</strong>
-<pre class="brush:ruby">
-class Book &lt; ActiveRecord::Base
-  def search_books(params={})</p>
 
-<pre><code>where('name like ? and price &gt; ? and published_date &gt; =?', "%#{params[:name]}%", 100,Date.today)
-</code></pre>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Book</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">search_books</span><span class="p">(</span><span class="n">params</span><span class="o">=</span><span class="p">{})</span>
+</span><span class='line'>    <span class="n">where</span><span class="p">(</span><span class="s1">&#39;name like ? and price &gt; ? and published_date &gt; =?&#39;</span><span class="p">,</span> <span class="s2">&quot;%</span><span class="si">#{</span><span class="n">params</span><span class="o">[</span><span class="ss">:name</span><span class="o">]</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span><span class="no">Date</span><span class="o">.</span><span class="n">today</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<p>  end
-end
-</pre></p>
 
-<p>Now suppose if you just need to find books based on published date you will create another method.That will duplicate your code
-<pre class="brush:ruby">
-class Book &lt; ActiveRecord::Base
-  def search_books(params={})</p>
+Now suppose if you just need to find books based on published date you will create another method.That will duplicate your code
 
-<pre><code>where('name like ? and price &gt; ? and published_date &gt; =?', "%#{params[:name]}%", 100,Date.today)
-</code></pre>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Book</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">search_books</span><span class="p">(</span><span class="n">params</span><span class="o">=</span><span class="p">{})</span>
+</span><span class='line'>    <span class="n">where</span><span class="p">(</span><span class="s1">&#39;name like ? and price &gt; ? and published_date &gt; =?&#39;</span><span class="p">,</span> <span class="s2">&quot;%</span><span class="si">#{</span><span class="n">params</span><span class="o">[</span><span class="ss">:name</span><span class="o">]</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span><span class="no">Date</span><span class="o">.</span><span class="n">today</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">search_by_published_date</span><span class="p">(</span><span class="n">date</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">where</span><span class="p">(</span><span class="s1">&#39;published_date &gt; =?&#39;</span><span class="p">,</span><span class="n">date</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<p>  end</p>
 
-<p>  def search_by_published_date(date)</p>
+In this case you can use scope
 
-<pre><code>where('published_date &gt; =?',date)
-</code></pre>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Book</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+</span><span class='line'>  <span class="n">scope</span> <span class="ss">:by_published_date</span><span class="p">,</span><span class="nb">lambda</span><span class="p">{</span><span class="o">|</span><span class="n">d</span><span class="o">|</span><span class="p">{</span><span class="ss">:where</span> <span class="o">=&gt;</span> <span class="o">[</span><span class="s1">&#39;published_date &gt;= ?&#39;</span><span class="p">,</span><span class="n">d</span><span class="o">]</span><span class="p">}}</span>
+</span><span class='line'>  <span class="n">scope</span> <span class="ss">:by_name</span><span class="p">,</span><span class="nb">lambda</span><span class="p">{</span><span class="o">|</span><span class="n">n</span><span class="o">|</span><span class="p">{</span><span class="ss">:where</span> <span class="o">=&gt;</span> <span class="o">[</span><span class="s1">&#39;name like ?&#39;</span><span class="p">,</span><span class="s2">&quot;%</span><span class="si">#{</span><span class="n">n</span><span class="si">}</span><span class="s2">%&quot;</span><span class="o">]</span><span class="p">}}</span>
+</span><span class='line'>  <span class="n">scope</span> <span class="ss">:by_price</span><span class="p">,</span><span class="nb">lambda</span><span class="p">{</span><span class="o">|</span><span class="nb">p</span><span class="o">|</span><span class="p">{</span><span class="ss">:where</span> <span class="o">=&gt;</span> <span class="o">[</span><span class="s1">&#39;price =?&#39;</span><span class="p">,</span><span class="nb">p</span><span class="p">}}</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<p>  end
-end
-</pre></p>
 
-<p>In this case you can use scope
-<pre class="brush:ruby">
-class Book &lt; ActiveRecord::Base
-  scope :by_published_date,lambda{|d|{:where => [&lsquo;published_date >= ?&rsquo;,d]}}
-  scope :by_name,lambda{|n|{:where => [&lsquo;name like ?&rsquo;,&ldquo;%#{n}%&rdquo;]}}
-  scope :by_price,lambda{|p|{:where => [&lsquo;price =?&rsquo;,p}}
-end
-</pre></p>
+Now you can use scope like
 
-<p>Now you can use scope like
-<pre class="brush:ruby">
-Book.by_published_date(Date.today).by_name(&lsquo;rails&rsquo;).by_price(100)
-</pre>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">Book</span><span class="o">.</span><span class="n">by_published_date</span><span class="p">(</span><span class="no">Date</span><span class="o">.</span><span class="n">today</span><span class="p">)</span><span class="o">.</span><span class="n">by_name</span><span class="p">(</span><span class="s1">&#39;rails&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">by_price</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
 </p>
+
+
 <p>
-<strong>6. Do Metaprogramming</strong></p>
+<strong>6. Do Metaprogramming</strong>
 
-<p><pre class="brush:ruby">
-class Plan &lt; ActiveRecord::Base
-  ACTIVE=&lsquo;active&rsquo;
-  INACTIVE = &lsquo;inactive&rsquo;
-  IN_PROGRESS = &lsquo;in progress&rsquo;
-  def active?</p>
 
-<pre><code>status == ACTIVE
-</code></pre>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Plan</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+</span><span class='line'>  <span class="no">ACTIVE</span><span class="o">=</span><span class="s1">&#39;active&#39;</span>
+</span><span class='line'>  <span class="no">INACTIVE</span> <span class="o">=</span> <span class="s1">&#39;inactive&#39;</span>
+</span><span class='line'>  <span class="no">IN_PROGRESS</span> <span class="o">=</span> <span class="s1">&#39;in progress&#39;</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">active?</span>
+</span><span class='line'>    <span class="n">status</span> <span class="o">==</span> <span class="no">ACTIVE</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">inactive?</span>
+</span><span class='line'>    <span class="n">status</span> <span class="o">==</span> <span class="no">INACTIVE</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">in_progress?</span>
+</span><span class='line'>    <span class="n">status</span> <span class="o">==</span> <span class="no">IN_PROGRESS</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<p>  end</p>
-
-<p>  def inactive?</p>
-
-<pre><code>status == INACTIVE
-</code></pre>
-
-<p>  end</p>
-
-<p>  def in_progress?</p>
-
-<pre><code>status == IN_PROGRESS
-</code></pre>
-
-<p>  end
-end
-</pre>
 now reduce code with meta programming
-<pre class="brush:ruby">
-class Plan &lt; ActiveRecord::Base
-  ACTIVE=&lsquo;active&rsquo;
-  INACTIVE = &lsquo;inactive&rsquo;
-  IN_PROGRESS = &lsquo;in progress&rsquo;</p>
 
-<p>  [ACTIVE, INACTIVE,IN_PROGRESS].each do |s|</p>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Plan</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+</span><span class='line'>  <span class="no">ACTIVE</span><span class="o">=</span><span class="s1">&#39;active&#39;</span>
+</span><span class='line'>  <span class="no">INACTIVE</span> <span class="o">=</span> <span class="s1">&#39;inactive&#39;</span>
+</span><span class='line'>  <span class="no">IN_PROGRESS</span> <span class="o">=</span> <span class="s1">&#39;in progress&#39;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="o">[</span><span class="no">ACTIVE</span><span class="p">,</span> <span class="no">INACTIVE</span><span class="p">,</span><span class="no">IN_PROGRESS</span><span class="o">].</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">s</span><span class="o">|</span>
+</span><span class='line'>    <span class="n">plan_status</span> <span class="o">=</span> <span class="o">&lt;&lt;-</span><span class="no">EOF</span>
+</span><span class='line'><span class="sh">      def is_#{s}?</span>
+</span><span class='line'><span class="sh">        self.status ==  &#39;#{s}&#39;</span>
+</span><span class='line'><span class="sh">      end</span>
+</span><span class='line'><span class="no">    EOF</span>
+</span><span class='line'>    <span class="nb">class_eval</span> <span class="n">plan_status</span><span class="p">,</span> <span class="bp">__FILE__</span><span class="p">,</span> <span class="bp">__LINE__</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<pre><code>plan_status = &lt;&lt;-EOF
-  def is_#{s}?
-    self.status ==  '#{s}'
-  end
-EOF
-class_eval plan_status, __FILE__, __LINE__
-</code></pre>
-
-<p>  end
-end
-</pre>
 </p>
+
+
 <p>
 <strong>7. Use full text search engine</strong>
   <p>
 if you app require search based on all the attribute on model or something like that then writing messy code is not an good idea.
 Better way is to use any search engine like Solr, Sphinx
- </p></p>
+ </p>
 
-<p><p>Search engine indexed the data.so it gives you results based on search query against any full words in the indexed data</p>
+<p>Search engine indexed the data.so it gives you results based on search query against any full words in the indexed data</p>
 </p>
+
+
 <p>
   I have covered most of the steps here to enhance your Rails Models and keep your Rails Models clean,
-  Here are some links to read more about these things.</p>
+  Here are some links to read more about these things.
 
-<p>  Reference links :
+  Reference links :
 </p>
+
+
 <ul>
-  <li><a href="http://blog.rubybestpractices.com/posts/gregory/008-decorator-delegator-disco.html"><a href="http://blog.rubybestpractices.com/posts/gregory/008-decorator-delegator-disco.html">http://blog.rubybestpractices.com/posts/gregory/008-decorator-delegator-disco.html</a></a></li>
-  <li><a href="http://khelll.com/blog/ruby/delegation-in-ruby/"><a href="http://khelll.com/blog/ruby/delegation-in-ruby/">http://khelll.com/blog/ruby/delegation-in-ruby/</a></a></li>
-  <li><a href="http://sunspot.github.com/"><a href="http://sunspot.github.com/">http://sunspot.github.com/</a></a></li>
-  <li><a href="http://freelancing-god.github.com/ts/en/"><a href="http://freelancing-god.github.com/ts/en/">http://freelancing-god.github.com/ts/en/</a></a></li>
-</ul></p>
+  <li><a href="http://blog.rubybestpractices.com/posts/gregory/008-decorator-delegator-disco.html">http://blog.rubybestpractices.com/posts/gregory/008-decorator-delegator-disco.html</a></li>
+  <li><a href="http://khelll.com/blog/ruby/delegation-in-ruby/">http://khelll.com/blog/ruby/delegation-in-ruby/</a></li>
+  <li><a href="http://sunspot.github.com/">http://sunspot.github.com/</a></li>
+  <li><a href="http://freelancing-god.github.com/ts/en/">http://freelancing-god.github.com/ts/en/</a></li>
+</ul>
+
 
 <p>Thanks for reading this post :&ndash;)</p>
 ]]></content>
@@ -699,13 +1203,16 @@ Better way is to use any search engine like Solr, Sphinx
   
   <entry>
     <title type="html"><![CDATA[Background Processing Using Rails Runner]]></title>
-    <link href="http://yoursite.com/blog/2012/05/03/background-processing-using-rails-runner/"/>
+    <link href="http://yoursite.com/2012/05/03/background-processing-using-rails-runner/"/>
     <updated>2012-05-03T00:00:00+02:00</updated>
-    <id>http://yoursite.com/blog/2012/05/03/background-processing-using-rails-runner</id>
+    <id>http://yoursite.com/2012/05/03/background-processing-using-rails-runner</id>
     <content type="html"><![CDATA[<p>Rails comes with a built-in tool for running tasks independent of the web cycle. The <code>rails runner</code> command simply loads the default Rails environment and then executes some specified Ruby code.</p>
 
 
-<p>READMORE</p>
+
+
+<!--more-->
+
 
 <p>Some of use cases :</p>
 
@@ -729,9 +1236,9 @@ Better way is to use any search engine like Solr, Sphinx
 
 
 
-<pre class="brush:ruby">
-rails runner DailyReport.send_me!
-</pre>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">rails</span> <span class="n">runner</span> <span class="no">DailyReport</span><span class="o">.</span><span class="n">send_me!</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 
@@ -746,9 +1253,9 @@ rails runner DailyReport.send_me!
 
 
 
-<pre class="brush:ruby">
-rails runner 'User.all.map(&:email).each {|e| puts e }'
-</pre>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">rails</span> <span class="n">runner</span> <span class="s1">&#39;User.all.map(&amp;:email).each {|e| puts e }&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 
@@ -758,9 +1265,9 @@ rails runner 'User.all.map(&:email).each {|e| puts e }'
 
 
 
-<pre class="brush:ruby">
-rails runner -h
-</pre>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">rails</span> <span class="n">runner</span> <span class="o">-</span><span class="n">h</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 
@@ -770,28 +1277,40 @@ rails runner -h
 
 
 
-<pre class="brush:ruby">
-Usage: runner [options] ('Some.ruby(code)' or a filename)
-
-    -e, --environment=name           Specifies the environment for the runner to operate under (test/development/production).
-                                     Default: development
-
-    -h, --help                       Show this help message.
-
-You can also use runner as a shebang line for your scripts like this:
--------------------------------------------------------------
-#!/usr/bin/env /Users/raysrashmi/checkouts/foobar/script/rails runner
-
-Product.find(:all).each { |p| p.price *= 2 ; p.save! }
--------------------------------------------------------------
-</pre>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="ss">Usage</span><span class="p">:</span> <span class="n">runner</span> <span class="o">[</span><span class="n">options</span><span class="o">]</span> <span class="p">(</span><span class="s1">&#39;Some.ruby(code)&#39;</span> <span class="ow">or</span> <span class="n">a</span> <span class="n">filename</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="o">-</span><span class="n">e</span><span class="p">,</span> <span class="o">--</span><span class="n">environment</span><span class="o">=</span><span class="nb">name</span>           <span class="no">Specifies</span> <span class="n">the</span> <span class="n">environment</span> <span class="k">for</span> <span class="n">the</span> <span class="n">runner</span> <span class="n">to</span> <span class="n">operate</span> <span class="n">under</span> <span class="p">(</span><span class="nb">test</span><span class="o">/</span><span class="n">development</span><span class="o">/</span><span class="n">production</span><span class="p">)</span><span class="o">.</span>
+</span><span class='line'>                                     <span class="ss">Default</span><span class="p">:</span> <span class="n">development</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="o">-</span><span class="n">h</span><span class="p">,</span> <span class="o">--</span><span class="n">help</span>                       <span class="no">Show</span> <span class="n">this</span> <span class="n">help</span> <span class="n">message</span><span class="o">.</span>
+</span><span class='line'>
+</span><span class='line'><span class="no">You</span> <span class="n">can</span> <span class="n">also</span> <span class="n">use</span> <span class="n">runner</span> <span class="n">as</span> <span class="n">a</span> <span class="n">shebang</span> <span class="n">line</span> <span class="k">for</span> <span class="n">your</span> <span class="n">scripts</span> <span class="n">like</span> <span class="ss">this</span><span class="p">:</span>
+</span><span class='line'><span class="o">-------------------------------------------------------------</span>
+</span><span class='line'><span class="c1">#!/usr/bin/env /Users/raysrashmi/checkouts/foobar/script/rails runner</span>
+</span><span class='line'>
+</span><span class='line'><span class="no">Product</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="ss">:all</span><span class="p">)</span><span class="o">.</span><span class="n">each</span> <span class="p">{</span> <span class="o">|</span><span class="nb">p</span><span class="o">|</span> <span class="nb">p</span><span class="o">.</span><span class="n">price</span> <span class="o">*=</span> <span class="mi">2</span> <span class="p">;</span> <span class="nb">p</span><span class="o">.</span><span class="n">save!</span> <span class="p">}</span>
+</span><span class='line'><span class="o">-------------------------------------------------------------</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>A sample crontab to run that script might look like</p>
 
-<pre class="brush:ruby">
-  @daily  /Users/raysrashmi/checkouts/foobar/script/rails runner -e production 'DailyReport.send_me!'
-</pre>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="vi">@daily</span>  <span class="sr">/Users/</span><span class="n">raysrashmi</span><span class="o">/</span><span class="n">checkouts</span><span class="o">/</span><span class="n">foobar</span><span class="o">/</span><span class="n">script</span><span class="o">/</span><span class="n">rails</span> <span class="n">runner</span> <span class="o">-</span><span class="n">e</span> <span class="n">production</span> <span class="s1">&#39;DailyReport.send_me!&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 
@@ -819,36 +1338,58 @@ I use <code> rails runner </code> whenever I need to run a small task.
   
   <entry>
     <title type="html"><![CDATA[Rails 3 Responders]]></title>
-    <link href="http://yoursite.com/blog/2012/05/01/rails-3-responders/"/>
+    <link href="http://yoursite.com/2012/05/01/rails-3-responders/"/>
     <updated>2012-05-01T00:00:00+02:00</updated>
-    <id>http://yoursite.com/blog/2012/05/01/rails-3-responders</id>
+    <id>http://yoursite.com/2012/05/01/rails-3-responders</id>
     <content type="html"><![CDATA[<p>So we have a problem here in Controllers.
 
-As our application grows our controllers grows. We will be in trouble when we have alternative formats in our controllers like JSON, XML.
+As our application grows our controllers grows.
+We will be in trouble when we have alternative formats in our controllers like JSON, XML.
 </p>
+
+
+<!--more-->
 
 
 <p>You might need to respond both in JSON and XML or might be only JSON in your controller.</p>
 
-<pre class="brush:ruby">
-class BlogsController &lt; ApplicationController
-   def index
-     @blogs = Blog.all
-     respond_to do |format|
-     format.html
-     format.xml { render :xml =&gt; @blogs }
-    end
-  end
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">BlogsController</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span> <span class="no">ApplicationController</span>
+</span><span class='line'>   <span class="k">def</span> <span class="nf">index</span>
+</span><span class='line'>     <span class="vi">@blogs</span> <span class="o">=</span> <span class="no">Blog</span><span class="o">.</span><span class="n">all</span>
+</span><span class='line'>     <span class="n">respond_to</span> <span class="k">do</span> <span class="o">|</span><span class="nb">format</span><span class="o">|</span>
+</span><span class='line'>     <span class="nb">format</span><span class="o">.</span><span class="n">html</span>
+</span><span class='line'>     <span class="nb">format</span><span class="o">.</span><span class="n">xml</span> <span class="p">{</span> <span class="n">render</span> <span class="ss">:xml</span> <span class="o">=&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="vi">@blogs</span> <span class="p">}</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">show</span>
+</span><span class='line'>    <span class="vi">@blog</span> <span class="o">=</span> <span class="no">Blog</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:id</span><span class="o">]</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">respond_to</span> <span class="k">do</span> <span class="o">|</span><span class="nb">format</span><span class="o">|</span>
+</span><span class='line'>      <span class="nb">format</span><span class="o">.</span><span class="n">html</span>
+</span><span class='line'>      <span class="nb">format</span><span class="o">.</span><span class="n">xml</span> <span class="p">{</span> <span class="n">render</span> <span class="ss">:xml</span> <span class="o">=&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="vi">@blog</span> <span class="p">}</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
 
-  def show
-    @blog = Blog.find(params[:id])
-    respond_to do |format|
-      format.html
-      format.xml { render :xml =&gt; @blog }
-    end
-  end
-end
-</pre>
+
 
 
 <p>You can see here that in both the action we are responding with HTML and XML.
@@ -859,20 +1400,35 @@ Rails 3 introduced a new set of methods called <code>responders</code> that abst
 
 <p>Here is our example written using <code>responders</code></p>
 
-<pre class="brush:ruby">
-  class BlogsController &lt; ApplicationController
-  respond_to :html, :xml
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="k">class</span> <span class="nc">BlogsController</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span> <span class="no">ApplicationController</span>
+</span><span class='line'>  <span class="n">respond_to</span> <span class="ss">:html</span><span class="p">,</span> <span class="ss">:xml</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">index</span>
+</span><span class='line'>    <span class="vi">@blogs</span> <span class="o">=</span> <span class="no">Blog</span><span class="o">.</span><span class="n">all</span>
+</span><span class='line'>    <span class="n">respond_with</span><span class="p">(</span><span class="vi">@blogs</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">show</span>
+</span><span class='line'>    <span class="vi">@blog</span> <span class="o">=</span> <span class="no">Blog</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:id</span><span class="o">]</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">respond_with</span><span class="p">(</span><span class="vi">@blog</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
 
-  def index
-    @blogs = Blog.all
-    respond_with(@blogs)
-  end
 
-  def show
-    @blog = Blog.find(params[:id])
-    respond_with(@blog)
-  end
-end</pre>
 
 
 <p>This looks more cleaner No ?
@@ -902,9 +1458,9 @@ The entire <code>respond_to</code> block is gone now.
   
   <entry>
     <title type="html"><![CDATA[OAuth with OmniAuth and Github]]></title>
-    <link href="http://yoursite.com/blog/2012/04/22/oauth-omniauth-github/"/>
+    <link href="http://yoursite.com/2012/04/22/oauth-omniauth-github/"/>
     <updated>2012-04-22T00:00:00+02:00</updated>
-    <id>http://yoursite.com/blog/2012/04/22/oauth-omniauth-github</id>
+    <id>http://yoursite.com/2012/04/22/oauth-omniauth-github</id>
     <content type="html"><![CDATA[<p>
 If you want to authenticate your user in your app with Github  use omniauth-github strategy for that.
 Here I am describing how you can do that very quickly.
@@ -914,12 +1470,18 @@ OmniAuth provides list of  strategies to use many OAuth for your application. H
 </p>
 
 
-<p>READMORE</p>
+
+
+<!--more-->
+
+
+
 
 <p>
   Github uses the OAuth2 flow.
 
-  First of all you have to register your app with Github <a href="https://github.com/settings/applications">GitHub Applications Page</a>. Create a new application here and get Client ID and Secret.
+  First of all you have to register your app with Github <a href="https://github.com/settings/applications">GitHub Applications Page</a>.
+  Create a new application here and get Client ID and Secret.
 
   Here is how can you obtain Client ID and Secret from Github.
 </p>
@@ -928,7 +1490,7 @@ OmniAuth provides list of  strategies to use many OAuth for your application. H
 
 
 <p>
-  <a href="http://raysrashmi.com/wp-content/uploads/2012/04/github_app.jpg"><img class="aligncenter size-full wp-image-279" title="github_app" src="http://raysrashmi.com/wp-content/uploads/2012/04/github_app.jpg" alt="" width="678" height="498" /></a>
+  <img src="http://farm4.staticflickr.com/3716/9240891751_409f794720_m.jpg">
 </p>
 
 
@@ -936,16 +1498,30 @@ OmniAuth provides list of  strategies to use many OAuth for your application. H
 
 <p>
 Steps to use these in your app.
-<pre class="brush:ruby">rails new GithubAuthApp</pre>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'> <span class="n">rails</span> <span class="kp">new</span> <span class="no">GithubAuthApp</span>
+</span></code></pre></td></tr></table></div></figure>
+ 
 Update your Gemfile add <code> omniauth-github </code>
-<pre class="brush:ruby">gem "omniauth-github"</pre>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'> <span class="n">gem</span> <span class="s2">&quot;omniauth-github&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+ 
 Create a config/initializers/omniauth.rb file.
 Paste your key instead of XXXX, and secret instead of YYYY
-<pre class="brush:ruby">
-use OmniAuth::Builder do
-  provider :github, XXXX, YYYY
-end
-</pre>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>
+</span><span class='line'><span class="n">use</span> <span class="ss">OmniAuth</span><span class="p">:</span><span class="ss">:Builder</span> <span class="k">do</span>
+</span><span class='line'>  <span class="n">provider</span> <span class="ss">:github</span><span class="p">,</span> <span class="no">XXXX</span><span class="p">,</span> <span class="no">YYYY</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+ 
 </p>
 
 
@@ -955,12 +1531,18 @@ end
 All done start you server</p>
 
 
-<pre class="brush:ruby">bundle exec rails server</pre>
+
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'> <span class="n">bundle</span> <span class="nb">exec</span> <span class="n">rails</span> <span class="n">server</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>Just open your app in browser with URL</p>
 
-<pre class="brush:ruby">http://localhost:3000/auth/github</pre>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'> <span class="ss">http</span><span class="p">:</span><span class="sr">//</span><span class="ss">localhost</span><span class="p">:</span><span class="mi">3000</span><span class="o">/</span><span class="n">auth</span><span class="o">/</span><span class="n">github</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>You will be redirecting to Github for authentication.</p>
@@ -982,27 +1564,36 @@ All done start you server</p>
   
   <entry>
     <title type="html"><![CDATA[Basic Difference between Proc and Lambda in Ruby]]></title>
-    <link href="http://yoursite.com/blog/2012/02/19/basic-difference-between-proc-and-lambda-in-ruby/"/>
+    <link href="http://yoursite.com/2012/02/19/basic-difference-between-proc-and-lambda-in-ruby/"/>
     <updated>2012-02-19T00:00:00+01:00</updated>
-    <id>http://yoursite.com/blog/2012/02/19/basic-difference-between-proc-and-lambda-in-ruby</id>
-    <content type="html"><![CDATA[<p><strong>Proc</strong> =&gt; <tt><a href="http://www.ruby-doc.org/core-1.9.3/Proc.html">Proc</a></tt> objects are blocks of code that have been bound to a set of local variables. Once bound, the code may be called in different contexts and still access those variables.</p>
+    <id>http://yoursite.com/2012/02/19/basic-difference-between-proc-and-lambda-in-ruby</id>
+    <content type="html"><![CDATA[<p><strong>Proc</strong> =&gt; <tt><a href="http://www.ruby-doc.org/core-1.9.3/Proc.html">Proc</a></tt> 
+objects are blocks of code that have been bound to a set of local variables.
+Once bound, the code may be called in different contexts and still access those variables.
+ <!--more--></p>
 
-<pre class="brush:ruby">
-my_proc = proc do |a|
-  puts "number is #{a}"
-end
-my_proc.call(10 ) # number is 10
-</pre>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">my_proc</span> <span class="o">=</span> <span class="nb">proc</span> <span class="k">do</span> <span class="o">|</span><span class="n">a</span><span class="o">|</span>
+</span><span class='line'>  <span class="nb">puts</span> <span class="s2">&quot;number is </span><span class="si">#{</span><span class="n">a</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'><span class="n">my_proc</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="mi">10</span> <span class="p">)</span> <span class="c1"># number is 10</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p><strong>lambda</strong></p>
 
-<pre class="brush:ruby">
-my_lambda = lambda do|a|
-  puts "number is #{a}"
-end
-my_lambda.call(10 ) # number is 10
-</pre>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">my_lambda</span> <span class="o">=</span> <span class="nb">lambda</span> <span class="k">do</span><span class="o">|</span><span class="n">a</span><span class="o">|</span>
+</span><span class='line'>  <span class="nb">puts</span> <span class="s2">&quot;number is </span><span class="si">#{</span><span class="n">a</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'><span class="n">my_lambda</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="mi">10</span> <span class="p">)</span> <span class="c1"># number is 10</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p><strong>Difference between both of them</strong>in Ruby-1.9.3</p>
@@ -1010,45 +1601,81 @@ my_lambda.call(10 ) # number is 10
 <ol>
   <li>
     lambda is very specific for parameters passing to it but proc not -:
-    <pre class="brush:ruby">
-    my_proc = proc do|a|
-      puts "this is proc"
-    end
-    my_proc.call #this is proc
-    </pre>
-    <pre class="brush:ruby">
-    my_lambda =lambda do |a|
-      puts "this is lambda"
-    end
-    my_lambda.call #will throw error "wrong number of arguments"
-    </pre>
+    
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>    <span class="n">my_proc</span> <span class="o">=</span> <span class="nb">proc</span> <span class="k">do</span><span class="o">|</span><span class="n">a</span><span class="o">|</span>
+</span><span class='line'>      <span class="nb">puts</span> <span class="s2">&quot;this is proc&quot;</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>    <span class="n">my_proc</span><span class="o">.</span><span class="n">call</span> <span class="c1">#this is proc</span>
+</span><span class='line'>
+</span></code></pre></td></tr></table></div></figure>
+
+    
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>    <span class="n">my_lambda</span> <span class="o">=</span><span class="nb">lambda</span> <span class="k">do</span> <span class="o">|</span><span class="n">a</span><span class="o">|</span>
+</span><span class='line'>      <span class="nb">puts</span> <span class="s2">&quot;this is lambda&quot;</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>    <span class="n">my_lambda</span><span class="o">.</span><span class="n">call</span> <span class="c1">#will throw error &quot;wrong number of arguments&quot;</span>
+</span><span class='line'>
+</span></code></pre></td></tr></table></div></figure>
+
 
     In ruby-1.8.7 it just give you warning not error
   </li>
   <li>
     Second is about return mean -:
-    <pre class="brush:ruby">
-    def run_a_proc(p)
-      puts "starting proc"
-      p.call
-      puts "Ending proc"
-    end
+    
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>    <span class="k">def</span> <span class="nf">run_a_proc</span><span class="p">(</span><span class="nb">p</span><span class="p">)</span>
+</span><span class='line'>      <span class="nb">puts</span> <span class="s2">&quot;starting proc&quot;</span>
+</span><span class='line'>      <span class="nb">p</span><span class="o">.</span><span class="n">call</span>
+</span><span class='line'>      <span class="nb">puts</span> <span class="s2">&quot;Ending proc&quot;</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">test_proc</span>
+</span><span class='line'>      <span class="n">run_a_proc</span> <span class="nb">lambda</span><span class="p">{</span><span class="nb">puts</span> <span class="s1">&#39;this is lambda&#39;</span><span class="p">;</span> <span class="k">return</span><span class="p">}</span>
+</span><span class='line'>      <span class="n">run_a_proc</span> <span class="nb">proc</span><span class="p">{</span><span class="nb">puts</span> <span class="s1">&#39;this is proc&#39;</span><span class="p">;</span> <span class="k">return</span><span class="p">}</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>    <span class="n">test_proc</span>
+</span><span class='line'>
+</span></code></pre></td></tr></table></div></figure>
 
-    def test_proc
-      run_a_proc lambda{puts 'this is lambda'; return}
-      run_a_proc proc{puts 'this is proc'; return}
-    end
-    test_proc
-    </pre>
     the output is -:
 
-    <pre class="brush:ruby">
-    starting proc
-    this is lambda
-    Ending proc
-    starting proc
-    this is proc
-    </pre>
+    
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>    <span class="n">starting</span> <span class="nb">proc</span>
+</span><span class='line'>    <span class="n">this</span> <span class="n">is</span> <span class="nb">lambda</span>
+</span><span class='line'>    <span class="no">Ending</span> <span class="nb">proc</span>
+</span><span class='line'>    <span class="n">starting</span> <span class="nb">proc</span>
+</span><span class='line'>    <span class="n">this</span> <span class="n">is</span> <span class="nb">proc</span>
+</span><span class='line'>
+</span></code></pre></td></tr></table></div></figure>
+
 
   </li>
 </ol>
@@ -1063,20 +1690,26 @@ if we modified test_proc method like
 </p>
 
 
-<pre class="brush:ruby">
-def test_proc
-  run_a_proc proc{puts 'this is proc'; return}
-  run_a_proc lambda{puts 'this is lambda'; return}
-end
-</pre>
+
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">test_proc</span>
+</span><span class='line'>  <span class="n">run_a_proc</span> <span class="nb">proc</span><span class="p">{</span><span class="nb">puts</span> <span class="s1">&#39;this is proc&#39;</span><span class="p">;</span> <span class="k">return</span><span class="p">}</span>
+</span><span class='line'>  <span class="n">run_a_proc</span> <span class="nb">lambda</span><span class="p">{</span><span class="nb">puts</span> <span class="s1">&#39;this is lambda&#39;</span><span class="p">;</span> <span class="k">return</span><span class="p">}</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>now the output will be &ndash;:</p>
 
-<pre class="brush:ruby">
-starting proc
-this is proc
-</pre>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">starting</span> <span class="nb">proc</span>
+</span><span class='line'><span class="n">this</span> <span class="n">is</span> <span class="nb">proc</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 
@@ -1085,30 +1718,37 @@ this is proc
   
   <entry>
     <title type="html"><![CDATA[Proc call in ruby1.9.3]]></title>
-    <link href="http://yoursite.com/blog/2012/02/18/call-proc-in-ruby-1-9.3/"/>
+    <link href="http://yoursite.com/2012/02/18/call-proc-in-ruby-1-9.3/"/>
     <updated>2012-02-18T00:00:00+01:00</updated>
-    <id>http://yoursite.com/blog/2012/02/18/call-proc-in-ruby-1-9.3</id>
+    <id>http://yoursite.com/2012/02/18/call-proc-in-ruby-1-9.3</id>
     <content type="html"><![CDATA[<p>
   Call a proc in different ways
 </p>
 
 
-<pre class="brush:ruby">
-my_proc = Proc.new do|name|
-  "this is #{name}"
-end
-</pre>
+
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">my_proc</span> <span class="o">=</span> <span class="no">Proc</span><span class="o">.</span><span class="n">new</span> <span class="k">do</span><span class="o">|</span><span class="nb">name</span><span class="o">|</span>
+</span><span class='line'>  <span class="s2">&quot;this is </span><span class="si">#{</span><span class="nb">name</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>READMORE
 You can call this proc by 4 ways</p>
 
-<pre class="brush:ruby">
-my_proc.call('rays')
-my_proc.('rashmi')
-my_proc.("rita")
-my_proc === "richa"
-</pre>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">my_proc</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s1">&#39;rays&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="n">my_proc</span><span class="o">.</span><span class="p">(</span><span class="s1">&#39;rashmi&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="n">my_proc</span><span class="o">.</span><span class="p">(</span><span class="s2">&quot;rita&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="n">my_proc</span> <span class="o">===</span> <span class="s2">&quot;richa&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 
@@ -1117,9 +1757,9 @@ my_proc === "richa"
   
   <entry>
     <title type="html"><![CDATA[Asset Pipeline with Rails 3.1]]></title>
-    <link href="http://yoursite.com/blog/2011/11/29/asset-pipeline.html/"/>
+    <link href="http://yoursite.com/2011/11/29/asset-pipeline.html/"/>
     <updated>2011-11-29T00:00:00+01:00</updated>
-    <id>http://yoursite.com/blog/2011/11/29/asset-pipeline.html</id>
+    <id>http://yoursite.com/2011/11/29/asset-pipeline.html</id>
     <content type="html"><![CDATA[<p>
 This is the new very interesting and useful  feature in Rails 3.1.
 </p>
@@ -1132,6 +1772,11 @@ This is the new very interesting and useful  feature in Rails 3.1.
     <li>It allows you to write these assets in other languages like CoffeeScript, Sass and ERB</li>
     <li>Asset pipeline helpful in production environment cause it will reduce the number of request which browser make.</li>
 </ul>
+
+
+<!--more-->
+
+
 
 
 <p>Prior to Rails 3.1 these features were added through third-party Ruby libraries such as Jammit and Sprockets. Rails 3.1 is integrated with Sprockets through Action Pack which depends on the sprockets gem, by default.</p>
@@ -1164,7 +1809,11 @@ This is the new very interesting and useful  feature in Rails 3.1.
 
 <p>
 you can add additional path to the pipeline in config/application.rb. For example:
-<pre class="brush:ruby">config.assets.paths &lt;&lt; Rails.root.join("app", "assets", "flash")</pre>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">config</span><span class="o">.</span><span class="n">assets</span><span class="o">.</span><span class="n">paths</span> <span class="o">&lt;&lt;</span> <span class="no">Rails</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;app&quot;</span><span class="p">,</span> <span class="s2">&quot;assets&quot;</span><span class="p">,</span> <span class="s2">&quot;flash&quot;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
 </p>
 
 
@@ -1178,149 +1827,178 @@ you can add additional path to the pipeline in config/application.rb. For exampl
 
 <p><strong>Assets In Development </strong></p>
 
-<p>
+<p><p>
 In Development environment all assets are served as individual files
-For Example in app/assets/javascripts/application.js
-</p>
+For Example in app/assets/javascripts/application.js</p>
 
-
-<pre><code>//= require core
-//= require blogs&lt;/blockquote&gt;
-</code></pre>
+<p><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>    <span class="sr">//</span><span class="o">=</span> <span class="nb">require</span> <span class="n">core</span>
+</span><span class='line'>    <span class="sr">//</span><span class="o">=</span> <span class="nb">require</span> <span class="n">blogs</span><span class="o">&lt;</span><span class="sr">/blockquote&gt;</span>
+</span></code></pre></td></tr></table></div></figure></p>
 
 <p>after converting in HTML it will look like</p>
 
-<pre><code>&lt;script src="http://yoursite.com/assets/core.js?body=1" type="text/javascript"&gt;&lt;/script&gt;
-&lt;script src="http://yoursite.com/assets/blogs.js?body=1" type="text/javascript"&gt;&lt;/script&gt;
-</code></pre>
+<p><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>    <span class="o">&lt;</span><span class="n">script</span> <span class="n">src</span><span class="o">=</span><span class="s2">&quot;/assets/core.js?body=1&quot;</span> <span class="n">type</span><span class="o">=</span><span class="s2">&quot;text/javascript&quot;</span><span class="o">&gt;&lt;</span><span class="sr">/script&gt;</span>
+</span><span class='line'><span class="sr">    &lt;script src=&quot;/</span><span class="n">assets</span><span class="o">/</span><span class="n">blogs</span><span class="o">.</span><span class="n">js?body</span><span class="o">=</span><span class="mi">1</span><span class="s2">&quot; type=&quot;</span><span class="n">text</span><span class="o">/</span><span class="n">javascript</span><span class="s2">&quot;&gt;&lt;/script&gt;</span>
+</span></code></pre></td></tr></table></div></figure></p>
 
-<p>If turn off debugging by setting config.assets.debug = false in config/environments/development.rb
-above file will generate</p>
+<p><p>If turn off debugging by setting config.assets.debug = false in config/environments/development.rb
+above file will generate</p></p>
 
+<p><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>    <span class="o">&lt;</span><span class="n">script</span> <span class="n">src</span><span class="o">=</span><span class="s2">&quot;/assets/application.js?body=1&quot;</span> <span class="n">type</span><span class="o">=</span><span class="s2">&quot;text/javascript&quot;</span><span class="o">&gt;&lt;</span><span class="sr">/script&gt;</span>
+</span><span class='line'><span class="sr">    </span>
+</span></code></pre></td></tr></table></div></figure></p>
 
-<pre><code>&lt;script src="http://yoursite.com/assets/application.js?body=1" type="text/javascript"&gt;&lt;/script&gt;
-</code></pre>
-
-<p><strong>In Production</strong></p>
-
+<p><strong>In Production</strong>
 <p>
 Rails server complied assets using <strong>Fingerprinting Scheme</strong>
 </p>
-
-
 <p>
 <strong>In Fingerprinting</strong> scheme a hash of  content is attached to the end of file to uniquely identified the file
 blogs-908e25f4bf641868d8683022a5b62f54.css
 </p>
-
-
 <p>
 Prior rails 3.1 a time stamp query string is attached to file name
 <span>stylesheets/blogs.css?1409495796</span>
-</p>
+</p></p>
 
+<p><p>For example &ndash;:</p></p>
 
-
-
-<p>For example -:</p>
-
-
-<pre><code>&lt;%= javascript_include_tag :application%&gt;
-&lt;%= stylesheet_link_tag "application" %&gt;
-</code></pre>
+<p><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>    <span class="o">&lt;</span><span class="sx">%= javascript_include_tag :application%&gt;</span>
+</span><span class='line'><span class="sx">    &lt;%=</span> <span class="n">stylesheet_link_tag</span> <span class="s2">&quot;application&quot;</span> <span class="o">%&gt;</span>
+</span><span class='line'>
+</span></code></pre></td></tr></table></div></figure></p>
 
 <p>It will compile in to</p>
 
-<pre><code>&lt;script src="http://yoursite.com/assets/application-908e25f4bf641868d8683022a5b62f54.js" type ="text/javascript"&gt;&lt;/script&gt;
-&lt;link href="http://yoursite.com/assets/application-4dd5b109ee3439da54f5bdfd78a80473.css" media="screen" rel="stylesheet" type="text/css"&gt;
-</code></pre>
+<p><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>    <span class="o">&lt;</span><span class="n">script</span> <span class="n">src</span><span class="o">=</span><span class="s2">&quot;/assets/application-908e25f4bf641868d8683022a5b62f54.js&quot;</span> <span class="n">type</span> <span class="o">=</span><span class="s2">&quot;text/javascript&quot;</span><span class="o">&gt;&lt;</span><span class="sr">/script&gt;</span>
+</span><span class='line'><span class="sr">    &lt;link href=&quot;/</span><span class="n">assets</span><span class="o">/</span><span class="n">application</span><span class="o">&ndash;</span><span class="mi">4</span><span class="n">dd5b109ee3439da54f5bdfd78a80473</span><span class="o">.</span><span class="n">css</span><span class="s2">&quot; media=&quot;</span><span class="n">screen</span><span class="s2">&quot; rel=&quot;</span><span class="n">stylesheet</span><span class="s2">&quot; type=&quot;</span><span class="n">text</span><span class="o">/</span><span class="n">css</span><span class="s2">&quot;&gt;</span>
+</span><span class='line'><span class="s2">  </span>
+</span></code></pre></td></tr></table></div></figure></p>
 
-<p>
+<p><p>
 The fingerprinting behavior is controlled by the setting of <b>config.assets.digest</b> setting in Rails (which is <b>true</b> for production, <b>false</b> for everything else)
 </p>
+<strong>Useful Links &ndash;:</strong></p>
 
-
-<p><strong>Useful Links &ndash;:</strong></p>
-
-<ul>
+<p><ul>
 <li>
-  <a href="http://railscasts.com/episodes/279-understanding-the-asset-pipeline" target="_blank">http://railscasts.com/episodes/279-understanding-the-asset-pipeline</a>
+  <a href="http://railscasts.com/episodes/279-understanding-the-asset-pipeline" target="_blank"><a href="http://railscasts.com/episodes/279-understanding-the-asset-pipeline">http://railscasts.com/episodes/279-understanding-the-asset-pipeline</a></a>
 </li>
-<li><a href="http://guides.rubyonrails.org/asset_pipeline.html" target="_blank">http://guides.rubyonrails.org/asset_pipeline.html</a></li>
-</ul>
-
+<li><a href="http://guides.rubyonrails.org/asset_pipeline.html" target="_blank"><a href="http://guides.rubyonrails.org/asset_pipeline.html">http://guides.rubyonrails.org/asset_pipeline.html</a></a></li>
+</ul></p>
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[jQuery Date/Time picker]]></title>
-    <link href="http://yoursite.com/blog/2011/05/15/jquery-datetime-picker/"/>
+    <link href="http://yoursite.com/2011/05/15/jquery-datetime-picker/"/>
     <updated>2011-05-15T00:00:00+02:00</updated>
-    <id>http://yoursite.com/blog/2011/05/15/jquery-datetime-picker</id>
+    <id>http://yoursite.com/2011/05/15/jquery-datetime-picker</id>
     <content type="html"><![CDATA[<p>To handle date and time both in calender use jQuery date time picker add-on</p>
 
 <p>you need to inlcude javascript files</p>
 
-<pre class="brush:ruby">
-jquery-1.4.1.min
-jquery-ui-1.8.9.custom.min
-jquery-ui-timepicker-addon
-</pre>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">jquery</span><span class="o">-</span><span class="mi">1</span><span class="o">.</span><span class="mi">4</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="n">min</span>
+</span><span class='line'><span class="n">jquery</span><span class="o">-</span><span class="n">ui</span><span class="o">-</span><span class="mi">1</span><span class="o">.</span><span class="mi">8</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="n">custom</span><span class="o">.</span><span class="n">min</span>
+</span><span class='line'><span class="n">jquery</span><span class="o">-</span><span class="n">ui</span><span class="o">-</span><span class="n">timepicker</span><span class="o">-</span><span class="n">addon</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>Inclue CSS files</p>
 
-<pre class="brush:ruby">jquery-ui-1.8.9.custom
-</pre>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">jquery</span><span class="o">-</span><span class="n">ui</span><span class="o">-</span><span class="mi">1</span><span class="o">.</span><span class="mi">8</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="n">custom</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 
 
-<pre class="brush:ruby">
-<%#= text_field_tag ' name','',:class => 'date_value'%>
-jQuery('.'date_value).datetimepicker({
-  dateFormat: 'MM dd,yy'
-});
-</pre>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&lt;%</span><span class="c1">#= text_field_tag &#39; name&#39;,&#39;&#39;,:class =&gt; &#39;date_value&#39;%&gt;</span>
+</span><span class='line'><span class="n">jQuery</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="n">date_value</span><span class="p">)</span><span class="o">.</span><span class="n">datetimepicker</span><span class="p">({</span>
+</span><span class='line'>  <span class="ss">dateFormat</span><span class="p">:</span> <span class="s1">&#39;MM dd,yy&#39;</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
 
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[Twitter Client script to retrieves all the unique http links in the last recent tweets]]></title>
-    <link href="http://yoursite.com/blog/2010/12/31/twitter-client-script-to-retrieves-all-the-unique-http-links-in-the-last-recent-tweets/"/>
+    <link href="http://yoursite.com/2010/12/31/twitter-client-script-to-retrieves-all-the-unique-http-links-in-the-last-recent-tweets/"/>
     <updated>2010-12-31T00:00:00+01:00</updated>
-    <id>http://yoursite.com/blog/2010/12/31/twitter-client-script-to-retrieves-all-the-unique-http-links-in-the-last-recent-tweets</id>
+    <id>http://yoursite.com/2010/12/31/twitter-client-script-to-retrieves-all-the-unique-http-links-in-the-last-recent-tweets</id>
     <content type="html"><![CDATA[<h1>Code to fetch link from tweets matched by given hash_tag</h1>
 
-<blockquote>
-<pre>
-require 'rubygems'
-require 'twitter'
-
-
-hash_tag = ARGV.first
-
-if hash_tag.nil?
-  puts "Please provide tag you want to fetch. Example 'rails', '#rails'"
-  exit
-end
-puts 'fetching......'
-begin
-  tweets = Twitter::Search.new.hashtag(hash_tag)
-rescue Exception => e
-  # Time out or any other error can occur here
-  puts "Errors in fetching tweets #{e}"
-end
-links = []
-tweets.each do |tweet|
-  links << tweet.text.match(/\bhttps?:\/\/\S+\b/)
-end
-
-links = links.uniq
-puts links
-</pre>
-</blockquote>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;rubygems&#39;</span>
+</span><span class='line'><span class="nb">require</span> <span class="s1">&#39;twitter&#39;</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="n">hash_tag</span> <span class="o">=</span> <span class="no">ARGV</span><span class="o">.</span><span class="n">first</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">if</span> <span class="n">hash_tag</span><span class="o">.</span><span class="n">nil?</span>
+</span><span class='line'>  <span class="nb">puts</span> <span class="s2">&quot;Please provide tag you want to fetch. Example &#39;rails&#39;, &#39;#rails&#39;&quot;</span>
+</span><span class='line'>  <span class="nb">exit</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'><span class="nb">puts</span> <span class="s1">&#39;fetching......&#39;</span>
+</span><span class='line'><span class="k">begin</span>
+</span><span class='line'>  <span class="n">tweets</span> <span class="o">=</span> <span class="ss">Twitter</span><span class="p">:</span><span class="ss">:Search</span><span class="o">.</span><span class="n">new</span><span class="o">.</span><span class="n">hashtag</span><span class="p">(</span><span class="n">hash_tag</span><span class="p">)</span>
+</span><span class='line'><span class="k">rescue</span> <span class="no">Exception</span> <span class="o">=&gt;</span> <span class="n">e</span>
+</span><span class='line'>  <span class="c1"># Time out or any other error can occur here</span>
+</span><span class='line'>  <span class="nb">puts</span> <span class="s2">&quot;Errors in fetching tweets </span><span class="si">#{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'><span class="n">links</span> <span class="o">=</span> <span class="o">[]</span>
+</span><span class='line'><span class="n">tweets</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">tweet</span><span class="o">|</span>
+</span><span class='line'>  <span class="n">links</span> <span class="o">&lt;&lt;</span> <span class="n">tweet</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="sr">/\bhttps?:\/\/\S+\b/</span><span class="p">)</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">links</span> <span class="o">=</span> <span class="n">links</span><span class="o">.</span><span class="n">uniq</span>
+</span><span class='line'><span class="nb">puts</span> <span class="n">links</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 
@@ -1329,34 +2007,50 @@ puts links
   
   <entry>
     <title type="html"><![CDATA[Include Class Methods and Validation Using Module in RubyOnRails]]></title>
-    <link href="http://yoursite.com/blog/2010/12/21/include-class-method-and-validation-using-module-in-rubyonrails/"/>
+    <link href="http://yoursite.com/2010/12/21/include-class-method-and-validation-using-module-in-rubyonrails/"/>
     <updated>2010-12-21T00:00:00+01:00</updated>
-    <id>http://yoursite.com/blog/2010/12/21/include-class-method-and-validation-using-module-in-rubyonrails</id>
-    <content type="html"><![CDATA[<blockquote>
-<pre>
-<code>
-class User
-  include TestModule
-end
+    <id>http://yoursite.com/2010/12/21/include-class-method-and-validation-using-module-in-rubyonrails</id>
+    <content type="html"><![CDATA[
 
-module TestModule
-  def test_instance_method
-    puts "Test Method"
-  end
-
-  def self.included(base)
-    base.extend ClassMethods
-  end
-
-  module ClassMethods
-    def my_class_method
-      puts "Class Methods"
-    end
-  end
-end
-</pre>
-</code>
-</blockquote>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">User</span>
+</span><span class='line'>  <span class="kp">include</span> <span class="no">TestModule</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">module</span> <span class="nn">TestModule</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">test_instance_method</span>
+</span><span class='line'>    <span class="nb">puts</span> <span class="s2">&quot;Test Method&quot;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">included</span><span class="p">(</span><span class="n">base</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">base</span><span class="o">.</span><span class="n">extend</span> <span class="no">ClassMethods</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">module</span> <span class="nn">ClassMethods</span>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">my_class_method</span>
+</span><span class='line'>      <span class="nb">puts</span> <span class="s2">&quot;Class Methods&quot;</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>Here my_class_method is Class Method.we can define more class methods in module ClassMethods</p>
@@ -1364,18 +2058,19 @@ end
 <p>Validations and call backs are called without prefix &lsquo;self&rsquo;. so for validations and call backs
 we have to explicitly set the class</p>
 
-<blockquote>
-<code>
-<pre>
-module TestModule
-  def self.included(base)
-    base.validates_presence_of :bar
-    base.before_save :some_method
-  end
-end
-</pre>
-</code>
-</blockquote>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">module</span> <span class="nn">TestModule</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">included</span><span class="p">(</span><span class="n">base</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">base</span><span class="o">.</span><span class="n">validates_presence_of</span> <span class="ss">:bar</span>
+</span><span class='line'>    <span class="n">base</span><span class="o">.</span><span class="n">before_save</span> <span class="ss">:some_method</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 
@@ -1384,102 +2079,112 @@ end
   
   <entry>
     <title type="html"><![CDATA[Routes in Rails3]]></title>
-    <link href="http://yoursite.com/blog/2010/12/04/routes-in-rails3/"/>
+    <link href="http://yoursite.com/2010/12/04/routes-in-rails3/"/>
     <updated>2010-12-04T00:00:00+01:00</updated>
-    <id>http://yoursite.com/blog/2010/12/04/routes-in-rails3</id>
+    <id>http://yoursite.com/2010/12/04/routes-in-rails3</id>
     <content type="html"><![CDATA[<h1>Rails3 define routes in more efficient way</h1>
 
 
 <p>Routes for CRUD actions</p>
 
-<blockquote>
-<code>resources   :users</code>
-</blockquote>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>     <span class="n">resources</span><span class="err">  </span> <span class="ss">:users</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>Also define for multiple resources</p>
 
-<blockquote>
-<code>resources :users,  :blogs, :books</code>
-</blockquote>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>     <span class="n">resources</span> <span class="ss">:users</span><span class="p">,</span> <span class="err"> </span><span class="ss">:blogs</span><span class="p">,</span> <span class="ss">:books</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>Nested Routes</p>
 
-<blockquote>
-<code>
-<pre>
-  resources :users do
-    resources  :blogs
-  end
-</pre>
-</code>
-</blockquote>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>
+</span><span class='line'>  <span class="n">resources</span> <span class="ss">:users</span> <span class="k">do</span>
+</span><span class='line'>    <span class="n">resources</span> <span class="err"> </span><span class="ss">:blogs</span>
+</span><span class='line'>  <span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>Member and collection</p>
 
-<blockquote>
-<code>
-<pre>
-  resources :blogs do
-    :get => :preview, :on =>:member
-    :get => :list, :on =>:collection
-  end
-</pre>
-</code>
-</blockquote>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>
+</span><span class='line'>  <span class="n">resources</span> <span class="ss">:blogs</span> <span class="k">do</span>
+</span><span class='line'>    <span class="ss">:get</span> <span class="o">=&gt;</span> <span class="ss">:preview</span><span class="p">,</span> <span class="ss">:on</span> <span class="o">=&gt;</span><span class="ss">:member</span>
+</span><span class='line'>    <span class="ss">:get</span> <span class="o">=&gt;</span> <span class="ss">:list</span><span class="p">,</span> <span class="ss">:on</span> <span class="o">=&gt;</span><span class="ss">:collection</span>
+</span><span class='line'>  <span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>if  we have more than one collection or member functions</p>
 
-<blockquote>
-<code>
-<pre>
-resources  :blogs do
-    member do
-     :get  :preview
-     :put :sort
-    end
-   collection do
-     :get :list
-     :get :detailed_info
-   end
-end
-</pre>
-</code>
-</blockquote>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>
+</span><span class='line'><span class="n">resources</span><span class="err"> </span> <span class="ss">:blogs</span> <span class="k">do</span>
+</span><span class='line'>    <span class="n">member</span> <span class="k">do</span>
+</span><span class='line'>     <span class="ss">:get</span><span class="err"> </span> <span class="ss">:preview</span>
+</span><span class='line'>     <span class="ss">:put</span> <span class="ss">:sort</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>   <span class="n">collection</span> <span class="k">do</span>
+</span><span class='line'>     <span class="ss">:get</span> <span class="ss">:list</span>
+</span><span class='line'>     <span class="ss">:get</span> <span class="ss">:detailed_info</span>
+</span><span class='line'>   <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>Named Routes</p>
 
-<blockquote>
-<code>
-<pre>
-  match "history" => "site#index", :as => :history
-</pre>
-</code>
-</blockquote>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>
+</span><span class='line'>  <span class="n">match</span> <span class="s2">&quot;history&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;site#index&quot;</span><span class="p">,</span> <span class="ss">:as</span> <span class="o">=&gt;</span> <span class="ss">:history</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
-<p>Adding :as makes it a named route so that we can use <code>history_path</code> or <code>history</code><code>_url</code> in our application.</p>
+<p>Adding :as makes it a named route so that we can use history_path      or      history_url in our application.</p>
 
 <p>Route for Root</p>
 
-<blockquote>
-<code>
-  root   :to => "home#index"
-</code>
-</blockquote>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>
+</span><span class='line'>  <span class="n">root</span><span class="err">  </span> <span class="ss">:to</span> <span class="o">=&gt;</span> <span class="s2">&quot;home#index&quot;</span>
+</span><span class='line'>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>Constraints and Parameters in routes</p>
 
-<blockquote>
-<code>
-  match "search/:email(/:first_name/:last_name)" => "users#search",  :constraints => {:email => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i}
-</code>
-</blockquote>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>
+</span><span class='line'>  <span class="n">match</span> <span class="s2">&quot;search/:email(/:first_name/:last_name)&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;users#search&quot;</span><span class="p">,</span><span class="err"> </span> <span class="ss">:constraints</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="ss">:email</span> <span class="o">=&gt;</span> <span class="sr">/\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i</span><span class="p">}</span>
+</span><span class='line'>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>Here email is mandatory parameter and first_name and last is optional parameter and in constraints email format is defined</p>
@@ -1488,38 +2193,55 @@ end
   
   <entry>
     <title type="html"><![CDATA[ActiveModel in Rails3]]></title>
-    <link href="http://yoursite.com/blog/2010/11/24/activemodel-in-rails3-table-less-model-can-behave-like-active-record-model/"/>
+    <link href="http://yoursite.com/2010/11/24/activemodel-in-rails3-table-less-model-can-behave-like-active-record-model/"/>
     <updated>2010-11-24T00:00:00+01:00</updated>
-    <id>http://yoursite.com/blog/2010/11/24/activemodel-in-rails3-table-less-model-can-behave-like-active-record-model</id>
+    <id>http://yoursite.com/2010/11/24/activemodel-in-rails3-table-less-model-can-behave-like-active-record-model</id>
     <content type="html"><![CDATA[<p>In Rails3 Active Model feature is added that helps to use feature of active record class for a non active record class.In Active Model you can make Any Ruby Object Feel Like Active Record and can get Rails-style models with validations, serialization, callbacks, dirty tracking, internationalization, attributes, observers and all the other Rails goodness.</p>
 
 <p>Here is the example &ndash;:</p>
 
-<pre class="brush:ruby">
-class Message
-  include ActiveModel::Validations
-  include ActiveModel::Conversion
-  include ActiveModel::Naming
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Message</span>
+</span><span class='line'>  <span class="kp">include</span> <span class="ss">ActiveModel</span><span class="p">:</span><span class="ss">:Validations</span>
+</span><span class='line'>  <span class="kp">include</span> <span class="ss">ActiveModel</span><span class="p">:</span><span class="ss">:Conversion</span>
+</span><span class='line'>  <span class="kp">include</span> <span class="ss">ActiveModel</span><span class="p">:</span><span class="ss">:Naming</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kp">attr_accessor</span> <span class="ss">:name</span><span class="p">,</span><span class="ss">:email</span><span class="p">,</span><span class="ss">:text_message</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">validates_presence_of</span> <span class="ss">:name</span>
+</span><span class='line'>  <span class="n">validates_presence_of</span> <span class="ss">:email</span>
+</span><span class='line'>  <span class="n">validates_presence_of</span> <span class="ss">:text_message</span>
+</span><span class='line'>  <span class="n">validates_length_of</span> <span class="ss">:text_message</span><span class="p">,</span> <span class="ss">:maximum</span> <span class="o">=&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="mi">500</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">attributes</span><span class="o">=</span><span class="p">{})</span>
+</span><span class='line'>    <span class="n">attributes</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="nb">name</span><span class="p">,</span> <span class="n">value</span><span class="o">|</span>
+</span><span class='line'>      <span class="nb">send</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">#{</span><span class="nb">name</span><span class="si">}</span><span class="s2">=&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
 
-  attr_accessor :name,:email,:text_message
 
-  validates_presence_of :name
-  validates_presence_of :email
-  validates_presence_of :text_message
-  validates_length_of :text_message, :maximum =&gt; 500
-
-  def initialize(attributes={})
-    attributes.each do |name, value|
-      send("#{name}=", value)
-    end
-  end
-
-end
-
-</pre>
-
-
-<p>@message = Message.new({:name =&gt; &ldquo;rays&rdquo;, :email =&gt; &lsquo;<a href="&#x6d;&#97;&#105;&#108;&#116;&#x6f;&#58;&#x61;&#x62;&#99;&#64;&#101;&#x78;&#x61;&#x6d;&#x70;&#x6c;&#x65;&#46;&#99;&#x6f;&#109;">&#x61;&#x62;&#x63;&#64;&#x65;&#x78;&#x61;&#x6d;&#112;&#108;&#101;&#46;&#99;&#111;&#x6d;</a>&rsquo;, :text_message =&gt; &ldquo;this my text message&rdquo;})</p>
+<p>@message = Message.new({:name =&gt; &ldquo;rays&rdquo;, :email =&gt; &lsquo;<a href="&#109;&#97;&#105;&#108;&#116;&#x6f;&#58;&#x61;&#98;&#99;&#64;&#101;&#120;&#x61;&#x6d;&#x70;&#108;&#101;&#46;&#x63;&#x6f;&#x6d;">&#x61;&#x62;&#x63;&#64;&#x65;&#x78;&#97;&#x6d;&#x70;&#108;&#x65;&#46;&#99;&#x6f;&#x6d;</a>&rsquo;, :text_message =&gt; &ldquo;this my text message&rdquo;})</p>
 
 <p>@message.valid? =&gt; true</p>
 
@@ -1533,9 +2255,9 @@ end
   
   <entry>
     <title type="html"><![CDATA[Extended Version of Active Merchant Plugin]]></title>
-    <link href="http://yoursite.com/blog/2010/08/02/extended-version-of-active-merchant-plugin/"/>
+    <link href="http://yoursite.com/2010/08/02/extended-version-of-active-merchant-plugin/"/>
     <updated>2010-08-02T00:00:00+02:00</updated>
-    <id>http://yoursite.com/blog/2010/08/02/extended-version-of-active-merchant-plugin</id>
+    <id>http://yoursite.com/2010/08/02/extended-version-of-active-merchant-plugin</id>
     <content type="html"><![CDATA[<p>Extend the existing <strong>active merchant</strong> plug in for extracting transaction report via Date Range or Transactions id.Now u can fetch transactions by date range and between transaction ids range by using this plug in</p>
 
 <p><a href="http://github.com/raysrashmi/active_merchant">github.com/raysrashmi/active_merchant</a></p>

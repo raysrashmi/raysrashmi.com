@@ -7,11 +7,13 @@ tags: Rails3,RailsResponders
 
 <p>So we have a problem here in Controllers.
 
-As our application grows our controllers grows. We will be in trouble when we have alternative formats in our controllers like JSON, XML.
+As our application grows our controllers grows.
+We will be in trouble when we have alternative formats in our controllers like JSON, XML.
 </p>
+<!--more-->
 
 You might need to respond both in JSON and XML or might be only JSON in your controller.
-<pre class="brush:ruby">
+{% codeblock lang:ruby%}
 class BlogsController &lt; ApplicationController
    def index
      @blogs = Blog.all
@@ -29,14 +31,14 @@ class BlogsController &lt; ApplicationController
     end
   end
 end
-</pre>
+{% endcodeblock %}
 <p>You can see here that in both the action we are responding with HTML and XML.
 
 Rails 3 introduced a new set of methods called <code>responders</code> that abstract the code so that the controller becomes much simpler.
 </p>
 
 Here is our example written using <code>responders</code>
-<pre class="brush:ruby">
+{% codeblock lang:ruby%}
   class BlogsController &lt; ApplicationController
   respond_to :html, :xml
 
@@ -49,7 +51,7 @@ Here is our example written using <code>responders</code>
     @blog = Blog.find(params[:id])
     respond_with(@blog)
   end
-end</pre>
+end{% endcodeblock %}
 <p>This looks more cleaner No ?
 
 The entire <code>respond_to</code> block is gone now.

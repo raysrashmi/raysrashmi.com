@@ -1,4 +1,5 @@
 ---
+layout: post
 title: Twitter Client script to retrieves all the unique http links in the last recent tweets
 date: 31/12/2010
 tags: Twitter,Client Script
@@ -7,8 +8,7 @@ tags: Twitter,Client Script
 # Code to fetch link from tweets matched by given hash_tag
 
 
-<blockquote>
-<pre>
+{% codeblock lang:ruby%}
 require 'rubygems'
 require 'twitter'
 
@@ -33,6 +33,6 @@ end
 
 links = links.uniq
 puts links
-</pre>
-</blockquote>
+{% endcodeblock %}
+
 

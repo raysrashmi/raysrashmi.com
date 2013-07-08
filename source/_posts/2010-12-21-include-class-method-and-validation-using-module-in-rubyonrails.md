@@ -1,12 +1,11 @@
 ---
+layout: post
 title: Include Class Methods and Validation Using Module in RubyOnRails
 date: 21/12/2010
 tags: Modules,Rails
 ---
 
-<blockquote>
-<pre>
-<code>
+{% codeblock lang:ruby%}
 class User
   include TestModule
 end
@@ -26,9 +25,7 @@ module TestModule
     end
   end
 end
-</pre>
-</code>
-</blockquote>
+{% endcodeblock %}
 
 
 Here my_class_method is Class Method.we can define more class methods in module ClassMethods
@@ -37,16 +34,12 @@ Validations and call backs are called without prefix 'self'. so for validations 
 we have to explicitly set the class
 
 
-<blockquote>
-<code>
-<pre>
+{% codeblock lang:ruby%}
 module TestModule
   def self.included(base)
     base.validates_presence_of :bar
     base.before_save :some_method
   end
 end
-</pre>
-</code>
-</blockquote>
+{% endcodeblock %}
 

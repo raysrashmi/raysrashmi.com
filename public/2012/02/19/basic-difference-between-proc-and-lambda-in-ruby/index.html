@@ -1,0 +1,338 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Basic Difference between Proc and Lambda in Ruby - Rashmi Yadav</title>
+  <meta name="author" content="Rashmi Yadav">
+
+  
+  <meta name="description" content="Basic Difference Between Proc and Lambda in Ruby Feb 19th, 2012 Proc =&gt; Proc 
+objects are blocks of code that have been bound to a set of local &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://yoursite.com/2012/02/19/basic-difference-between-proc-and-lambda-in-ruby">
+  <link href="/favicon.png" rel="icon">
+  <link href='http://fonts.googleapis.com/css?family=Quicksand:300,400' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Rashmi Yadav" type="application/atom+xml">
+  <script src="/js/jquery.js"></script>
+  <script src="/js/bootstrap-collapse.js"></script>
+  <script src="/js/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/js/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <div class="navbar navbar-inverse navbar-static-top">
+  	<div class="navbar-inner">
+  	  <div class="container">
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+          <span class="fui-menu-24"></span>
+        </a>
+  	  	<div class="nav-collapse collapse navbar-responsive-collapse" style="height:0;">
+  	      <ul class="nav">
+    
+        <li ><a href="/index.html">Home</a></li>
+    
+        <li ><a href="/about.html">About</a></li>
+    
+</ul>
+
+<ul class="nav pull-right">
+    
+    
+    
+    
+    
+</ul>
+
+  	    </div>
+  	  </div>
+  	</div>
+  </div>
+  <div class="container" id="main">
+    <div class="span12">
+      <div class="row-fluid">
+        <div id="content">
+          <div>
+<article class="hentry" role="article">
+  
+
+  <header>
+  <div class="jumbotron">
+    Basic Difference Between Proc and Lambda in Ruby
+	<h5>
+
+
+
+
+
+
+
+
+  
+
+
+<i class="icon-calendar-empty"></i> <time datetime="2012-02-19T00:00:00+01:00" pubdate data-updated="true">Feb 19<span>th</span>, 2012</time></h5>
+  </div>
+</header>
+  <div class="row-fluid">
+    <div class="span12">
+      <p><strong>Proc</strong> =&gt; <tt><a href="http://www.ruby-doc.org/core-1.9.3/Proc.html">Proc</a></tt> 
+objects are blocks of code that have been bound to a set of local variables.
+Once bound, the code may be called in different contexts and still access those variables.
+ <!--more--></p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">my_proc</span> <span class="o">=</span> <span class="nb">proc</span> <span class="k">do</span> <span class="o">|</span><span class="n">a</span><span class="o">|</span>
+</span><span class='line'>  <span class="nb">puts</span> <span class="s2">&quot;number is </span><span class="si">#{</span><span class="n">a</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'><span class="n">my_proc</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="mi">10</span> <span class="p">)</span> <span class="c1"># number is 10</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>lambda</strong></p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">my_lambda</span> <span class="o">=</span> <span class="nb">lambda</span> <span class="k">do</span><span class="o">|</span><span class="n">a</span><span class="o">|</span>
+</span><span class='line'>  <span class="nb">puts</span> <span class="s2">&quot;number is </span><span class="si">#{</span><span class="n">a</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'><span class="n">my_lambda</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="mi">10</span> <span class="p">)</span> <span class="c1"># number is 10</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>Difference between both of them</strong>in Ruby-1.9.3</p>
+
+<ol>
+  <li>
+    lambda is very specific for parameters passing to it but proc not -:
+    
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>    <span class="n">my_proc</span> <span class="o">=</span> <span class="nb">proc</span> <span class="k">do</span><span class="o">|</span><span class="n">a</span><span class="o">|</span>
+</span><span class='line'>      <span class="nb">puts</span> <span class="s2">&quot;this is proc&quot;</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>    <span class="n">my_proc</span><span class="o">.</span><span class="n">call</span> <span class="c1">#this is proc</span>
+</span><span class='line'>
+</span></code></pre></td></tr></table></div></figure>
+
+    
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>    <span class="n">my_lambda</span> <span class="o">=</span><span class="nb">lambda</span> <span class="k">do</span> <span class="o">|</span><span class="n">a</span><span class="o">|</span>
+</span><span class='line'>      <span class="nb">puts</span> <span class="s2">&quot;this is lambda&quot;</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>    <span class="n">my_lambda</span><span class="o">.</span><span class="n">call</span> <span class="c1">#will throw error &quot;wrong number of arguments&quot;</span>
+</span><span class='line'>
+</span></code></pre></td></tr></table></div></figure>
+
+
+    In ruby-1.8.7 it just give you warning not error
+  </li>
+  <li>
+    Second is about return mean -:
+    
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>    <span class="k">def</span> <span class="nf">run_a_proc</span><span class="p">(</span><span class="nb">p</span><span class="p">)</span>
+</span><span class='line'>      <span class="nb">puts</span> <span class="s2">&quot;starting proc&quot;</span>
+</span><span class='line'>      <span class="nb">p</span><span class="o">.</span><span class="n">call</span>
+</span><span class='line'>      <span class="nb">puts</span> <span class="s2">&quot;Ending proc&quot;</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">test_proc</span>
+</span><span class='line'>      <span class="n">run_a_proc</span> <span class="nb">lambda</span><span class="p">{</span><span class="nb">puts</span> <span class="s1">&#39;this is lambda&#39;</span><span class="p">;</span> <span class="k">return</span><span class="p">}</span>
+</span><span class='line'>      <span class="n">run_a_proc</span> <span class="nb">proc</span><span class="p">{</span><span class="nb">puts</span> <span class="s1">&#39;this is proc&#39;</span><span class="p">;</span> <span class="k">return</span><span class="p">}</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>    <span class="n">test_proc</span>
+</span><span class='line'>
+</span></code></pre></td></tr></table></div></figure>
+
+    the output is -:
+
+    
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>    <span class="n">starting</span> <span class="nb">proc</span>
+</span><span class='line'>    <span class="n">this</span> <span class="n">is</span> <span class="nb">lambda</span>
+</span><span class='line'>    <span class="no">Ending</span> <span class="nb">proc</span>
+</span><span class='line'>    <span class="n">starting</span> <span class="nb">proc</span>
+</span><span class='line'>    <span class="n">this</span> <span class="n">is</span> <span class="nb">proc</span>
+</span><span class='line'>
+</span></code></pre></td></tr></table></div></figure>
+
+
+  </li>
+</ol>
+
+
+
+
+<p>
+so difference is lambda return within it but the proc return from where it is called
+
+if we modified test_proc method like
+</p>
+
+
+
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">test_proc</span>
+</span><span class='line'>  <span class="n">run_a_proc</span> <span class="nb">proc</span><span class="p">{</span><span class="nb">puts</span> <span class="s1">&#39;this is proc&#39;</span><span class="p">;</span> <span class="k">return</span><span class="p">}</span>
+</span><span class='line'>  <span class="n">run_a_proc</span> <span class="nb">lambda</span><span class="p">{</span><span class="nb">puts</span> <span class="s1">&#39;this is lambda&#39;</span><span class="p">;</span> <span class="k">return</span><span class="p">}</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>now the output will be &ndash;:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">starting</span> <span class="nb">proc</span>
+</span><span class='line'><span class="n">this</span> <span class="n">is</span> <span class="nb">proc</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+    </div>
+  </div>
+
+
+
+  <footer>
+    <hr>
+    
+    <div class="row-fluid">
+      
+      <div class="span6">
+        <p class="meta">
+        
+        
+
+
+        </p>
+      </div>
+      
+      <div class="span6 social-sharing">
+        <div class="sharing">
+  <div class="addthis_toolbox addthis_default_style ">
+  
+  
+  <a class="addthis_button_tweet"></a>
+  
+  
+  <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+</div>
+
+      </div>
+      
+      
+    </div>
+    
+    <div class="row-fluid">
+      <div class="span12">
+        <p class="meta">
+          
+            <a class="basic-alignment left" href="/2012/02/18/call-proc-in-ruby-1-9.3/" title="Previous Post: Proc call in ruby1.9.3">&laquo; Proc call in ruby1.9.3</a>
+          
+          
+            <a class="basic-alignment right" href="/2012/04/22/oauth-omniauth-github/" title="Next Post: OAuth with OmniAuth and Github">OAuth with OmniAuth and Github &raquo;</a>
+          
+        </p>
+      </div>
+    </div>
+  </footer>
+</article>
+
+</div>
+
+
+
+        </div>
+      </div>
+      <div class="row-fluid">
+        <footer class="footer-page" role="contentinfo">
+          <p>
+  Copyright &copy; 2013 - Rashmi Yadav -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span> - Theme by <a href="http://alexgaribay.com">Alex Garibay</a>
+</p>
+
+
+        </footer>
+      </div>
+    </div>
+  </div>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
