@@ -4,7 +4,7 @@
   <title><![CDATA[Rashmi Yadav]]></title>
   <link href="http://yoursite.com/atom.xml" rel="self"/>
   <link href="http://yoursite.com/"/>
-  <updated>2013-07-09T15:20:01+02:00</updated>
+  <updated>2013-07-09T18:46:31+02:00</updated>
   <id>http://yoursite.com/</id>
   <author>
     <name><![CDATA[Rashmi Yadav]]></name>
@@ -2239,7 +2239,7 @@ we have to explicitly set the class</p>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>@message = Message.new({:name =&gt; &ldquo;rays&rdquo;, :email =&gt; &lsquo;<a href="&#109;&#x61;&#105;&#x6c;&#116;&#x6f;&#x3a;&#x61;&#98;&#x63;&#64;&#101;&#x78;&#97;&#109;&#112;&#x6c;&#x65;&#x2e;&#99;&#111;&#x6d;">&#x61;&#98;&#x63;&#64;&#x65;&#120;&#97;&#109;&#112;&#108;&#x65;&#46;&#x63;&#x6f;&#x6d;</a>&rsquo;, :text_message =&gt; &ldquo;this my text message&rdquo;})</p>
+<p>@message = Message.new({:name =&gt; &ldquo;rays&rdquo;, :email =&gt; &lsquo;<a href="&#109;&#97;&#x69;&#108;&#x74;&#111;&#x3a;&#97;&#98;&#x63;&#64;&#x65;&#120;&#x61;&#109;&#112;&#108;&#x65;&#46;&#x63;&#x6f;&#109;">&#97;&#98;&#x63;&#64;&#x65;&#120;&#97;&#109;&#112;&#108;&#x65;&#46;&#x63;&#111;&#109;</a>&rsquo;, :text_message =&gt; &ldquo;this my text message&rdquo;})</p>
 
 <p>@message.valid? =&gt; true</p>
 
