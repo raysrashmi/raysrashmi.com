@@ -88,7 +88,7 @@ When we do
 an executable file is genearted in gems//cucumber-1.3.2/bin dir(i am using rvm here)
 {% codeblock lang:ruby %}~/.rvm/gems/ruby-1.9.3-p448/gems/cucumber-1.3.2/bin{% endcodeblock %}
    
-Now we can generate using budnle command
+Now we can generate using bundle command
 {% codeblock lang:ruby %} bundle binstubs cucumber{% endcodeblock%}
 It wil genrate executable in bin/. Having executables within your app ensures that they are using app ruby and gems.
 
