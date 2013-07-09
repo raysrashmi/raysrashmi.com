@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Rashmi Yadav]]></title>
-  <link href="http://yoursite.com/atom.xml" rel="self"/>
-  <link href="http://yoursite.com/"/>
-  <updated>2013-07-09T18:46:31+02:00</updated>
-  <id>http://yoursite.com/</id>
+  <link href="http://raysrashmi.com/atom.xml" rel="self"/>
+  <link href="http://raysrashmi.com/"/>
+  <updated>2013-07-09T20:51:10+02:00</updated>
+  <id>http://raysrashmi.com/</id>
   <author>
     <name><![CDATA[Rashmi Yadav]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Rails 4 Directory Structure]]></title>
-    <link href="http://yoursite.com/2013/07/09/rails4-directory-structure/"/>
+    <link href="http://raysrashmi.com/2013/07/09/rails4-directory-structure/"/>
     <updated>2013-07-09T00:00:00+02:00</updated>
-    <id>http://yoursite.com/2013/07/09/rails4-directory-structure</id>
+    <id>http://raysrashmi.com/2013/07/09/rails4-directory-structure</id>
     <content type="html"><![CDATA[<p><img src="http://farm6.staticflickr.com/5443/9241313505_ac035bd643_m_d.jpg"></p>
 
 <p>Rails 4 is released. Lots of new features has been added to rails.
@@ -270,9 +270,9 @@ just let me know.</p>
   
   <entry>
     <title type="html"><![CDATA[The Basics of Caching and Cache Digests]]></title>
-    <link href="http://yoursite.com/2013/04/06/the-basics-of-caching-and-cache-digestes/"/>
+    <link href="http://raysrashmi.com/2013/04/06/the-basics-of-caching-and-cache-digestes/"/>
     <updated>2013-04-06T00:00:00+02:00</updated>
-    <id>http://yoursite.com/2013/04/06/the-basics-of-caching-and-cache-digestes</id>
+    <id>http://raysrashmi.com/2013/04/06/the-basics-of-caching-and-cache-digestes</id>
     <content type="html"><![CDATA[<p>Recently posted a blog about basics of caching and cache digests on Rubysource. If you are going to apply caching in your app this blog will help you.</p>
 
 <p>You can find blog on <a href="http://rubysource.com/caching-cache-digest/"> RubySource</a></p>
@@ -281,9 +281,9 @@ just let me know.</p>
   
   <entry>
     <title type="html"><![CDATA[Rails 4 Quick Look Strong Parameters]]></title>
-    <link href="http://yoursite.com/2012/12/09/rails-4-quick-look-strong-parameters/"/>
+    <link href="http://raysrashmi.com/2012/12/09/rails-4-quick-look-strong-parameters/"/>
     <updated>2012-12-09T00:00:00+01:00</updated>
-    <id>http://yoursite.com/2012/12/09/rails-4-quick-look-strong-parameters</id>
+    <id>http://raysrashmi.com/2012/12/09/rails-4-quick-look-strong-parameters</id>
     <content type="html"><![CDATA[<p>Strong Parameters is a new feature coming with Rails4.
 Its about Mass-assignment protection in controller instead of model.
 If you are keen to know more about it- <a href="http://rubysource.com/rails-4-quick-look-strong-parameters/">read it on RubySource</a>.</p>
@@ -292,9 +292,9 @@ If you are keen to know more about it- <a href="http://rubysource.com/rails-4-qu
   
   <entry>
     <title type="html"><![CDATA[Polymorphic Association with has_many :through]]></title>
-    <link href="http://yoursite.com/2012/06/07/polymorphic-association-has_many-through/"/>
+    <link href="http://raysrashmi.com/2012/06/07/polymorphic-association-has_many-through/"/>
     <updated>2012-06-07T00:00:00+02:00</updated>
-    <id>http://yoursite.com/2012/06/07/polymorphic-association-has_many-through</id>
+    <id>http://raysrashmi.com/2012/06/07/polymorphic-association-has_many-through</id>
     <content type="html"><![CDATA[<p>Hi Folks,</p>
 
 <p>
@@ -614,9 +614,9 @@ Handling <code>Plan</code> and <code> Contact</code> here.
   
   <entry>
     <title type="html"><![CDATA[Enhance Rails Models]]></title>
-    <link href="http://yoursite.com/2012/05/05/enhance-rails-models/"/>
+    <link href="http://raysrashmi.com/2012/05/05/enhance-rails-models/"/>
     <updated>2012-05-05T00:00:00+02:00</updated>
-    <id>http://yoursite.com/2012/05/05/enhance-rails-models</id>
+    <id>http://raysrashmi.com/2012/05/05/enhance-rails-models</id>
     <content type="html"><![CDATA[<p>In Rails Models play a important part in our Rails App.We should keep are model pretty,not having dirty code
 Here i am just reminding you some basic points to refactor a model.</p>
 
@@ -1201,9 +1201,9 @@ Better way is to use any search engine like Solr, Sphinx
   
   <entry>
     <title type="html"><![CDATA[Background Processing Using Rails Runner]]></title>
-    <link href="http://yoursite.com/2012/05/03/background-processing-using-rails-runner/"/>
+    <link href="http://raysrashmi.com/2012/05/03/background-processing-using-rails-runner/"/>
     <updated>2012-05-03T00:00:00+02:00</updated>
-    <id>http://yoursite.com/2012/05/03/background-processing-using-rails-runner</id>
+    <id>http://raysrashmi.com/2012/05/03/background-processing-using-rails-runner</id>
     <content type="html"><![CDATA[<p>Rails comes with a built-in tool for running tasks independent of the web cycle. The <code>rails runner</code> command simply loads the default Rails environment and then executes some specified Ruby code.</p>
 
 
@@ -1336,9 +1336,9 @@ I use <code> rails runner </code> whenever I need to run a small task.
   
   <entry>
     <title type="html"><![CDATA[Rails 3 Responders]]></title>
-    <link href="http://yoursite.com/2012/05/01/rails-3-responders/"/>
+    <link href="http://raysrashmi.com/2012/05/01/rails-3-responders/"/>
     <updated>2012-05-01T00:00:00+02:00</updated>
-    <id>http://yoursite.com/2012/05/01/rails-3-responders</id>
+    <id>http://raysrashmi.com/2012/05/01/rails-3-responders</id>
     <content type="html"><![CDATA[<p>So we have a problem here in Controllers.
 
 As our application grows our controllers grows.
@@ -1456,9 +1456,9 @@ The entire <code>respond_to</code> block is gone now.
   
   <entry>
     <title type="html"><![CDATA[OAuth with OmniAuth and Github]]></title>
-    <link href="http://yoursite.com/2012/04/22/oauth-omniauth-github/"/>
+    <link href="http://raysrashmi.com/2012/04/22/oauth-omniauth-github/"/>
     <updated>2012-04-22T00:00:00+02:00</updated>
-    <id>http://yoursite.com/2012/04/22/oauth-omniauth-github</id>
+    <id>http://raysrashmi.com/2012/04/22/oauth-omniauth-github</id>
     <content type="html"><![CDATA[<p>
 If you want to authenticate your user in your app with Github  use omniauth-github strategy for that.
 Here I am describing how you can do that very quickly.
@@ -1562,9 +1562,9 @@ All done start you server</p>
   
   <entry>
     <title type="html"><![CDATA[Basic Difference between Proc and Lambda in Ruby]]></title>
-    <link href="http://yoursite.com/2012/02/19/basic-difference-between-proc-and-lambda-in-ruby/"/>
+    <link href="http://raysrashmi.com/2012/02/19/basic-difference-between-proc-and-lambda-in-ruby/"/>
     <updated>2012-02-19T00:00:00+01:00</updated>
-    <id>http://yoursite.com/2012/02/19/basic-difference-between-proc-and-lambda-in-ruby</id>
+    <id>http://raysrashmi.com/2012/02/19/basic-difference-between-proc-and-lambda-in-ruby</id>
     <content type="html"><![CDATA[<p><strong>Proc</strong> =&gt; <tt><a href="http://www.ruby-doc.org/core-1.9.3/Proc.html">Proc</a></tt> 
 objects are blocks of code that have been bound to a set of local variables.
 Once bound, the code may be called in different contexts and still access those variables.
@@ -1716,9 +1716,9 @@ if we modified test_proc method like
   
   <entry>
     <title type="html"><![CDATA[Proc call in ruby1.9.3]]></title>
-    <link href="http://yoursite.com/2012/02/18/call-proc-in-ruby-1-9.3/"/>
+    <link href="http://raysrashmi.com/2012/02/18/call-proc-in-ruby-1-9.3/"/>
     <updated>2012-02-18T00:00:00+01:00</updated>
-    <id>http://yoursite.com/2012/02/18/call-proc-in-ruby-1-9.3</id>
+    <id>http://raysrashmi.com/2012/02/18/call-proc-in-ruby-1-9.3</id>
     <content type="html"><![CDATA[<p>
   Call a proc in different ways
 </p>
@@ -1755,9 +1755,9 @@ You can call this proc by 4 ways</p>
   
   <entry>
     <title type="html"><![CDATA[Asset Pipeline with Rails 3.1]]></title>
-    <link href="http://yoursite.com/2011/11/29/asset-pipeline.html/"/>
+    <link href="http://raysrashmi.com/2011/11/29/asset-pipeline.html/"/>
     <updated>2011-11-29T00:00:00+01:00</updated>
-    <id>http://yoursite.com/2011/11/29/asset-pipeline.html</id>
+    <id>http://raysrashmi.com/2011/11/29/asset-pipeline.html</id>
     <content type="html"><![CDATA[<p>
 This is the new very interesting and useful  feature in Rails 3.1.
 </p>
@@ -1901,9 +1901,9 @@ The fingerprinting behavior is controlled by the setting of <b>config.assets.di
   
   <entry>
     <title type="html"><![CDATA[jQuery Date/Time picker]]></title>
-    <link href="http://yoursite.com/2011/05/15/jquery-datetime-picker/"/>
+    <link href="http://raysrashmi.com/2011/05/15/jquery-datetime-picker/"/>
     <updated>2011-05-15T00:00:00+02:00</updated>
-    <id>http://yoursite.com/2011/05/15/jquery-datetime-picker</id>
+    <id>http://raysrashmi.com/2011/05/15/jquery-datetime-picker</id>
     <content type="html"><![CDATA[<p>To handle date and time both in calender use jQuery date time picker add-on</p>
 
 <p>you need to inlcude javascript files</p>
@@ -1943,9 +1943,9 @@ The fingerprinting behavior is controlled by the setting of <b>config.assets.di
   
   <entry>
     <title type="html"><![CDATA[Twitter Client script to retrieves all the unique http links in the last recent tweets]]></title>
-    <link href="http://yoursite.com/2010/12/31/twitter-client-script-to-retrieves-all-the-unique-http-links-in-the-last-recent-tweets/"/>
+    <link href="http://raysrashmi.com/2010/12/31/twitter-client-script-to-retrieves-all-the-unique-http-links-in-the-last-recent-tweets/"/>
     <updated>2010-12-31T00:00:00+01:00</updated>
-    <id>http://yoursite.com/2010/12/31/twitter-client-script-to-retrieves-all-the-unique-http-links-in-the-last-recent-tweets</id>
+    <id>http://raysrashmi.com/2010/12/31/twitter-client-script-to-retrieves-all-the-unique-http-links-in-the-last-recent-tweets</id>
     <content type="html"><![CDATA[<h1>Code to fetch link from tweets matched by given hash_tag</h1>
 
 <figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -2005,9 +2005,9 @@ The fingerprinting behavior is controlled by the setting of <b>config.assets.di
   
   <entry>
     <title type="html"><![CDATA[Include Class Methods and Validation Using Module in RubyOnRails]]></title>
-    <link href="http://yoursite.com/2010/12/21/include-class-method-and-validation-using-module-in-rubyonrails/"/>
+    <link href="http://raysrashmi.com/2010/12/21/include-class-method-and-validation-using-module-in-rubyonrails/"/>
     <updated>2010-12-21T00:00:00+01:00</updated>
-    <id>http://yoursite.com/2010/12/21/include-class-method-and-validation-using-module-in-rubyonrails</id>
+    <id>http://raysrashmi.com/2010/12/21/include-class-method-and-validation-using-module-in-rubyonrails</id>
     <content type="html"><![CDATA[
 
 <figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -2077,9 +2077,9 @@ we have to explicitly set the class</p>
   
   <entry>
     <title type="html"><![CDATA[Routes in Rails3]]></title>
-    <link href="http://yoursite.com/2010/12/04/routes-in-rails3/"/>
+    <link href="http://raysrashmi.com/2010/12/04/routes-in-rails3/"/>
     <updated>2010-12-04T00:00:00+01:00</updated>
-    <id>http://yoursite.com/2010/12/04/routes-in-rails3</id>
+    <id>http://raysrashmi.com/2010/12/04/routes-in-rails3</id>
     <content type="html"><![CDATA[<h1>Rails3 define routes in more efficient way</h1>
 
 
@@ -2191,9 +2191,9 @@ we have to explicitly set the class</p>
   
   <entry>
     <title type="html"><![CDATA[ActiveModel in Rails3]]></title>
-    <link href="http://yoursite.com/2010/11/24/activemodel-in-rails3-table-less-model-can-behave-like-active-record-model/"/>
+    <link href="http://raysrashmi.com/2010/11/24/activemodel-in-rails3-table-less-model-can-behave-like-active-record-model/"/>
     <updated>2010-11-24T00:00:00+01:00</updated>
-    <id>http://yoursite.com/2010/11/24/activemodel-in-rails3-table-less-model-can-behave-like-active-record-model</id>
+    <id>http://raysrashmi.com/2010/11/24/activemodel-in-rails3-table-less-model-can-behave-like-active-record-model</id>
     <content type="html"><![CDATA[<p>In Rails3 Active Model feature is added that helps to use feature of active record class for a non active record class.In Active Model you can make Any Ruby Object Feel Like Active Record and can get Rails-style models with validations, serialization, callbacks, dirty tracking, internationalization, attributes, observers and all the other Rails goodness.</p>
 
 <p>Here is the example &ndash;:</p>
@@ -2239,7 +2239,7 @@ we have to explicitly set the class</p>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>@message = Message.new({:name =&gt; &ldquo;rays&rdquo;, :email =&gt; &lsquo;<a href="&#109;&#97;&#x69;&#108;&#x74;&#111;&#x3a;&#97;&#98;&#x63;&#64;&#x65;&#120;&#x61;&#109;&#112;&#108;&#x65;&#46;&#x63;&#x6f;&#109;">&#97;&#98;&#x63;&#64;&#x65;&#120;&#97;&#109;&#112;&#108;&#x65;&#46;&#x63;&#111;&#109;</a>&rsquo;, :text_message =&gt; &ldquo;this my text message&rdquo;})</p>
+<p>@message = Message.new({:name =&gt; &ldquo;rays&rdquo;, :email =&gt; &lsquo;<a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#x61;&#x62;&#99;&#64;&#101;&#x78;&#x61;&#109;&#112;&#108;&#x65;&#x2e;&#99;&#x6f;&#109;">&#x61;&#98;&#x63;&#x40;&#101;&#x78;&#x61;&#x6d;&#112;&#x6c;&#x65;&#x2e;&#99;&#x6f;&#x6d;</a>&rsquo;, :text_message =&gt; &ldquo;this my text message&rdquo;})</p>
 
 <p>@message.valid? =&gt; true</p>
 
@@ -2253,9 +2253,9 @@ we have to explicitly set the class</p>
   
   <entry>
     <title type="html"><![CDATA[Extended Version of Active Merchant Plugin]]></title>
-    <link href="http://yoursite.com/2010/08/02/extended-version-of-active-merchant-plugin/"/>
+    <link href="http://raysrashmi.com/2010/08/02/extended-version-of-active-merchant-plugin/"/>
     <updated>2010-08-02T00:00:00+02:00</updated>
-    <id>http://yoursite.com/2010/08/02/extended-version-of-active-merchant-plugin</id>
+    <id>http://raysrashmi.com/2010/08/02/extended-version-of-active-merchant-plugin</id>
     <content type="html"><![CDATA[<p>Extend the existing <strong>active merchant</strong> plug in for extracting transaction report via Date Range or Transactions id.Now u can fetch transactions by date range and between transaction ids range by using this plug in</p>
 
 <p><a href="http://github.com/raysrashmi/active_merchant">github.com/raysrashmi/active_merchant</a></p>
