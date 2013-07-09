@@ -101,8 +101,8 @@ facebook_like: false
 
 navigation:
 - text: Home
-  url: /index.html
+  url: 
 - text: About
-  url: /about.html
+  url: about
 - text: Archives
-  url: /blog/archives/index.html
+  url: blog/archives
