@@ -15,4 +15,11 @@
     {% if site.facebook_user %}
     <li><a href="http://facebook.com/{{ site.facebook_user }}" title="Facebook Profile"><i class="icon-facebook-sign social-navbar"></i></a></li>
     {% endif %}
+    {% if site.subscribe_rss%}
+    <li>
+    <a href="{{site.subscribe_rss}}" rel="alternate" type="application/rss+xml" class='feed_burner'>
+      <img src="http://www.feedburner.com/fb/images/pub/feed-icon16x16.png" alt="" style="vertical-align:middle;border:0"/>
+    </a>
+    </li>
+    {%endif%}
 </ul>
