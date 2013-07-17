@@ -162,6 +162,6 @@ just let me know.
 There are lot to learn about rails 4. If you want here are some links 
  
  * http://railscasts.com/episodes/400-what-s-new-in-rails-4?view=asciicast
- * http://edgeguides.rubyonrails.org/4_0_release_notes.html#active-record-deprecations 
+ * http://edgeguides.rubyonrails.org/4_0_release_notes.html 
 
  
