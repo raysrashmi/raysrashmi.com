@@ -5,11 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>ActiveModel in Rails3 - Rashmi Yadav</title>
+  <title>jQuery attr('value') and val() - Rashmi Yadav</title>
   <meta name="author" content="Rashmi Yadav">
 
   
-  <meta name="description" content="ActiveModel in Rails3 Nov 24th, 2010 In Rails3 Active Model feature is added that helps to use feature of active record class for a non active &hellip;">
+  <meta name="description" content="jQuery Attr('value') and Val() Aug 12th, 2013 Here is a short tip about using $(obj).val() and $(obj).attr(&lsquo;value&rsquo;).
+I was fixing a bug &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://raysrashmi.com/2010/11/24/activemodel-in-rails3-table-less-model-can-behave-like-active-record-model">
+  <link rel="canonical" href="http://raysrashmi.com/2013/08/12/jquery-val-and-attr">
   <link href="/favicon.png" rel="icon">
   <link href='http://fonts.googleapis.com/css?family=Quicksand:300,400' rel='stylesheet' type='text/css'>
   <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
@@ -107,7 +108,7 @@
 
   <header>
   <div class="jumbotron">
-    ActiveModel in Rails3
+    jQuery Attr('value') and Val()
 	<h5>
 
 
@@ -120,7 +121,7 @@
   
 
 
-<i class="icon-calendar-empty"></i> <time datetime="2010-11-24T00:00:00+01:00" pubdate data-updated="true">Nov 24<span>th</span>, 2010</time></h5>
+<i class="icon-calendar-empty"></i> <time datetime="2013-08-12T00:11:00+02:00" pubdate data-updated="true">Aug 12<span>th</span>, 2013</time></h5>
   </div>
 </header>
 
@@ -141,60 +142,50 @@
 
   <div class="row-fluid">
     <div class="span12">
-      <p>In Rails3 Active Model feature is added that helps to use feature of active record class for a non active record class.In Active Model you can make Any Ruby Object Feel Like Active Record and can get Rails-style models with validations, serialization, callbacks, dirty tracking, internationalization, attributes, observers and all the other Rails goodness.</p>
+      <p>Here is a short tip about using <strong>$(obj).val()</strong> and <strong>$(obj).attr(&lsquo;value&rsquo;)</strong>.
+I was fixing a bug in ajax request with some params
+then i found that there is a difference <code>val()</code> method and <code>attr(&lsquo;value&rsquo;)</code>
+I never faced this problem before. I thought to share this with you guys.</p>
 
-<p>Here is the example &ndash;:</p>
+<!--more-->
+
+
+<p>I had an text field</p>
 
 <figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Message</span>
-</span><span class='line'>  <span class="kp">include</span> <span class="ss">ActiveModel</span><span class="p">:</span><span class="ss">:Validations</span>
-</span><span class='line'>  <span class="kp">include</span> <span class="ss">ActiveModel</span><span class="p">:</span><span class="ss">:Conversion</span>
-</span><span class='line'>  <span class="kp">include</span> <span class="ss">ActiveModel</span><span class="p">:</span><span class="ss">:Naming</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="kp">attr_accessor</span> <span class="ss">:name</span><span class="p">,</span><span class="ss">:email</span><span class="p">,</span><span class="ss">:text_message</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">validates_presence_of</span> <span class="ss">:name</span>
-</span><span class='line'>  <span class="n">validates_presence_of</span> <span class="ss">:email</span>
-</span><span class='line'>  <span class="n">validates_presence_of</span> <span class="ss">:text_message</span>
-</span><span class='line'>  <span class="n">validates_length_of</span> <span class="ss">:text_message</span><span class="p">,</span> <span class="ss">:maximum</span> <span class="o">=&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="mi">500</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">attributes</span><span class="o">=</span><span class="p">{})</span>
-</span><span class='line'>    <span class="n">attributes</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="nb">name</span><span class="p">,</span> <span class="n">value</span><span class="o">|</span>
-</span><span class='line'>      <span class="nb">send</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">#{</span><span class="nb">name</span><span class="si">}</span><span class="s2">=&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
-</span><span class='line'>    <span class="k">end</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">end</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;input</span> <span class="na">class=</span><span class="s">&quot;blur_text&quot;</span> <span class="na">id=</span><span class="s">&quot;search_box_location_input&quot;</span> <span class="na">name=</span><span class="s">&quot;location&quot;</span> <span class="na">placeholder=</span><span class="s">&quot;Address, City, State or Zip&quot;</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">value=</span><span class="s">&quot;New York&quot;</span><span class="nt">&gt;</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>@message = Message.new({:name =&gt; &ldquo;rays&rdquo;, :email =&gt; &lsquo;<a href="&#x6d;&#x61;&#105;&#x6c;&#116;&#111;&#x3a;&#x61;&#98;&#x63;&#64;&#x65;&#x78;&#x61;&#x6d;&#112;&#x6c;&#101;&#46;&#x63;&#111;&#x6d;">&#97;&#98;&#99;&#x40;&#101;&#x78;&#97;&#x6d;&#112;&#x6c;&#101;&#x2e;&#99;&#x6f;&#x6d;</a>&rsquo;, :text_message =&gt; &ldquo;this my text message&rdquo;})</p>
+<p>I had to send the value of this text field to server side</p>
 
-<p>@message.valid? =&gt; true</p>
+<p>So if I do</p>
 
-<p>@message = Message.new({:name =&gt; &ldquo;rays&rdquo;, :text_message =&gt; &ldquo;this my text message&rdquo;})</p>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'>  $(&quot;#search_box_location_input&quot;).attr(&#39;value&#39;) =&gt; &quot;New York&quot;
+</span></code></pre></td></tr></table></div></figure>
 
-<p>@message.valid? =&gt; false</p>
 
-<p>@message.errors will give error &ldquo;Email can&rsquo;t be blank&rdquo;</p>
+<p>Result is &ldquo;New York&rdquo;</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'>  $(&quot;#search_box_location_input&quot;).val() =&gt; &quot;Address, City, State or Zip&quot;
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>It gives the the value entered in text field and if nothing then the placeholder value</p>
+
+<p>It means <code>val()</code> gives the actual value that is there in text field. <code>$(obj).attre(&lsquo;value&rsquo;)</code> it actually give the value of attribute &lsquo;value&rsquo;</p>
+
+<p>Its is better to use <code><strong>val()</strong></code> method to get the value of input field</p>
+
+<p>Read about <code>val()</code> method and <code>attr</code></p>
+
+<ul>
+<li><a href="http://api.jquery.com/val/">http://api.jquery.com/val/</a></li>
+<li><a href="http://api.jquery.com/attr/">http://api.jquery.com/attr/</a></li>
+</ul>
+
 
     </div>
   </div>
@@ -210,6 +201,12 @@
         <p class="meta">
         
         
+
+
+
+  <a href="/blog/categories/jquery/"><span class="badge">jquery</span></a>
+
+
 
 
         </p>
@@ -237,10 +234,8 @@
       <div class="span12">
         <p class="meta">
           
-            <a class="basic-alignment left" href="/2010/08/02/extended-version-of-active-merchant-plugin/" title="Previous Post: Extended Version of Active Merchant Plugin">&laquo; Extended Version of Active Merchant Plugin</a>
+            <a class="basic-alignment left" href="/2013/07/09/rails4-directory-structure/" title="Previous Post: Rails 4 Directory Structure">&laquo; Rails 4 Directory Structure</a>
           
-          
-            <a class="basic-alignment right" href="/2010/12/04/routes-in-rails3/" title="Next Post: Routes in Rails3">Routes in Rails3 &raquo;</a>
           
         </p>
       </div>
