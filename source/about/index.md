@@ -9,8 +9,8 @@ layout: default
 
   * Skills she knows :
   
-    1. <a href="http://guides.rubyonrails.org/">Ruby</a>
-    2. <a href='http://www.ruby-lang.org/en/'>RubyOnRails</a>
+    1. <a href="http://www.ruby-lang.org/en/">Ruby</a>
+    2. <a href='http://guides.rubyonrails.org/'>RubyOnRails</a>
     3. <a href='http://jquery.com/'>jQuery</a>
     4. <a href="http://coffeescript.org/">Coffeescript</a>
     5. <a href="http://www.mysql.com/">Mysql</a></li>
