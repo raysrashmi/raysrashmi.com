@@ -23,7 +23,6 @@
 - **Sitemap.xml Generator** for search engines
 
 ## 1.0
-
 - **No longer supported.**
 - Jekyll Matured, but Henrik's Jekyll fork did not.
 - Thanks for all your pull requests, I learned a lot.
