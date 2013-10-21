@@ -6,6 +6,9 @@ layout: default
   * She is involved in Database Design , Analysis ,Testing and Development.
 
   * She is always passionate to learn and try new things.
+  * She love to to do open source contribution also have contributed in Rails <a>http://contributors.rubyonrails.org/</a>
+
+  
 
   * Skills she knows :
   
