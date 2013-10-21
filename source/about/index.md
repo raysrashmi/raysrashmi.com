@@ -2,11 +2,16 @@
 layout: default
 ---
   * Rashmi is a Ruby and Ruby on Rails professional working for Web Development.
+
   * She has done many projects in RubyOnRails.
+
   * She is involved in Database Design , Analysis ,Testing and Development.
 
   * She is always passionate to learn and try new things.
-  * She love to to do open source contribution also have contributed in Rails <a>http://contributors.rubyonrails.org/</a>
+
+  * She loves to to do open source contribution also have contributed in Rails <a>http://contributors.rubyonrails.org/</a>
+  
+  I work as freelancer so if you want to hire me contact me at <a href='mailto:rashmi14yadav@gmail.com'>rashmi14yadav@gmail.com</a>
 
   
 
