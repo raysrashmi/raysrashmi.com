@@ -9,7 +9,7 @@ layout: default
 
   * She is always passionate to learn and try new things.
 
-  * She loves to to do open source contribution also have contributed in Rails <a>http://contributors.rubyonrails.org/</a>
+  * She loves to do open source contribution also have contributed in Rails <a>http://contributors.rubyonrails.org/</a>
   
   I work as freelancer so if you want to hire me contact me at <a href='mailto:rashmi14yadav@gmail.com'>rashmi14yadav@gmail.com</a>
 

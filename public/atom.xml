@@ -4,7 +4,7 @@
   <title><![CDATA[Rashmi Yadav]]></title>
   <link href="http://raysrashmi.com/atom.xml" rel="self"/>
   <link href="http://raysrashmi.com/"/>
-  <updated>2013-10-21T22:36:25+02:00</updated>
+  <updated>2013-11-06T18:58:56+01:00</updated>
   <id>http://raysrashmi.com/</id>
   <author>
     <name><![CDATA[Rashmi Yadav]]></name>
@@ -2291,15 +2291,28 @@ we have to explicitly set the class</p>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>@message = Message.new({:name =&gt; &ldquo;rays&rdquo;, :email =&gt; &lsquo;<a href="&#109;&#x61;&#x69;&#108;&#x74;&#x6f;&#58;&#97;&#98;&#99;&#x40;&#x65;&#120;&#97;&#x6d;&#112;&#108;&#101;&#46;&#x63;&#x6f;&#109;">&#x61;&#98;&#x63;&#64;&#101;&#120;&#97;&#109;&#112;&#108;&#x65;&#x2e;&#x63;&#111;&#x6d;</a>&rsquo;, :text_message =&gt; &ldquo;this my text message&rdquo;})</p>
 
-<p>@message.valid? =&gt; true</p>
 
-<p>@message = Message.new({:name =&gt; &ldquo;rays&rdquo;, :text_message =&gt; &ldquo;this my text message&rdquo;})</p>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="vi">@message</span> <span class="o">=</span> <span class="no">Message</span><span class="o">.</span><span class="n">new</span><span class="p">({</span><span class="ss">:name</span> <span class="o">=&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="s2">&quot;rays&quot;</span><span class="p">,</span> <span class="ss">:email</span> <span class="o">=&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="s1">&#39;abc@example.com&#39;</span><span class="p">,</span> <span class="ss">:text_message</span> <span class="o">=&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="s2">&quot;this my text message&quot;</span><span class="p">})</span>
+</span><span class='line'>
+</span><span class='line'><span class="vi">@message</span><span class="o">.</span><span class="n">valid?</span> <span class="o">=&gt;</span> <span class="kp">true</span>
+</span><span class='line'>
+</span><span class='line'><span class="vi">@message</span> <span class="o">=</span> <span class="no">Message</span><span class="o">.</span><span class="n">new</span><span class="p">({</span><span class="ss">:name</span> <span class="o">=&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="s2">&quot;rays&quot;</span><span class="p">,</span> <span class="ss">:text_message</span> <span class="o">=&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="s2">&quot;this my text message&quot;</span><span class="p">})</span>
+</span><span class='line'>
+</span><span class='line'><span class="vi">@message</span><span class="o">.</span><span class="n">valid?</span> <span class="o">=&gt;</span> <span class="kp">false</span>
+</span><span class='line'>
+</span><span class='line'><span class="vi">@message</span><span class="o">.</span><span class="n">errors</span> <span class="n">will</span> <span class="n">give</span> <span class="n">error</span> <span class="s2">&quot;Email can&#39;t be blank&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<p>@message.valid? =&gt; false</p>
-
-<p>@message.errors will give error &ldquo;Email can&rsquo;t be blank&rdquo;</p>
 ]]></content>
   </entry>
   

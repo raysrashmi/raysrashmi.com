@@ -31,12 +31,14 @@ class Message
 end
 
 {% endcodeblock %}
+```ruby
 @message = Message.new({:name =&gt; "rays", :email =&gt; 'abc@example.com', :text_message =&gt; "this my text message"})
 
-@message.valid? =&gt; true
+@message.valid? => true
 
 @message = Message.new({:name =&gt; "rays", :text_message =&gt; "this my text message"})
 
-@message.valid? =&gt; false
+@message.valid? => false
 
 @message.errors will give error "Email can't be blank"
+```
