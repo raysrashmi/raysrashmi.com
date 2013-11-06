@@ -3,6 +3,8 @@ layout: post
 title: Rails 4 Directory Structure
 date: 09/07/2013
 tags: rails4, rails
+keywords: rails4, rails
+description: rails 4 directory structure
 ---
 
 {%img http://farm6.staticflickr.com/5443/9241313505_ac035bd643_m_d.jpg%}
