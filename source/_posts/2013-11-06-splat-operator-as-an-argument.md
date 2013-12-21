@@ -40,7 +40,7 @@ rays
 
 How many arguments you passed it wont generate any error
 
-Lets's take another example
+Let's take another example
 
 ```ruby
 class A
