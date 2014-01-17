@@ -9,7 +9,7 @@ keywords: ruby, splat operator, asterisk, rails
 As we know we see `*args` as an argument in method definition it means we can pass
 multiple parameters.
 See the below example
-
+<!--more-->
 
 ```ruby
 clas Test
