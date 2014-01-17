@@ -4,7 +4,7 @@
   <title><![CDATA[Rashmi Yadav]]></title>
   <link href="http://raysrashmi.com/atom.xml" rel="self"/>
   <link href="http://raysrashmi.com/"/>
-  <updated>2013-11-06T23:35:04+01:00</updated>
+  <updated>2014-01-17T21:21:18+01:00</updated>
   <id>http://raysrashmi.com/</id>
   <author>
     <name><![CDATA[Rashmi Yadav]]></name>
@@ -21,6 +21,11 @@
     <content type="html"><![CDATA[<p>As we know we see <code>*args</code> as an argument in method definition it means we can pass
 multiple parameters.
 See the below example</p>
+
+<!--more-->
+
+
+
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -64,7 +69,7 @@ See the below example</p>
 
 <p>How many arguments you passed it wont generate any error</p>
 
-<p>Lets&rsquo;s take another example</p>
+<p>Let&rsquo;s take another example</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -378,7 +383,7 @@ What Binstubs are executables required to prepare the environment before origina
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>Now we can generate using budnle command</p>
+<p>Now we can generate using bundle command</p>
 
 <figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='ruby'><span class='line'> <span class="n">bundle</span> <span class="n">binstubs</span> <span class="n">cucumber</span>

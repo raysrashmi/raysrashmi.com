@@ -9,7 +9,7 @@
   <meta name="author" content="Rashmi Yadav">
 
   
-  <meta name="description" content="Rashmi Yadav Ruby on Rails Developer Nov 6th, 2013 splat operator as an argument in ruby As we know we see *args as an argument in method definition &hellip;">
+  <meta name="description" content="Rashmi Yadav Programmer Nov 6th, 2013 splat operator as an argument in ruby As we know we see *args as an argument in method definition it means we &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -104,7 +104,7 @@
           <div class="jumbotron">
   <div class="container">
     Rashmi Yadav
-    <h3 class="tagline">Ruby on Rails Developer</h3>
+    <h3 class="tagline">Programmer</h3>
   </div>
 </div>
 
@@ -146,160 +146,9 @@
 multiple parameters.
 See the below example</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">clas</span> <span class="no">Test</span>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
-</span><span class='line'>    <span class="nb">puts</span> <span class="n">args</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span><span class='line'><span class="no">Test</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">)</span> <span class="o">=&gt;</span>
-</span><span class='line'><span class="n">a</span>
-</span><span class='line'><span class="n">b</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>But what if we just have asterisk(splat operator) as an argument?</p>
-
-<p>I was looking Rails code base and found  asterisk<code>(*)</code> in an class initialize method.</p>
-
-<p>Link: <a href="https://github.com/rails/rails/blob/master/railties/lib/rails/commands/server.rb#L42">https://github.com/rails/rails/blob/master/railties/lib/rails/commands/server.rb#L42</a></p>
-
-<p>Let&rsquo;s take an example &ndash;:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">hello</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="o">*</span><span class="p">)</span>
-</span><span class='line'>  <span class="nb">puts</span> <span class="n">a</span>
-</span><span class='line'><span class="k">end</span>
-</span><span class='line'><span class="n">hello</span><span class="p">(</span><span class="s1">&#39;rays&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">)</span>
-</span><span class='line'><span class="n">rays</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>How many arguments you passed it wont generate any error</p>
-
-<p>Lets&rsquo;s take another example</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">A</span>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">argument</span><span class="o">=</span><span class="kp">nil</span><span class="p">)</span>
-</span><span class='line'>    <span class="nb">puts</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">argument</span><span class="si">}</span><span class="s2">&quot;</span>
-</span><span class='line'>    <span class="nb">puts</span> <span class="s1">&#39;I am in Parent class&#39;</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">class</span> <span class="nc">B</span> <span class="o">&lt;</span> <span class="n">A</span>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">initialize</span><span class="p">()</span>
-</span><span class='line'>   <span class="k">super</span>
-</span><span class='line'>   <span class="nb">puts</span> <span class="s1">&#39;I am in Child class&#39;</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">b</span> <span class="o">=</span> <span class="n">B</span><span class="o">.</span><span class="n">new</span> <span class="c1">#=&gt; </span>
-</span><span class='line'><span class="n">I</span> <span class="n">am</span> <span class="k">in</span> <span class="no">Parent</span> <span class="k">class</span>
-</span><span class='line'><span class="nc">I</span> <span class="n">am</span> <span class="k">in</span> <span class="no">Child</span> <span class="k">class</span>
-</span><span class='line'>
-</span><span class='line'><span class="nc">B</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">)</span> <span class="c1">#=&gt;</span>
-</span><span class='line'><span class="sb">`initialize&#39;: wrong number of arguments (1 for 0) (ArgumentError)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>But now if we pass <code>*</code> as an argument in child class initialize method see what
-happens.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">A</span>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">argument</span><span class="o">=</span><span class="kp">nil</span><span class="p">)</span>
-</span><span class='line'>    <span class="nb">puts</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">argument</span><span class="si">}</span><span class="s2">&quot;</span>
-</span><span class='line'>    <span class="nb">puts</span> <span class="s1">&#39;I am in Parent class&#39;</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">class</span> <span class="nc">B</span> <span class="o">&lt;</span> <span class="n">A</span>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="o">*</span><span class="p">)</span>
-</span><span class='line'>   <span class="k">super</span>
-</span><span class='line'>   <span class="nb">puts</span> <span class="s1">&#39;I am in Child class&#39;</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">B</span><span class="o">.</span><span class="n">new</span> <span class="c1">#=&gt; </span>
-</span><span class='line'>
-</span><span class='line'><span class="n">I</span> <span class="n">am</span> <span class="k">in</span> <span class="no">Parent</span> <span class="k">class</span>
-</span><span class='line'><span class="nc">I</span> <span class="n">am</span> <span class="k">in</span> <span class="no">Child</span> <span class="k">class</span>
-</span><span class='line'>
-</span><span class='line'><span class="nc">B</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">)</span> <span class="c1">#=&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">a</span>
-</span><span class='line'><span class="n">I</span> <span class="n">am</span> <span class="k">in</span> <span class="no">Parent</span> <span class="k">class</span>
-</span><span class='line'><span class="nc">I</span> <span class="n">am</span> <span class="k">in</span> <span class="no">Child</span> <span class="k">class</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>You can see passing * as an argument help to send parameters for parent class even though child class doesn&rsquo;t require those arguments</p>
-
-<p>Note: <code>*</code> is called splat operator in Ruby.</p>
-
-<p>See some sample Rails code which is using <code>*</code></p>
-
-<p><a href="https://github.com/rails/rails/blob/v4.0.0/railties/lib/rails/commands/server.rb#L40">https://github.com/rails/rails/blob/v4.0.0/railties/lib/rails/commands/server.rb#L40</a>
-<a href="https://github.com/rack/rack/blob/1.5.2/lib/rack/server.rb#L178">https://github.com/rack/rack/blob/1.5.2/lib/rack/server.rb#L178</a></p>
-
-<p>It was new to me so thought to share with you guys. I hope you can get it if you do not know about this already.</p>
 
       
-      
+       <a href="/2013/11/06/splat-operator-as-an-argument/">Read on &rarr;</a> 
     </div>
   </div>
 
@@ -770,7 +619,7 @@ OmniAuth provides list of  strategies to use many OAuth for your application. H
       <div class="row-fluid">
         <footer class="footer-page" role="contentinfo">
           <p>
-  Copyright &copy; 2013 - Rashmi Yadav -
+  Copyright &copy; 2014 - Rashmi Yadav -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span> - Theme by <a href="http://alexgaribay.com">Alex Garibay</a>
 </p>
 
