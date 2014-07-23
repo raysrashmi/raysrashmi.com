@@ -4,7 +4,7 @@
   <title><![CDATA[Rashmi Yadav]]></title>
   <link href="http://raysrashmi.com/atom.xml" rel="self"/>
   <link href="http://raysrashmi.com/"/>
-  <updated>2014-07-23T15:40:10+02:00</updated>
+  <updated>2014-07-23T16:21:11+02:00</updated>
   <id>http://raysrashmi.com/</id>
   <author>
     <name><![CDATA[Rashmi Yadav]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Rails Routing Constraints]]></title>
-    <link href="http://raysrashmi.com/2014/07/04/rails-routes-constraints/"/>
-    <updated>2014-07-04T00:00:00+02:00</updated>
-    <id>http://raysrashmi.com/2014/07/04/rails-routes-constraints</id>
+    <link href="http://raysrashmi.com/2014/07/23/rails-routes-constraints/"/>
+    <updated>2014-07-23T00:00:00+02:00</updated>
+    <id>http://raysrashmi.com/2014/07/23/rails-routes-constraints</id>
     <content type="html"><![CDATA[<p>Routing is backbone of a web applications. When we are building applications using Rails we can manage routing for our app easily. I am going to explain a bit advance feature of routing in Rails</p>
 
 <h2>What is routing constraints</h2>
