@@ -4,7 +4,7 @@
   <title><![CDATA[Rashmi Yadav]]></title>
   <link href="http://raysrashmi.com/atom.xml" rel="self"/>
   <link href="http://raysrashmi.com/"/>
-  <updated>2014-07-23T16:21:11+02:00</updated>
+  <updated>2014-07-23T16:22:41+02:00</updated>
   <id>http://raysrashmi.com/</id>
   <author>
     <name><![CDATA[Rashmi Yadav]]></name>
@@ -439,15 +439,19 @@ Here we will see what new directories have been added.</p>
 <span class='line-number'>10</span>
 <span class='line-number'>11</span>
 <span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
 </pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="k">module</span> <span class="nn">Commentable</span>
 </span><span class='line'>    <span class="kp">extend</span> <span class="ss">ActiveSupport</span><span class="p">:</span><span class="ss">:Concern</span>
 </span><span class='line'>    <span class="k">def</span> <span class="nf">comments</span>
 </span><span class='line'>      <span class="n">comments</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:text</span><span class="p">)</span>
 </span><span class='line'>    <span class="k">end</span>
 </span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
 </span><span class='line'>  <span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
 </span><span class='line'>    <span class="kp">include</span> <span class="no">Commentable</span>
 </span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
 </span><span class='line'>  <span class="k">class</span> <span class="nc">Post</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
 </span><span class='line'>    <span class="kp">include</span> <span class="no">Commentable</span>
 </span><span class='line'>  <span class="k">end</span>
@@ -467,6 +471,7 @@ Here we will see what new directories have been added.</p>
 <span class='line-number'>9</span>
 <span class='line-number'>10</span>
 <span class='line-number'>11</span>
+<span class='line-number'>12</span>
 </pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="k">module</span> <span class="nn">Noteable</span>
 </span><span class='line'>    <span class="kp">extend</span> <span class="ss">ActiveSupport</span><span class="p">:</span><span class="ss">:Concern</span>
 </span><span class='line'>    <span class="n">included</span> <span class="k">do</span>
@@ -474,6 +479,7 @@ Here we will see what new directories have been added.</p>
 </span><span class='line'>      <span class="n">validated</span> <span class="ss">:note</span><span class="p">,</span> <span class="ss">presence</span><span class="p">:</span> <span class="kp">true</span>
 </span><span class='line'>    <span class="k">end</span>
 </span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
 </span><span class='line'>  <span class="k">class</span> <span class="nc">Post</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
 </span><span class='line'>    <span class="kp">include</span> <span class="no">Commentable</span>
 </span><span class='line'>    <span class="kp">include</span> <span class="no">Noteable</span>
@@ -494,6 +500,7 @@ Here we will see what new directories have been added.</p>
 <span class='line-number'>9</span>
 <span class='line-number'>10</span>
 <span class='line-number'>11</span>
+<span class='line-number'>12</span>
 </pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">module</span> <span class="nn">Noteable</span>
 </span><span class='line'>  <span class="kp">extend</span> <span class="ss">ActiveSupport</span><span class="p">:</span><span class="ss">:Concern</span>
 </span><span class='line'>  <span class="kp">include</span> <span class="no">Commentable</span>
@@ -502,6 +509,7 @@ Here we will see what new directories have been added.</p>
 </span><span class='line'>    <span class="n">validated</span> <span class="ss">:note</span><span class="p">,</span> <span class="ss">presence</span><span class="p">:</span> <span class="kp">true</span>
 </span><span class='line'>  <span class="k">end</span>
 </span><span class='line'><span class="k">end</span>
+</span><span class='line'>
 </span><span class='line'><span class="k">class</span> <span class="nc">Post</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
 </span><span class='line'>  <span class="kp">include</span> <span class="no">Noteable</span>
 </span><span class='line'><span class="k">end</span>

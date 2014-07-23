@@ -43,9 +43,11 @@ Here we will see what new directories have been added.
       comments.map(&:text)
     end
   end
+
   class User < ActiveRecord::Base
     include Commentable
   end
+
   class Post < ActiveRecord::Base
     include Commentable
   end{%endcodeblock%}
@@ -58,6 +60,7 @@ Here we will see what new directories have been added.
       validated :note, presence: true
     end
   end
+
   class Post < ActiveRecord::Base
     include Commentable
     include Noteable
@@ -72,6 +75,7 @@ module Noteable
     validated :note, presence: true
   end
 end
+
 class Post < ActiveRecord::Base
   include Noteable
 end{%endcodeblock%}
