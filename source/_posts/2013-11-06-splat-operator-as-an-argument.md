@@ -1,6 +1,6 @@
 ---
 layout: post
-title: splat operator as an argument in ruby
+title: Splat operator as an argument in ruby
 date: 06/11/2013
 tags: ruby
 description: splat operator as an argument in ruby
@@ -12,7 +12,7 @@ See the below example
 <!--more-->
 
 ```ruby
-clas Test
+class Test
   def initialize(*args)
     puts args
   end
@@ -57,7 +57,7 @@ class B < A
   end
 end
 
-b = B.new #=> 
+b = B.new #=>
 I am in Parent class
 I am in Child class
 
@@ -83,7 +83,7 @@ class B < A
   end
 end
 
-B.new #=> 
+B.new #=>
 
 I am in Parent class
 I am in Child class

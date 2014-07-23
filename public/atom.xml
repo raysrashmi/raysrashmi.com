@@ -4,7 +4,7 @@
   <title><![CDATA[Rashmi Yadav]]></title>
   <link href="http://raysrashmi.com/atom.xml" rel="self"/>
   <link href="http://raysrashmi.com/"/>
-  <updated>2014-01-17T21:21:18+01:00</updated>
+  <updated>2014-07-23T15:40:10+02:00</updated>
   <id>http://raysrashmi.com/</id>
   <author>
     <name><![CDATA[Rashmi Yadav]]></name>
@@ -14,7 +14,157 @@
 
   
   <entry>
-    <title type="html"><![CDATA[splat operator as an argument in ruby]]></title>
+    <title type="html"><![CDATA[Rails Routing Constraints]]></title>
+    <link href="http://raysrashmi.com/2014/07/04/rails-routes-constraints/"/>
+    <updated>2014-07-04T00:00:00+02:00</updated>
+    <id>http://raysrashmi.com/2014/07/04/rails-routes-constraints</id>
+    <content type="html"><![CDATA[<p>Routing is backbone of a web applications. When we are building applications using Rails we can manage routing for our app easily. I am going to explain a bit advance feature of routing in Rails</p>
+
+<h2>What is routing constraints</h2>
+
+<p>Few many times we require routes to behave differently and also want to do some routing based on specific conditions.</p>
+
+<p> For example</p>
+
+<ul>
+<li><p> Constraint routes for http methods( put, post )</p></li>
+<li><p>Want to show different home page for different users.</p></li>
+<li><p>Want to restrict URL for some sub domain or range of IP addresses</p></li>
+</ul>
+
+
+<p>We can easily constraints our routes in Rails</p>
+
+<h2>How many ways we can constraint our routes</h2>
+
+<h3>Segment Constraints(Parameter Restriction)</h3>
+
+<p>You can filter any parameter based on Regular expression</p>
+
+<!--more-->
+
+
+<p>Lets say we have route</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">resources</span> <span class="ss">:maps</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If we want to restrict it for certain range of IP addresses we can do like</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">resources</span> <span class="ss">:maps</span><span class="p">,</span> <span class="ss">constraints</span><span class="p">:</span> <span class="p">{</span> <span class="ss">ip</span><span class="p">:</span> <span class="sr">/172\.124\.\d+\.\d+/</span> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>OR</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">constraints</span><span class="p">(</span> <span class="ss">ip</span><span class="p">:</span> <span class="sr">/172\.124\.\d+\.\d+/</span><span class="p">)</span> <span class="k">do</span>
+</span><span class='line'>  <span class="n">resources</span> <span class="ss">:maps</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Another example of filtering <code>id</code> parameter</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">match</span> <span class="s1">&#39;maps/:id&#39;</span><span class="p">,</span> <span class="ss">to</span><span class="p">:</span> <span class="s1">&#39;maps#show&#39;</span> <span class="p">,</span><span class="ss">constraints</span><span class="p">:</span> <span class="p">{</span> <span class="nb">id</span><span class="p">:</span> <span class="sr">/\d+/</span><span class="p">},</span> <span class="ss">via</span><span class="p">:</span> <span class="ss">:get</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now URL with <code>id</code> as integer only allowed to hit <code>maps#show</code> action</p>
+
+<p>Can restrict <code>format</code> parameter</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">match</span> <span class="s1">&#39;maps/:id&#39;</span><span class="p">,</span> <span class="ss">to</span><span class="p">:</span> <span class="s1">&#39;maps#show&#39;</span> <span class="p">,</span><span class="ss">constraints</span><span class="p">:</span> <span class="p">{</span> <span class="nb">format</span><span class="p">:</span> <span class="s1">&#39;json&#39;</span> <span class="p">},</span> <span class="ss">via</span><span class="p">:</span> <span class="ss">:get</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>It will generate route only for <code>json</code> format so if somebody try to open HTML format for this URL it won&rsquo;t hit maps show action.</p>
+
+<h3>Request-Based Constraints</h3>
+
+<p>We can also constraint routes on request object</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">get</span> <span class="s1">&#39;admin/&#39;</span><span class="p">,</span> <span class="ss">to</span><span class="p">:</span> <span class="s1">&#39;admin#show&#39;</span><span class="p">,</span> <span class="ss">constraints</span><span class="p">:</span> <span class="p">{</span> <span class="ss">subdomain</span><span class="p">:</span> <span class="s1">&#39;admin&#39;</span> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now URL <code>admin.example.com/admin</code> will redirect to <code>show</code> action of <code>admin</code>
+controller</p>
+
+<h3>Dynamic Constraint(Dynamic request matching)</h3>
+
+<ul>
+<li>Using <code>matches?</code> method</li>
+</ul>
+
+
+<p>We can constraint route dynamically based on some specific criteria by creating a <code>matches?</code> method</p>
+
+<p>Lets say we have to filter sub domain of URL</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">constraints</span> <span class="no">Subdomain</span> <span class="k">do</span>
+</span><span class='line'>  <span class="n">get</span> <span class="s1">&#39;*path&#39;</span><span class="p">,</span> <span class="ss">to</span><span class="p">:</span> <span class="s1">&#39;proxy#index&#39;</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">Subdomain</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">matches?</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">subdomain</span><span class="o">.</span><span class="n">present?</span> <span class="o">&amp;&amp;</span> <span class="n">request</span><span class="o">.</span><span class="n">subdomain</span><span class="o">.</span><span class="n">start_with?</span><span class="p">(</span><span class="s1">&#39;foobar&#39;</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>What we are doing here checking for URL if it start with sub domain <code>foobar</code> then only hit <code>proxy#index</code> action. Your class must have <code>mathes?</code> method either class method or instance method. If you want to make it a instance method then do</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">constraints</span> <span class="no">Subdomain</span><span class="o">.</span><span class="n">new</span> <span class="k">do</span>
+</span><span class='line'>  <span class="n">get</span> <span class="s1">&#39;*path&#39;</span><span class="p">,</span> <span class="ss">to</span><span class="p">:</span> <span class="s1">&#39;proxy#index&#39;</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>Using <code>lambdas</code></li>
+</ul>
+
+
+<p>Instead of writing class we can also use <code>lambdas</code></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">get</span> <span class="s1">&#39;*path&#39;</span><span class="p">,</span> <span class="ss">to</span><span class="p">:</span> <span class="s1">&#39;proxy#index&#39;</span><span class="p">,</span> <span class="ss">constraints</span><span class="p">:</span> <span class="nb">lambda</span><span class="p">{</span><span class="o">|</span><span class="n">request</span><span class="o">|</span><span class="n">request</span><span class="o">.</span><span class="n">env</span><span class="o">[</span><span class="s1">&#39;SERVER_NAME&#39;</span><span class="o">].</span><span class="n">match</span><span class="p">(</span><span class="s1">&#39;foo.bar&#39;</span><span class="p">)}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Resource</p>
+
+<ul>
+<li><a href="http://guides.rubyonrails.org/routing.html">http://guides.rubyonrails.org/routing.html</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Splat operator as an argument in ruby]]></title>
     <link href="http://raysrashmi.com/2013/11/06/splat-operator-as-an-argument/"/>
     <updated>2013-11-06T00:00:00+01:00</updated>
     <id>http://raysrashmi.com/2013/11/06/splat-operator-as-an-argument</id>
@@ -35,7 +185,7 @@ See the below example</p>
 <span class='line-number'>6</span>
 <span class='line-number'>7</span>
 <span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">clas</span> <span class="no">Test</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Test</span>
 </span><span class='line'>  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
 </span><span class='line'>    <span class="nb">puts</span> <span class="n">args</span>
 </span><span class='line'>  <span class="k">end</span>
@@ -105,7 +255,7 @@ See the below example</p>
 </span><span class='line'>  <span class="k">end</span>
 </span><span class='line'><span class="k">end</span>
 </span><span class='line'>
-</span><span class='line'><span class="n">b</span> <span class="o">=</span> <span class="n">B</span><span class="o">.</span><span class="n">new</span> <span class="c1">#=&gt; </span>
+</span><span class='line'><span class="n">b</span> <span class="o">=</span> <span class="n">B</span><span class="o">.</span><span class="n">new</span> <span class="c1">#=&gt;</span>
 </span><span class='line'><span class="n">I</span> <span class="n">am</span> <span class="k">in</span> <span class="no">Parent</span> <span class="k">class</span>
 </span><span class='line'><span class="nc">I</span> <span class="n">am</span> <span class="k">in</span> <span class="no">Child</span> <span class="k">class</span>
 </span><span class='line'>
@@ -155,7 +305,7 @@ happens.</p>
 </span><span class='line'>  <span class="k">end</span>
 </span><span class='line'><span class="k">end</span>
 </span><span class='line'>
-</span><span class='line'><span class="n">B</span><span class="o">.</span><span class="n">new</span> <span class="c1">#=&gt; </span>
+</span><span class='line'><span class="n">B</span><span class="o">.</span><span class="n">new</span> <span class="c1">#=&gt;</span>
 </span><span class='line'>
 </span><span class='line'><span class="n">I</span> <span class="n">am</span> <span class="k">in</span> <span class="no">Parent</span> <span class="k">class</span>
 </span><span class='line'><span class="nc">I</span> <span class="n">am</span> <span class="k">in</span> <span class="no">Child</span> <span class="k">class</span>
@@ -289,7 +439,7 @@ Here we will see what new directories have been added.</p>
 <span class='line-number'>10</span>
 <span class='line-number'>11</span>
 <span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="k">module</span> <span class="nn">CommentTable</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="k">module</span> <span class="nn">Commentable</span>
 </span><span class='line'>    <span class="kp">extend</span> <span class="ss">ActiveSupport</span><span class="p">:</span><span class="ss">:Concern</span>
 </span><span class='line'>    <span class="k">def</span> <span class="nf">comments</span>
 </span><span class='line'>      <span class="n">comments</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:text</span><span class="p">)</span>
@@ -478,7 +628,7 @@ These are generated by <a href='https://github.com/rails/jbuilder'>jbuilder</a>
 <p>I hope this post will be useful for you. If there is any mistake in this post
 just let me know.</p>
 
-<p>There are lot to learn about rails 4. If you want here are some links</p>
+<p>There is lot to learn about rails 4. If you want here are some links</p>
 
 <ul>
 <li><a href="http://railscasts.com/episodes/400-what-s-new-in-rails-4?view=asciicast">http://railscasts.com/episodes/400-what-s-new-in-rails-4?view=asciicast</a></li>
@@ -2322,9 +2472,7 @@ we have to explicitly set the class</p>
 <figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'>
-</span><span class='line'>  <span class="n">resources</span> <span class="ss">:users</span> <span class="k">do</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="n">resources</span> <span class="ss">:users</span> <span class="k">do</span>
 </span><span class='line'>    <span class="n">resources</span> <span class="err"> </span><span class="ss">:blogs</span>
 </span><span class='line'>  <span class="k">end</span>
 </span></code></pre></td></tr></table></div></figure>
@@ -2336,9 +2484,7 @@ we have to explicitly set the class</p>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'>
-</span><span class='line'>  <span class="n">resources</span> <span class="ss">:blogs</span> <span class="k">do</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="n">resources</span> <span class="ss">:blogs</span> <span class="k">do</span>
 </span><span class='line'>    <span class="ss">:get</span> <span class="o">=&gt;</span> <span class="ss">:preview</span><span class="p">,</span> <span class="ss">:on</span> <span class="o">=&gt;</span><span class="ss">:member</span>
 </span><span class='line'>    <span class="ss">:get</span> <span class="o">=&gt;</span> <span class="ss">:list</span><span class="p">,</span> <span class="ss">:on</span> <span class="o">=&gt;</span><span class="ss">:collection</span>
 </span><span class='line'>  <span class="k">end</span>
@@ -2357,9 +2503,7 @@ we have to explicitly set the class</p>
 <span class='line-number'>8</span>
 <span class='line-number'>9</span>
 <span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'>
-</span><span class='line'><span class="n">resources</span><span class="err"> </span> <span class="ss">:blogs</span> <span class="k">do</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">resources</span><span class="err"> </span> <span class="ss">:blogs</span> <span class="k">do</span>
 </span><span class='line'>    <span class="n">member</span> <span class="k">do</span>
 </span><span class='line'>     <span class="ss">:get</span><span class="err"> </span> <span class="ss">:preview</span>
 </span><span class='line'>     <span class="ss">:put</span> <span class="ss">:sort</span>
@@ -2375,9 +2519,7 @@ we have to explicitly set the class</p>
 <p>Named Routes</p>
 
 <figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'>
-</span><span class='line'>  <span class="n">match</span> <span class="s2">&quot;history&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;site#index&quot;</span><span class="p">,</span> <span class="ss">:as</span> <span class="o">=&gt;</span> <span class="ss">:history</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="n">match</span> <span class="s2">&quot;history&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;site#index&quot;</span><span class="p">,</span> <span class="ss">:as</span> <span class="o">=&gt;</span> <span class="ss">:history</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
@@ -2386,22 +2528,14 @@ we have to explicitly set the class</p>
 <p>Route for Root</p>
 
 <figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'>
-</span><span class='line'>  <span class="n">root</span><span class="err">  </span> <span class="ss">:to</span> <span class="o">=&gt;</span> <span class="s2">&quot;home#index&quot;</span>
-</span><span class='line'>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="n">root</span><span class="err">  </span> <span class="ss">:to</span> <span class="o">=&gt;</span> <span class="s2">&quot;home#index&quot;</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
 <p>Constraints and Parameters in routes</p>
 
 <figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'>
-</span><span class='line'>  <span class="n">match</span> <span class="s2">&quot;search/:email(/:first_name/:last_name)&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;users#search&quot;</span><span class="p">,</span><span class="err"> </span> <span class="ss">:constraints</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="ss">:email</span> <span class="o">=&gt;</span> <span class="sr">/\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i</span><span class="p">}</span>
-</span><span class='line'>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="n">match</span> <span class="s2">&quot;search/:email(/:first_name/:last_name)&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;users#search&quot;</span><span class="p">,</span><span class="err"> </span> <span class="ss">:constraints</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="ss">:email</span> <span class="o">=&gt;</span> <span class="sr">/\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i</span><span class="p">}</span>
 </span></code></pre></td></tr></table></div></figure>
 
 

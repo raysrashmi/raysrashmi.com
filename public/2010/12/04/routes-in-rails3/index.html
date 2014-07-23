@@ -163,9 +163,7 @@
 <figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'>
-</span><span class='line'>  <span class="n">resources</span> <span class="ss">:users</span> <span class="k">do</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="n">resources</span> <span class="ss">:users</span> <span class="k">do</span>
 </span><span class='line'>    <span class="n">resources</span> <span class="err"> </span><span class="ss">:blogs</span>
 </span><span class='line'>  <span class="k">end</span>
 </span></code></pre></td></tr></table></div></figure>
@@ -177,9 +175,7 @@
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'>
-</span><span class='line'>  <span class="n">resources</span> <span class="ss">:blogs</span> <span class="k">do</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="n">resources</span> <span class="ss">:blogs</span> <span class="k">do</span>
 </span><span class='line'>    <span class="ss">:get</span> <span class="o">=&gt;</span> <span class="ss">:preview</span><span class="p">,</span> <span class="ss">:on</span> <span class="o">=&gt;</span><span class="ss">:member</span>
 </span><span class='line'>    <span class="ss">:get</span> <span class="o">=&gt;</span> <span class="ss">:list</span><span class="p">,</span> <span class="ss">:on</span> <span class="o">=&gt;</span><span class="ss">:collection</span>
 </span><span class='line'>  <span class="k">end</span>
@@ -198,9 +194,7 @@
 <span class='line-number'>8</span>
 <span class='line-number'>9</span>
 <span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'>
-</span><span class='line'><span class="n">resources</span><span class="err"> </span> <span class="ss">:blogs</span> <span class="k">do</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">resources</span><span class="err"> </span> <span class="ss">:blogs</span> <span class="k">do</span>
 </span><span class='line'>    <span class="n">member</span> <span class="k">do</span>
 </span><span class='line'>     <span class="ss">:get</span><span class="err"> </span> <span class="ss">:preview</span>
 </span><span class='line'>     <span class="ss">:put</span> <span class="ss">:sort</span>
@@ -216,9 +210,7 @@
 <p>Named Routes</p>
 
 <figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'>
-</span><span class='line'>  <span class="n">match</span> <span class="s2">&quot;history&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;site#index&quot;</span><span class="p">,</span> <span class="ss">:as</span> <span class="o">=&gt;</span> <span class="ss">:history</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="n">match</span> <span class="s2">&quot;history&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;site#index&quot;</span><span class="p">,</span> <span class="ss">:as</span> <span class="o">=&gt;</span> <span class="ss">:history</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
@@ -227,22 +219,14 @@
 <p>Route for Root</p>
 
 <figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'>
-</span><span class='line'>  <span class="n">root</span><span class="err">  </span> <span class="ss">:to</span> <span class="o">=&gt;</span> <span class="s2">&quot;home#index&quot;</span>
-</span><span class='line'>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="n">root</span><span class="err">  </span> <span class="ss">:to</span> <span class="o">=&gt;</span> <span class="s2">&quot;home#index&quot;</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
 <p>Constraints and Parameters in routes</p>
 
 <figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'>
-</span><span class='line'>  <span class="n">match</span> <span class="s2">&quot;search/:email(/:first_name/:last_name)&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;users#search&quot;</span><span class="p">,</span><span class="err"> </span> <span class="ss">:constraints</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="ss">:email</span> <span class="o">=&gt;</span> <span class="sr">/\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i</span><span class="p">}</span>
-</span><span class='line'>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="n">match</span> <span class="s2">&quot;search/:email(/:first_name/:last_name)&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;users#search&quot;</span><span class="p">,</span><span class="err"> </span> <span class="ss">:constraints</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="ss">:email</span> <span class="o">=&gt;</span> <span class="sr">/\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i</span><span class="p">}</span>
 </span></code></pre></td></tr></table></div></figure>
 
 

@@ -9,39 +9,39 @@ tags: Routes in Rails3,Routes,Rails
 
 Routes for CRUD actions
 {% codeblock lang:ruby%}
-     resources   :users     
+     resources   :users
 {% endcodeblock %}
 
 Also define for multiple resources
 {% codeblock lang:ruby%}
-     resources :users,  :blogs, :books     
+     resources :users,  :blogs, :books
 {% endcodeblock %}
 
 Nested Routes
 
-     
-{% codeblock lang:ruby%} 
+
+{% codeblock lang:ruby%}
   resources :users do
     resources  :blogs
   end
 {% endcodeblock %}
-     
+
 
 Member and collection
 
-{% codeblock lang:ruby%} 
+{% codeblock lang:ruby%}
   resources :blogs do
     :get => :preview, :on =>:member
     :get => :list, :on =>:collection
   end
 {% endcodeblock %}
-     
+
 
 
 if  we have more than one collection or member functions
 
-     
-{% codeblock lang:ruby%} 
+
+{% codeblock lang:ruby%}
 resources  :blogs do
     member do
      :get  :preview
@@ -53,13 +53,13 @@ resources  :blogs do
    end
 end
 {% endcodeblock %}
-     
+
 
 
 
 Named Routes
 
-{% codeblock lang:ruby%} 
+{% codeblock lang:ruby%}
   match "history" => "site#index", :as => :history
 {% endcodeblock %}
 
@@ -67,17 +67,17 @@ Adding :as makes it a named route so that we can use history_path      or      
 
 Route for Root
 {% codeblock lang:ruby%}
-     
+
   root   :to => "home#index"
-     
+
 {% endcodeblock %}
 
 Constraints and Parameters in routes
 {% codeblock lang:ruby%}
 
-     
+
   match "search/:email(/:first_name/:last_name)" => "users#search",  :constraints => {:email => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i}
-     
+
 
 {% endcodeblock %}
 Here email is mandatory parameter and first_name and last is optional parameter and in constraints email format is defined
