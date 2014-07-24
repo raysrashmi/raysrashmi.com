@@ -92,7 +92,7 @@ Lets say we have to filter sub domain of URL
       end
     end
 ```
-What we are doing here checking for URL if it start with sub domain `foobar` then only hit `proxy#index` action. Your class must have `mathes?` method either class method or instance method. If you want to make it a instance method then do
+What we are doing here is checking for URL if it start with sub domain `foobar` then only hit `proxy#index` action. Your class must have `mathes?` method either class method or instance method. If you want to make it a instance method then do
 
 ```ruby
     constraints Subdomain.new do

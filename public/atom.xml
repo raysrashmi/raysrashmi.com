@@ -4,7 +4,7 @@
   <title><![CDATA[Rashmi Yadav]]></title>
   <link href="http://raysrashmi.com/atom.xml" rel="self"/>
   <link href="http://raysrashmi.com/"/>
-  <updated>2014-07-23T16:23:47+02:00</updated>
+  <updated>2014-07-24T11:05:00+02:00</updated>
   <id>http://raysrashmi.com/</id>
   <author>
     <name><![CDATA[Rashmi Yadav]]></name>
@@ -131,7 +131,7 @@ controller</p>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>What we are doing here checking for URL if it start with sub domain <code>foobar</code> then only hit <code>proxy#index</code> action. Your class must have <code>mathes?</code> method either class method or instance method. If you want to make it a instance method then do</p>
+<p>What we are doing here is checking for URL if it start with sub domain <code>foobar</code> then only hit <code>proxy#index</code> action. Your class must have <code>mathes?</code> method either class method or instance method. If you want to make it a instance method then do</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
