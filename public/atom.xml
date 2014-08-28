@@ -4,7 +4,7 @@
   <title><![CDATA[Rashmi Yadav]]></title>
   <link href="http://raysrashmi.com/atom.xml" rel="self"/>
   <link href="http://raysrashmi.com/"/>
-  <updated>2014-07-24T11:05:00+02:00</updated>
+  <updated>2014-08-28T23:18:59+02:00</updated>
   <id>http://raysrashmi.com/</id>
   <author>
     <name><![CDATA[Rashmi Yadav]]></name>
@@ -12,6 +12,151 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[rails-4-2-features]]></title>
+    <link href="http://raysrashmi.com/2014/08/28/rails-4-2-features/"/>
+    <updated>2014-08-28T15:42:00+02:00</updated>
+    <id>http://raysrashmi.com/2014/08/28/rails-4-2-features</id>
+    <content type="html"><![CDATA[<p><a href='http://edgeguides.rubyonrails.org/4_2_release_notes.html'>Rails 4.2 beta</a> is releasing soon with some nice major features</p>
+
+<ol>
+<li><a href='http://edgeguides.rubyonrails.org/4_2_release_notes.html#active-job-action-mailer-deliver-later'>Active Job, ActionMailer #deliver_later</a></li>
+<li><a href='http://edgeguides.rubyonrails.org/4_2_release_notes.html#adequate-record'>Adequate records</a></li>
+<li><a href='http://edgeguides.rubyonrails.org/4_2_release_notes.html#web-console'>Web console</a></li>
+<li><a href='http://edgeguides.rubyonrails.org/4_2_release_notes.html#foreign-key-support'>Foreign key support</a></li>
+</ol>
+
+
+<p>But part from this <a href='http://edgeguides.rubyonrails.org/4_2_release_notes.html'>Rails 4.2 beta</a> will give us other features which is good to know</p>
+
+<h2><code>required</code> option for singular associations (<code>belongs_to</code> and <code>has_one</code>)</h2>
+
+<p>Sometimes we want to have presence validation for association</p>
+
+<p>For example &ndash;:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+</span><span class='line'>  <span class="n">belongs_to</span> <span class="ss">:account</span>
+</span><span class='line'>  <span class="n">validates</span> <span class="ss">:account</span><span class="p">,</span> <span class="ss">presence</span><span class="p">:</span> <span class="kp">true</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In rails 4.2 we can set option <code>required</code> true which will validate association presence</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+</span><span class='line'>  <span class="n">belongs_to</span> <span class="ss">:account</span><span class="p">,</span> <span class="ss">required</span><span class="p">:</span> <span class="kp">true</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Also with <code>has_one</code> association we can set <code>required</code> true
+We can set <code>required</code> true for <code>has_one</code> as well</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Account</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+</span><span class='line'>  <span class="n">has_one</span> <span class="ss">:user</span><span class="p">,</span> <span class="ss">required</span><span class="p">:</span> <span class="kp">true</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2><code>required</code> option in migration and model generator</h2>
+
+<p>When we generate model we can pass <code>required</code> option</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="n">rails</span> <span class="n">generate</span> <span class="n">model</span> <span class="no">Comment</span> <span class="ss">commentable</span><span class="p">:</span><span class="n">references</span><span class="p">{</span><span class="n">required</span><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Model file will be generated like</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Comment</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+</span><span class='line'>  <span class="n">belongs_to</span> <span class="ss">:commentable</span><span class="p">,</span> <span class="ss">required</span><span class="p">:</span> <span class="kp">true</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And migration file will be</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">CreateComments</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Migration</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">change</span>
+</span><span class='line'>    <span class="n">create_table</span> <span class="ss">:comments</span> <span class="k">do</span> <span class="o">|</span><span class="n">t</span><span class="o">|</span>
+</span><span class='line'>      <span class="n">t</span><span class="o">.</span><span class="n">references</span> <span class="ss">:commentable</span><span class="p">,</span> <span class="ss">index</span><span class="p">:</span> <span class="kp">true</span><span class="p">,</span> <span class="ss">null</span><span class="p">:</span> <span class="kp">false</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="n">t</span><span class="o">.</span><span class="n">timestamps</span> <span class="ss">null</span><span class="p">:</span> <span class="kp">false</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>We can also pass it with <code>polymorphic</code> option</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">rails</span> <span class="n">generate</span> <span class="n">model</span> <span class="no">Comment</span> <span class="ss">commentable</span><span class="p">:</span><span class="n">references</span><span class="p">{</span><span class="n">required</span><span class="p">,</span> <span class="n">polymorphic</span><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This <code>required</code> option can also be passed while generating migration</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">rails</span> <span class="n">generate</span> <span class="n">migration</span> <span class="no">AddAccountToUsers</span> <span class="ss">account</span><span class="p">:</span><span class="n">references</span><span class="p">{</span><span class="n">required</span><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>validate &amp;&amp; validate!</h2>
+
+<h3>validate</h3>
+
+<p>It runs all validation and return <code>true</code> if no error found  return <code>false</code> if
+alias of <code>valid?</code></p>
+
+<h3>validate!</h3>
+
+<p>Its run all validation return <code>true</code> if no error found and
+raise <code>ActiveRecord::RecordInvalid</code> if validation fails</p>
+
+<h2>pretty_print support for ActiveRecord::Base objects</h2>
+
+<p>If you have active base record with many attributes and you want to print in console or in logs it just come in one line which looks messy kind of
+Rails 4.2 pretty print support for active base record</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">pp</span> <span class="n">u</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&lt;%=</span> <span class="n">image_tag</span> <span class="o">%&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Rails Routing Constraints]]></title>
@@ -2623,17 +2768,6 @@ we have to explicitly set the class</p>
 </span><span class='line'><span class="vi">@message</span><span class="o">.</span><span class="n">errors</span> <span class="n">will</span> <span class="n">give</span> <span class="n">error</span> <span class="s2">&quot;Email can&#39;t be blank&quot;</span>
 </span></code></pre></td></tr></table></div></figure>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Extended Version of Active Merchant Plugin]]></title>
-    <link href="http://raysrashmi.com/2010/08/02/extended-version-of-active-merchant-plugin/"/>
-    <updated>2010-08-02T00:00:00+02:00</updated>
-    <id>http://raysrashmi.com/2010/08/02/extended-version-of-active-merchant-plugin</id>
-    <content type="html"><![CDATA[<p>Extend the existing <strong>active merchant</strong> plug in for extracting transaction report via Date Range or Transactions id.Now u can fetch transactions by date range and between transaction ids range by using this plug in</p>
-
-<p><a href="http://github.com/raysrashmi/active_merchant">github.com/raysrashmi/active_merchant</a></p>
 ]]></content>
   </entry>
   
