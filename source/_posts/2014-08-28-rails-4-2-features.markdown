@@ -90,6 +90,8 @@ alias of `valid?`
 Its run all validation return `true` if no error found and
 raise `ActiveRecord::RecordInvalid` if validation fails
 
+##with_options without explicit receiver
+
 ##pretty_print support for ActiveRecord::Base objects
 If you have active base record with many attributes and you want to print in console or in logs it just come in one line which looks messy kind of
 Rails 4.2 pretty print support for active base record
@@ -101,4 +103,13 @@ pp u
 <%= image_tag %>
 ```
 
+## `--skip-gems` option
 
+We can skip adding gems to Gem while creating new app with `--skip-gems` option
+
+```ruby
+rails new <app name> --skip-gems turbolinks coffee-rails
+```
+
+
+##bin/rake db:purge
