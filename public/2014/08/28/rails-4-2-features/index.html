@@ -154,6 +154,9 @@ Adequate &hellip;">
 
 <p>But part from this <a href='http://edgeguides.rubyonrails.org/4_2_release_notes.html'>Rails 4.2 beta</a> will give us other features which is good to know</p>
 
+<!--more-->
+
+
 <h2><code>required</code> option for singular associations (<code>belongs_to</code> and <code>has_one</code>)</h2>
 
 <p>Sometimes we want to have presence validation for association</p>
@@ -263,6 +266,36 @@ alias of <code>valid?</code></p>
 <p>Its run all validation return <code>true</code> if no error found and
 raise <code>ActiveRecord::RecordInvalid</code> if validation fails</p>
 
+<h2><code>with_options</code> without explicit receiver</h2>
+
+<p>Now in rails 4.2 we don&rsquo;t need to pass receiver to <code>with_options</code> until it is required</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+</span><span class='line'> <span class="n">with_options</span> <span class="k">if</span><span class="p">:</span> <span class="ss">:is_admin?</span> <span class="k">do</span>
+</span><span class='line'>    <span class="n">validates</span> <span class="ss">:name</span><span class="p">,</span> <span class="ss">presence</span><span class="p">:</span> <span class="kp">true</span>
+</span><span class='line'>    <span class="n">validates</span> <span class="ss">:email</span><span class="p">,</span> <span class="ss">presence</span><span class="p">:</span> <span class="kp">true</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>touch multiple attributes</h2>
+
+<p>You can update multiple attributes at once with <code>touch</code> method</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">a</span> <span class="o">=</span> <span class="no">Article</span><span class="o">.</span><span class="n">first</span>
+</span><span class='line'><span class="n">a</span><span class="o">.</span><span class="n">touch</span><span class="p">(</span><span class="ss">:published_at</span><span class="p">,</span> <span class="ss">:created_at</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
 <h2>pretty_print support for ActiveRecord::Base objects</h2>
 
 <p>If you have active base record with many attributes and you want to print in console or in logs it just come in one line which looks messy kind of
@@ -273,11 +306,74 @@ Rails 4.2 pretty print support for active base record</p>
 </span></code></pre></td></tr></table></div></figure>
 
 
+<p><img src=''/></p>
+
+<h2><code>--skip-gems</code> option</h2>
+
+<p>We can skip adding gems to Gem file while creating new app with <code>--skip-gems</code> option</p>
+
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&lt;%=</span> <span class="n">image_tag</span> <span class="o">%&gt;</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">rails</span> <span class="kp">new</span> <span class="o">&lt;</span><span class="n">app</span> <span class="nb">name</span><span class="o">&gt;</span> <span class="o">--</span><span class="n">skip</span><span class="o">-</span><span class="n">gems</span> <span class="n">turbolinks</span> <span class="n">coffee</span><span class="o">-</span><span class="n">rails</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
+<h2>Empty your database</h2>
+
+<p>Rails provides us few rake tasks to create/delete database and to run migrations.</p>
+
+<p>There is new task <code>rake db:purge</code> to empty database for current environment.</p>
+
+<p>It remove your data and tables from database and of course we pass environment <code>RAILS_ENV</code> like other rake task.</p>
+
+<h2>Transform Hash Values</h2>
+
+<p>To modify has values only call <code>tarnsform_values</code> it accepts a block and apply the block operation to each value of hash</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">a</span> <span class="o">=</span> <span class="p">{</span><span class="ss">a</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="ss">b</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="ss">c</span><span class="p">:</span> <span class="mi">3</span><span class="p">}</span>
+</span><span class='line'><span class="n">a</span><span class="o">.</span><span class="n">transform_values</span><span class="p">{</span><span class="o">|</span><span class="n">a</span><span class="o">|</span><span class="n">a</span><span class="o">*</span><span class="mi">2</span><span class="p">}</span> <span class="c1">#=&gt; :a=&gt;2, :b=&gt;4, :c=&gt;6}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>There is also bang version <code>transform_values!</code> which change original hash</p>
+
+<h2>Truncate String by words</h2>
+
+<p><code>truncate_words</code> method truncate a string by give number of words</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="s1">&#39;This is fantastic place in this world&#39;</span><span class="o">.</span><span class="n">truncate_words</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="c1">#=&gt; &quot;This is fantastic...&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>bin/setup</h2>
+
+<p>We always need some set of commands to bootstrap our application.</p>
+
+<p>Now in rails 4.2 there is <code>bin/setup</code> script where we can have all the commands required to bootstrap your application.</p>
+
+<p>There are some defaults commands written but we can add our more
+Default file look like
+<img src='bin_setup.png'></p>
+
+<h2>Support for PostgreSQL citext data type</h2>
+
+<p>Rails 4.2 added support for <a href='http://www.postgresql.org/docs/9.0/static/citext.html'><code>citext</code></a>
+column type in PostgreSQL adapter.</p>
+
+<p>You have enable extension before running migration
+<img src='citext_migration'></p>
+
+<p><code>citext</code> column type provides a case-insensitive character string type.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">User</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="ss">bio</span><span class="p">:</span> <span class="s1">&#39;Developer&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="c1">#=&gt;SELECT &quot;users&quot;.* FROM &quot;users&quot; WHERE &quot;users&quot;.&quot;bio&quot; = $1  [[&quot;bio&quot;, &quot;Developer&quot;]]</span>
+</span><span class='line'><span class="c1">#=&gt; #&lt;ActiveRecord::Relation [#&lt;User id: 1, name: nil, email: &quot;test@example.com&quot;, created_at: &quot;2014-08-30 17:51:17&quot;, updated_at: &quot;2014-08-30 17:51:17&quot;, role: nil, bio: &quot;developer&quot;&gt;]&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
     </div>

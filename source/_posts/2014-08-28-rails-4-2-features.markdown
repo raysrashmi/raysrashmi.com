@@ -14,6 +14,7 @@ categories:
 
 But part from this <a href='http://edgeguides.rubyonrails.org/4_2_release_notes.html'>Rails 4.2 beta</a> will give us other features which is good to know
 
+<!--more-->
 ##`required` option for singular associations (`belongs_to` and `has_one`)
 Sometimes we want to have presence validation for association
 
@@ -90,8 +91,25 @@ alias of `valid?`
 Its run all validation return `true` if no error found and
 raise `ActiveRecord::RecordInvalid` if validation fails
 
-##with_options without explicit receiver
+##`with_options` without explicit receiver
+Now in rails 4.2 we don't need to pass receiver to `with_options` until it is required
 
+```ruby
+class User < ActiveRecord::Base
+ with_options if: :is_admin? do
+    validates :name, presence: true
+    validates :email, presence: true
+  end
+end
+```
+## touch multiple attributes
+
+You can update multiple attributes at once with `touch` method
+
+```ruby
+a = Article.first
+a.touch(:published_at, :created_at)
+```
 ##pretty_print support for ActiveRecord::Base objects
 If you have active base record with many attributes and you want to print in console or in logs it just come in one line which looks messy kind of
 Rails 4.2 pretty print support for active base record
@@ -99,17 +117,58 @@ Rails 4.2 pretty print support for active base record
 ```ruby
 pp u
 ```
-```ruby
-<%= image_tag %>
-```
+<img src=''/>
 
 ## `--skip-gems` option
 
-We can skip adding gems to Gem while creating new app with `--skip-gems` option
+We can skip adding gems to Gem file while creating new app with `--skip-gems` option
 
 ```ruby
 rails new <app name> --skip-gems turbolinks coffee-rails
 ```
+## Empty your database
+Rails provides us few rake tasks to create/delete database and to run migrations.
+
+There is new task `rake db:purge` to empty database for current environment.
+
+It remove your data and tables from database and of course we pass environment `RAILS_ENV` like other rake task.
 
 
-##bin/rake db:purge
+##Transform Hash Values
+To modify has values only call `tarnsform_values` it accepts a block and apply the block operation to each value of hash
+
+```ruby
+a = {a: 1, b: 2, c: 3}
+a.transform_values{|a|a*2} #=> :a=>2, :b=>4, :c=>6}
+```
+There is also bang version `transform_values!` which change original hash
+
+##Truncate String by words
+`truncate_words` method truncate a string by give number of words
+
+```ruby
+'This is fantastic place in this world'.truncate_words(3) #=> "This is fantastic..."
+```
+##bin/setup
+We always need some set of commands to bootstrap our application.
+
+Now in rails 4.2 there is `bin/setup` script where we can have all the commands required to bootstrap your application.
+
+There are some defaults commands written but we can add our more
+Default file look like
+<img src='bin_setup.png'>
+
+##Support for PostgreSQL citext data type
+Rails 4.2 added support for <a href='http://www.postgresql.org/docs/9.0/static/citext.html'>`citext`</a>
+column type in PostgreSQL adapter.
+
+You have enable extension before running migration
+<img src='citext_migration'>
+
+`citext` column type provides a case-insensitive character string type.
+
+```ruby
+User.where(bio: 'Developer')
+#=>SELECT "users".* FROM "users" WHERE "users"."bio" = $1  [["bio", "Developer"]]
+#=> #<ActiveRecord::Relation [#<User id: 1, name: nil, email: "test@example.com", created_at: "2014-08-30 17:51:17", updated_at: "2014-08-30 17:51:17", role: nil, bio: "developer">]>
+```
