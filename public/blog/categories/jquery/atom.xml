@@ -4,7 +4,7 @@
   <title><![CDATA[Category: jquery | Rashmi Yadav]]></title>
   <link href="http://raysrashmi.com/blog/categories/jquery/atom.xml" rel="self"/>
   <link href="http://raysrashmi.com/"/>
-  <updated>2014-08-30T20:04:10+02:00</updated>
+  <updated>2014-08-30T22:46:58+02:00</updated>
   <id>http://raysrashmi.com/</id>
   <author>
     <name><![CDATA[Rashmi Yadav]]></name>
@@ -28,23 +28,23 @@ I never faced this problem before. I thought to share this with you guys.</p>
 
 <p>I had an text field</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;input</span> <span class="na">class=</span><span class="s">&quot;blur_text&quot;</span> <span class="na">id=</span><span class="s">&quot;search_box_location_input&quot;</span> <span class="na">name=</span><span class="s">&quot;location&quot;</span> <span class="na">placeholder=</span><span class="s">&quot;Address, City, State or Zip&quot;</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">value=</span><span class="s">&quot;New York&quot;</span><span class="nt">&gt;</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+<p>{% codeblock lang:html%}
+<input class="blur_text" id="search_box_location_input" name="location" placeholder="Address, City, State or Zip" type="text" value="New York">
+{% endcodeblock %}</p>
 
 <p>I had to send the value of this text field to server side</p>
 
 <p>So if I do</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'>  $(<span class="ni">&amp;ldquo;</span>#search_box_location_input<span class="ni">&amp;rdquo;</span>).attr(<span class="ni">&amp;lsquo;</span>value<span class="ni">&amp;rsquo;</span>) =&gt; <span class="ni">&amp;ldquo;</span>New York<span class="ni">&amp;rdquo;</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+<p>{% codeblock lang:html%}
+  $(&ldquo;#search_box_location_input&rdquo;).attr(&lsquo;value&rsquo;) => &ldquo;New York&rdquo;
+{% endcodeblock %}</p>
 
 <p>Result is &ldquo;New York&rdquo;</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'>  $(<span class="ni">&amp;ldquo;</span>#search_box_location_input<span class="ni">&amp;rdquo;</span>).val() =&gt; <span class="ni">&amp;ldquo;</span>Address, City, State or Zip<span class="ni">&amp;rdquo;</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
+<p>{% codeblock lang:html%}
+  $(&ldquo;#search_box_location_input&rdquo;).val() => &ldquo;Address, City, State or Zip&rdquo;
+{% endcodeblock %}
 It gives the the value entered in text field and if nothing then the placeholder value</p>
 
 <p>It means <code>val()</code> gives the actual value that is there in text field. <code>$(obj).attre(&lsquo;value&rsquo;)</code> it actually give the value of attribute &lsquo;value&rsquo;</p>

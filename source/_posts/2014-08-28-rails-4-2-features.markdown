@@ -117,9 +117,9 @@ Rails 4.2 pretty print support for active base record
 ```ruby
 pp u
 ```
-<img src=''/>
+<img src="{{ root_url }}/images/pretty_print.png" />
 
-## `--skip-gems` option
+## Skip gems
 
 We can skip adding gems to Gem file while creating new app with `--skip-gems` option
 
@@ -155,15 +155,17 @@ We always need some set of commands to bootstrap our application.
 Now in rails 4.2 there is `bin/setup` script where we can have all the commands required to bootstrap your application.
 
 There are some defaults commands written but we can add our more
-Default file look like
-<img src='bin_setup.png'>
+
+Default file bin/setup file look like
+
+<img src="{{ root_url }}/images/bin_setup.png" />
+[{% img left /images/bin_setup.png %}](http://{% root_url %}/images/bin_setup.png)
 
 ##Support for PostgreSQL citext data type
 Rails 4.2 added support for <a href='http://www.postgresql.org/docs/9.0/static/citext.html'>`citext`</a>
 column type in PostgreSQL adapter.
 
 You have enable extension before running migration
-<img src='citext_migration'>
 
 `citext` column type provides a case-insensitive character string type.
 
