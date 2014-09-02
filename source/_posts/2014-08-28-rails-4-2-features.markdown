@@ -1,9 +1,10 @@
 ---
 layout: post
-title: "rails-4-2-features"
+title: "Rails 4.2 beta Changelog"
 date: 2014-08-28 15:42
 comments: true
 categories:
+keywords: rails 4.2 beta, rails changelog rails, ruby
 ---
 <a href='http://edgeguides.rubyonrails.org/4_2_release_notes.html'>Rails 4.2 beta</a> is releasing soon with some nice major features
 
@@ -55,7 +56,7 @@ class Comment < ActiveRecord::Base
   belongs_to :commentable, required: true
 end
 ```
-commentable associatio is required here.
+commentable association is required here.
 
 And migration file will be
 

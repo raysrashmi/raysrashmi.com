@@ -4,7 +4,7 @@
   <title><![CDATA[Rashmi Yadav]]></title>
   <link href="http://raysrashmi.com/atom.xml" rel="self"/>
   <link href="http://raysrashmi.com/"/>
-  <updated>2014-08-31T23:22:01+02:00</updated>
+  <updated>2014-09-02T20:21:56+02:00</updated>
   <id>http://raysrashmi.com/</id>
   <author>
     <name><![CDATA[Rashmi Yadav]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[rails-4-2-features]]></title>
+    <title type="html"><![CDATA[Rails 4.2 beta Changelog]]></title>
     <link href="http://raysrashmi.com/2014/08/28/rails-4-2-features/"/>
     <updated>2014-08-28T15:42:00+02:00</updated>
     <id>http://raysrashmi.com/2014/08/28/rails-4-2-features</id>
@@ -92,7 +92,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>commentable associatio is required here.</p>
+<p>commentable association is required here.</p>
 
 <p>And migration file will be</p>
 
@@ -273,7 +273,11 @@ column type in PostgreSQL adapter.</p>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>Here you can see bio column value is &lsquo;developer&rsquo; still in <code>where</code> query with &lsquo;Developer&rsquo; values gave use the user. Internally <code>citext</code></p>
+<p>Here you can see we have user with bio value as &lsquo;developer&rsquo; but when in <code>where</code> query with &lsquo;Developer&rsquo; value gave us the user.</p>
+
+<p>Internally <code>citext</code> calls lower when comparing values so we don&rsquo;t need to explicitly convert value in lowercase</p>
+
+<h1>References</h1>
 ]]></content>
   </entry>
   

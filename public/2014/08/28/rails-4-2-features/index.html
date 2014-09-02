@@ -5,13 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>rails-4-2-features - Rashmi Yadav</title>
+  <title>Rails 4.2 beta Changelog - Rashmi Yadav</title>
   <meta name="author" content="Rashmi Yadav">
 
   
-  <meta name="description" content="Rails-4-2-features Aug 28th, 2014 Rails 4.2 beta is releasing soon with some nice major features Active Job, ActionMailer #deliver_later
-Adequate &hellip;">
-  
+  <meta name="description" content="Rails 4.2 Beta Changelog Aug 28th, 2014 Rails 4.2 beta is releasing soon with some nice major features Active Job, ActionMailer #deliver_later &hellip;">
+  <meta name="keywords" content="rails 4.2 beta, rails changelog rails, ruby">
 
   <!-- http://t.co/dKP3o1e -->
   <meta name="HandheldFriendly" content="True">
@@ -108,7 +107,7 @@ Adequate &hellip;">
 
   <header>
   <div class="jumbotron">
-    Rails-4-2-features
+    Rails 4.2 Beta Changelog
 	<h5>
 
 
@@ -216,7 +215,7 @@ Adequate &hellip;">
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>commentable associatio is required here.</p>
+<p>commentable association is required here.</p>
 
 <p>And migration file will be</p>
 
@@ -397,7 +396,11 @@ column type in PostgreSQL adapter.</p>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>Here you can see bio column value is &lsquo;developer&rsquo; still in <code>where</code> query with &lsquo;Developer&rsquo; values gave use the user. Internally <code>citext</code></p>
+<p>Here you can see we have user with bio value as &lsquo;developer&rsquo; but when in <code>where</code> query with &lsquo;Developer&rsquo; value gave us the user.</p>
+
+<p>Internally <code>citext</code> calls lower when comparing values so we don&rsquo;t need to explicitly convert value in lowercase</p>
+
+<h1>References</h1>
 
     </div>
   </div>
