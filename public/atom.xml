@@ -4,7 +4,7 @@
   <title><![CDATA[Rashmi Yadav]]></title>
   <link href="http://raysrashmi.com/atom.xml" rel="self"/>
   <link href="http://raysrashmi.com/"/>
-  <updated>2014-09-02T20:21:56+02:00</updated>
+  <updated>2014-09-02T21:51:38+02:00</updated>
   <id>http://raysrashmi.com/</id>
   <author>
     <name><![CDATA[Rashmi Yadav]]></name>
@@ -18,26 +18,30 @@
     <link href="http://raysrashmi.com/2014/08/28/rails-4-2-features/"/>
     <updated>2014-08-28T15:42:00+02:00</updated>
     <id>http://raysrashmi.com/2014/08/28/rails-4-2-features</id>
-    <content type="html"><![CDATA[<p><a href='http://edgeguides.rubyonrails.org/4_2_release_notes.html'>Rails 4.2 beta</a> is releasing soon with some nice major features</p>
+    <content type="html"><![CDATA[<p><a href='http://edgeguides.rubyonrails.org/4_2_release_notes.html'>Rails 4.2 beta</a> has been released and final version is going to come out soon.</p>
+
+<p>Listed are some feature are going introduced in version of Rails 4.2. You can also try them while it&rsquo;s beta.</p>
 
 <ol>
-<li><a href='http://edgeguides.rubyonrails.org/4_2_release_notes.html#active-job-action-mailer-deliver-later'>Active Job, ActionMailer #deliver_later</a></li>
-<li><a href='http://edgeguides.rubyonrails.org/4_2_release_notes.html#adequate-record'>Adequate records</a></li>
-<li><a href='http://edgeguides.rubyonrails.org/4_2_release_notes.html#web-console'>Web console</a></li>
-<li><a href='http://edgeguides.rubyonrails.org/4_2_release_notes.html#foreign-key-support'>Foreign key support</a></li>
+<li><p><a href='http://edgeguides.rubyonrails.org/4_2_release_notes.html#active-job-action-mailer-deliver-later'>Active Job, ActionMailer #deliver_later</a></p></li>
+<li><p><a href='http://edgeguides.rubyonrails.org/4_2_release_notes.html#adequate-record'>Adequate records</a></p></li>
+<li><p><a href='http://edgeguides.rubyonrails.org/4_2_release_notes.html#web-console'>Web console</a></p></li>
+<li><p><a href='http://edgeguides.rubyonrails.org/4_2_release_notes.html#foreign-key-support'>Foreign key support</a></p></li>
 </ol>
 
 
-<p>But part from this <a href='http://edgeguides.rubyonrails.org/4_2_release_notes.html'>Rails 4.2 beta</a> will give us other features which is good to know</p>
+<p>But apart from these there are more features which are going to ship in Rails 4.2.</p>
+
+<p>Few of them are..</p>
 
 <!--more-->
 
 
 <h2><code>required</code> option for singular associations (<code>belongs_to</code> and <code>has_one</code>)</h2>
 
-<p>Current way of validating presence of association is &ndash;:</p>
+<p>Sometime we need to validate presence of associated object not the foreign key used to map the association</p>
 
-<p>For example &ndash;:</p>
+<p>Lets say for each user there must be a account so we validate it like this &ndash;:</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -50,38 +54,29 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>In Rails 4.2 we can set <code>required</code> option to true which will validate presence of association</p>
+<p>But in Rails 4.2 we just need to set <code>required</code> option to true which will validate associated object is present</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
+<span class='line-number'>4</span>
 </pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
 </span><span class='line'>  <span class="n">belongs_to</span> <span class="ss">:account</span><span class="p">,</span> <span class="ss">required</span><span class="p">:</span> <span class="kp">true</span>
+</span><span class='line'>  <span class="n">has_one</span> <span class="ss">:profile</span><span class="p">,</span> <span class="ss">required</span><span class="p">:</span> <span class="kp">true</span>
 </span><span class='line'><span class="k">end</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>We can also use it for <code>has_one</code> association</p>
+<h2><code>required</code> option in generator for model and migration</h2>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Account</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
-</span><span class='line'>  <span class="n">has_one</span> <span class="ss">:user</span><span class="p">,</span> <span class="ss">required</span><span class="p">:</span> <span class="kp">true</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2><code>required</code> option in migration and model generator</h2>
-
-<p>When we generate model we can pass <code>required</code> option  for references</p>
+<p>When we generate model we can pass <code>required</code> option  for references/associations</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="n">rails</span> <span class="n">generate</span> <span class="n">model</span> <span class="no">Comment</span> <span class="ss">commentable</span><span class="p">:</span><span class="n">references</span><span class="p">{</span><span class="n">required</span><span class="p">}</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>Model file will be generated like</p>
+<p>It will automatically set <code>required</code> true for <code>commentable</code> association</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -92,9 +87,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>commentable association is required here.</p>
-
-<p>And migration file will be</p>
+<p>And in migration set <code>null: false</code> for <code>commentable</code> association which is basically a database validation</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -117,36 +110,51 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>It set <code>null: false</code> for references.</p>
-
-<p>We can also pass it with <code>polymorphic</code> option</p>
+<p>We can also pass it with <code>polymorphic</code> option if we need polymorphic relation</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">rails</span> <span class="n">generate</span> <span class="n">model</span> <span class="no">Comment</span> <span class="ss">commentable</span><span class="p">:</span><span class="n">references</span><span class="p">{</span><span class="n">required</span><span class="p">,</span> <span class="n">polymorphic</span><span class="p">}</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>This <code>required</code> option can also be passed while generating migration</p>
+<p>This <code>required</code> option can also be passed in generating migration</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">rails</span> <span class="n">generate</span> <span class="n">migration</span> <span class="no">AddAccountToUsers</span> <span class="ss">account</span><span class="p">:</span><span class="n">references</span><span class="p">{</span><span class="n">required</span><span class="p">}</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<h2>validate &amp;&amp; validate!</h2>
+<h2>validate and validate!</h2>
 
 <h3>validate</h3>
 
-<p>It runs all validation and return <code>true</code> if no error found  otherwise return <code>false</code>.</p>
+<p>It runs all validations and returns <code>true</code> if no error found  otherwise return <code>false</code>.</p>
 
 <p>It is alias of <code>valid?</code> method.</p>
 
 <h3>validate!</h3>
 
-<p>It runs all validation and return <code>true</code> if no error found and
+<p>It runs all validations and returns <code>true</code> if no error found otherwise
 raise <code>ActiveRecord::RecordInvalid</code> if any validation fails</p>
 
 <h2><code>with_options</code> without explicit receiver</h2>
+
+<p>In <code>with_options</code> block we have to pass explicit receiver whether it is required or not</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+</span><span class='line'> <span class="n">with_options</span> <span class="k">if</span><span class="p">:</span> <span class="ss">:is_admin?</span> <span class="k">do</span> <span class="o">|</span><span class="n">admin</span><span class="o">|</span>
+</span><span class='line'>    <span class="n">admin</span><span class="o">.</span><span class="n">validates</span> <span class="ss">:name</span><span class="p">,</span> <span class="ss">presence</span><span class="p">:</span> <span class="kp">true</span>
+</span><span class='line'>    <span class="n">admin</span><span class="o">.</span><span class="n">validates</span> <span class="ss">:email</span><span class="p">,</span> <span class="ss">presence</span><span class="p">:</span> <span class="kp">true</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>Now in Rails 4.2 we don&rsquo;t need to pass explicit receiver to <code>with_options</code> until it is required</p>
 
@@ -165,32 +173,59 @@ raise <code>ActiveRecord::RecordInvalid</code> if any validation fails</p>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<h2>touch multiple attributes</h2>
+<h2>Touch multiple attributes</h2>
 
-<p>You can update multiple attributes at once with <code>touch</code> method</p>
+<p>Before Rails 4.2 we can just pass one attribute in <code>touch</code> method</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">a</span> <span class="o">=</span> <span class="no">Article</span><span class="o">.</span><span class="n">first</span>
+</span><span class='line'><span class="n">a</span><span class="o">.</span><span class="n">touch</span><span class="p">(</span><span class="ss">:published_at</span><span class="p">)</span> <span class="c1"># =&gt; true</span>
+</span><span class='line'><span class="n">a</span><span class="o">.</span><span class="n">touch</span><span class="p">(</span><span class="ss">:published_at</span><span class="p">,</span> <span class="ss">:created_at</span><span class="p">)</span> <span class="c1">#=&gt; ArgumentError: wrong number of arguments (2 for 0..1)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>But in Rails 4.2 we can update multiple attributes at once with <code>touch</code> method</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 </pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">a</span> <span class="o">=</span> <span class="no">Article</span><span class="o">.</span><span class="n">first</span>
-</span><span class='line'><span class="n">a</span><span class="o">.</span><span class="n">touch</span><span class="p">(</span><span class="ss">:published_at</span><span class="p">,</span> <span class="ss">:created_at</span><span class="p">)</span>
+</span><span class='line'><span class="n">a</span><span class="o">.</span><span class="n">touch</span><span class="p">(</span><span class="ss">:published_at</span><span class="p">,</span> <span class="ss">:created_at</span><span class="p">)</span> <span class="c1">#=&gt; true</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<h2>pretty_print support for ActiveRecord::Base objects</h2>
+<h2>Pretty print for ActiveRecord object</h2>
 
-<p>If you have active base record with many attributes and you want to print in console or in logs it just come in one line which is not so clear
-Rails 4.2 pretty print support for active base record</p>
+<p>Now in Rails console/logs we can print ActiveRecord object output nicely
+just pass that object to <code>pp</code> method</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">pp</span> <span class="n">u</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">pp</span> <span class="no">User</span><span class="o">.</span><span class="n">last</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">#&lt;User:0x007f8fdf29f3a8</span>
+</span><span class='line'> <span class="nb">id</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+</span><span class='line'> <span class="nb">name</span><span class="p">:</span> <span class="kp">nil</span><span class="p">,</span>
+</span><span class='line'> <span class="ss">email</span><span class="p">:</span> <span class="kp">nil</span><span class="p">,</span>
+</span><span class='line'> <span class="n">created_at</span><span class="p">:</span> <span class="no">Tue</span><span class="p">,</span> <span class="mo">02</span> <span class="no">Sep</span> <span class="mi">2014</span> <span class="mi">19</span><span class="p">:</span><span class="mi">18</span><span class="p">:</span><span class="mi">52</span> <span class="no">UTC</span> <span class="o">+</span><span class="mo">00</span><span class="p">:</span><span class="mo">00</span><span class="p">,</span>
+</span><span class='line'> <span class="n">updated_at</span><span class="p">:</span> <span class="no">Tue</span><span class="p">,</span> <span class="mo">02</span> <span class="no">Sep</span> <span class="mi">2014</span> <span class="mi">19</span><span class="p">:</span><span class="mi">18</span><span class="p">:</span><span class="mi">52</span> <span class="no">UTC</span> <span class="o">+</span><span class="mo">00</span><span class="p">:</span><span class="mo">00</span><span class="p">,</span>
+</span><span class='line'> <span class="ss">role</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span>
+</span><span class='line'> <span class="ss">bio</span><span class="p">:</span> <span class="kp">nil</span><span class="o">&gt;</span>
 </span></code></pre></td></tr></table></div></figure>
 
-
-<p><img src="http://raysrashmi.com/images/pretty_print.png" /></p>
 
 <h2>Skip gems</h2>
 
-<p>We can skip adding gems to Gem file while creating new app with <code>--skip-gems</code> option</p>
+<p>We can skip default gems to Gem file while creating new app with <code>--skip-gems</code> option. They will not be added to our <code>Gemfile</code></p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">rails</span> <span class="kp">new</span> <span class="o">&lt;</span><span class="n">app</span> <span class="nb">name</span><span class="o">&gt;</span> <span class="o">--</span><span class="n">skip</span><span class="o">-</span><span class="n">gems</span> <span class="n">turbolinks</span> <span class="n">coffee</span><span class="o">-</span><span class="n">rails</span>
@@ -199,11 +234,11 @@ Rails 4.2 pretty print support for active base record</p>
 
 <h2>Empty your database</h2>
 
-<p>Rails provides us few rake tasks to create/delete database and to run migrations.</p>
+<p>Rails provides us few database related rake tasks such as to create/drop database and to run migrations.</p>
 
-<p>There is new task <code>rake db:purge</code> to empty database for current environment.</p>
+<p>There is a new rake task added <code>rake db:purge</code> to empty database for current environment.</p>
 
-<p>It removes your data and tables from database and of course we pass environment <code>RAILS_ENV</code> like any other rake task.</p>
+<p>It removes your data and tables from database and of course we can pass environment <code>RAILS_ENV</code> like any other rake task.</p>
 
 <h2>Transform Hash Values</h2>
 
@@ -212,57 +247,55 @@ Rails 4.2 pretty print support for active base record</p>
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 </pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">a</span> <span class="o">=</span> <span class="p">{</span><span class="ss">a</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="ss">b</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="ss">c</span><span class="p">:</span> <span class="mi">3</span><span class="p">}</span>
-</span><span class='line'><span class="n">a</span><span class="o">.</span><span class="n">transform_values</span><span class="p">{</span><span class="o">|</span><span class="n">a</span><span class="o">|</span><span class="n">a</span><span class="o">*</span><span class="mi">2</span><span class="p">}</span> <span class="c1">#=&gt; {:a=&gt;2, :b=&gt;4, :c=&gt;6}</span>
+</span><span class='line'><span class="n">a</span><span class="o">.</span><span class="n">transform_values</span><span class="p">{</span> <span class="o">|</span><span class="n">a</span><span class="o">|</span><span class="n">a</span><span class="o">*</span><span class="mi">2</span> <span class="p">}</span> <span class="c1">#=&gt; {:a=&gt;2, :b=&gt;4, :c=&gt;6}</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>There is also bang version <code>transform_values!</code> which change original hash</p>
+<p>There is also a bang version <code>transform_values!</code> which change original hash</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 </pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">a</span> <span class="o">=</span> <span class="p">{</span><span class="ss">a</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="ss">b</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="ss">c</span><span class="p">:</span> <span class="mi">3</span><span class="p">}</span>
-</span><span class='line'><span class="n">a</span><span class="o">.</span><span class="n">transform_values!</span><span class="p">{</span><span class="o">|</span><span class="n">a</span><span class="o">|</span><span class="n">a</span><span class="o">*</span><span class="mi">2</span><span class="p">}</span> <span class="c1">#=&gt; {:a=&gt;2, :b=&gt;4, :c=&gt;6}</span>
+</span><span class='line'><span class="n">a</span><span class="o">.</span><span class="n">transform_values!</span><span class="p">{</span> <span class="o">|</span><span class="n">a</span><span class="o">|</span><span class="n">a</span><span class="o">*</span><span class="mi">2</span> <span class="p">}</span> <span class="c1">#=&gt; {:a=&gt;2, :b=&gt;4, :c=&gt;6}</span>
 </span><span class='line'><span class="n">a</span> <span class="c1">#=&gt; {:a=&gt;2, :b=&gt;4, :c=&gt;6}</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
 <h2>Truncate String by words</h2>
 
-<p><code>truncate_words</code> method truncate a string by given number of words</p>
+<p>There is new method <code>truncate_words</code> which truncate a string by given number of words length</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="s1">&#39;This is fantastic place in this world&#39;</span><span class="o">.</span><span class="n">truncate_words</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="c1">#=&gt; &quot;This is fantastic...&quot;</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<h2>bin/setup</h2>
+<h2>New binstubs(bin/setup)</h2>
 
 <p>We always need some set of commands to bootstrap our application.</p>
 
-<p>Now in Rails 4.2 there is default <code>bin/setup</code> script where we can have all the commands required to bootstrap our application.</p>
+<p>Now in Rails 4.2 there is default <code>bin/setup</code> script where we can have all tasks to setup our application in quick and consistent way. It is place in bin directory.</p>
 
-<p>There are some defaults commands written but we can add more</p>
-
-<p>Default bin/setup file look like</p>
-
-<p><img src="http://raysrashmi.com/images/bin_setup.png" /></p>
+<p>There are some defaults commands given by Rails but we can add more as per our requiremnt.</p>
 
 <h2>Support for PostgreSQL citext data type</h2>
 
 <p>Rails 4.2 added support for <a href='http://www.postgresql.org/docs/9.0/static/citext.html'><code>citext</code></a>
 column type in PostgreSQL adapter.</p>
 
-<p>You have to enable extension before running migration</p>
-
-<p><code>citext</code> column type provides a case-insensitive character string type.</p>
+<p>But we have to enable extension before running migration because its additional supplied module</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">execute</span> <span class="s2">&quot;CREATE EXTENSION IF NOT EXISTS citext&quot;</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
+<p><code>citext</code> column type provides a case-insensitive character string type.</p>
+
 <p>For example we have a <code>users</code> table with bio column as <code>citext</code> type</p>
+
+<p>We have a user object with bio value as &lsquo;developer&rsquo; but we search with &lsquo;Developer&rsquo; it will return our user object in result</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -273,9 +306,12 @@ column type in PostgreSQL adapter.</p>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>Here you can see we have user with bio value as &lsquo;developer&rsquo; but when in <code>where</code> query with &lsquo;Developer&rsquo; value gave us the user.</p>
-
 <p>Internally <code>citext</code> calls lower when comparing values so we don&rsquo;t need to explicitly convert value in lowercase</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">SELECT</span> <span class="o">*</span> <span class="no">FROM</span> <span class="n">tab</span> <span class="no">WHERE</span> <span class="n">lower</span><span class="p">(</span><span class="n">col</span><span class="p">)</span> <span class="o">=</span> <span class="no">LOWER</span><span class="p">(</span><span class="sc">?)</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <h1>References</h1>
 ]]></content>
