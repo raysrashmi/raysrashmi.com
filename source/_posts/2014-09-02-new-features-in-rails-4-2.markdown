@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "Rails 4.2 beta Changelog"
-date: 2014-08-28 15:42
+title: "New features in Rails 4.2"
+date: 2014-09-02 15:42
 comments: true
 categories:
 keywords: rails 4.2 beta, rails changelog rails, ruby
@@ -227,3 +227,5 @@ Here are some more articles about rails 4.2
 * http://www.justinweiss.com/blog/2014/08/25/the-lesser-known-features-in-rails-4-dot-2/
 
 Thanks to all Rails contributors for making Rails awesome :)
+
+If you any feedback on this article let me know <a href='https://twitter.com/raysrashmi'>@raysrashnmi</a> on Twitter

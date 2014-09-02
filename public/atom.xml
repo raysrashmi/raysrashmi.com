@@ -4,7 +4,7 @@
   <title><![CDATA[Rashmi Yadav]]></title>
   <link href="http://raysrashmi.com/atom.xml" rel="self"/>
   <link href="http://raysrashmi.com/"/>
-  <updated>2014-09-02T22:02:30+02:00</updated>
+  <updated>2014-09-02T22:13:46+02:00</updated>
   <id>http://raysrashmi.com/</id>
   <author>
     <name><![CDATA[Rashmi Yadav]]></name>
@@ -14,10 +14,10 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Rails 4.2 beta Changelog]]></title>
-    <link href="http://raysrashmi.com/2014/08/28/rails-4-2-features/"/>
-    <updated>2014-08-28T15:42:00+02:00</updated>
-    <id>http://raysrashmi.com/2014/08/28/rails-4-2-features</id>
+    <title type="html"><![CDATA[New features in Rails 4.2]]></title>
+    <link href="http://raysrashmi.com/2014/09/02/new-features-in-rails-4-2/"/>
+    <updated>2014-09-02T15:42:00+02:00</updated>
+    <id>http://raysrashmi.com/2014/09/02/new-features-in-rails-4-2</id>
     <content type="html"><![CDATA[<p><a href='http://edgeguides.rubyonrails.org/4_2_release_notes.html'>Rails 4.2 beta</a> has been released and final version is going to come out soon.</p>
 
 <p>Listed are some feature are going introduced in version of Rails 4.2. You can also try them while it&rsquo;s beta.</p>
@@ -326,6 +326,8 @@ just pass that object to <code>pp</code> method</p>
 
 
 <p>Thanks to all Rails contributors for making Rails awesome :)</p>
+
+<p>If you any feedback on this article let me know <a href='https://twitter.com/raysrashmi'>@raysrashnmi</a> on Twitter</p>
 ]]></content>
   </entry>
   
