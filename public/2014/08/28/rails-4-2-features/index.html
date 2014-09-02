@@ -318,6 +318,87 @@ raise <code>ActiveRecord::RecordInvalid</code> if any validation fails</p>
 </span></code></pre></td></tr></table></div></figure>
 
 
+<h2>Support for PostgreSQL citext data type</h2>
+
+<p>Rails 4.2 added support for <a href='http://www.postgresql.org/docs/9.0/static/citext.html'><code>citext</code></a>
+column type in PostgreSQL adapter.</p>
+
+<p>But we have to enable extension before running migration because its additional supplied module</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">execute</span> <span class="s2">&quot;CREATE EXTENSION IF NOT EXISTS citext&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>citext</code> column type provides a case-insensitive character string type.</p>
+
+<p>For example we have a <code>users</code> table with bio column as <code>citext</code> type</p>
+
+<p>We have a user object with bio value as &lsquo;developer&rsquo; but we search with &lsquo;Developer&rsquo; it will return our user object in result</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">User</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="ss">bio</span><span class="p">:</span> <span class="s1">&#39;Developer&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="c1">#=&gt;SELECT &quot;users&quot;.* FROM &quot;users&quot; WHERE &quot;users&quot;.&quot;bio&quot; = $1  [[&quot;bio&quot;, &quot;Developer&quot;]]</span>
+</span><span class='line'><span class="c1">#=&gt; #&lt;ActiveRecord::Relation [#&lt;User id: 1, name: nil, email: &quot;test@example.com&quot;, created_at: &quot;2014-08-30 17:51:17&quot;, updated_at: &quot;2014-08-30 17:51:17&quot;, role: nil, bio: &quot;developer&quot;&gt;]&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Internally <code>citext</code> calls lower when comparing values so we don&rsquo;t need to explicitly convert value in lowercase</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">SELECT</span> <span class="o">*</span> <span class="no">FROM</span> <span class="n">tab</span> <span class="no">WHERE</span> <span class="n">lower</span><span class="p">(</span><span class="n">col</span><span class="p">)</span> <span class="o">=</span> <span class="no">LOWER</span><span class="p">(</span><span class="sc">?)</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Empty your database</h2>
+
+<p>Rails provides us few database related rake tasks such as to create/drop database and to run migrations.</p>
+
+<p>There is a new rake task added <code>rake db:purge</code> to empty database for current environment.</p>
+
+<p>It removes your data and tables from database and of course we can pass environment <code>RAILS_ENV</code> like any other rake task.</p>
+
+<h2>New binstubs(bin/setup)</h2>
+
+<p>We always need some set of commands to bootstrap our application.</p>
+
+<p>Now in Rails 4.2 there is default <code>bin/setup</code> script where we can have all tasks to setup our application in quick and consistent way. It is located in bin directory.</p>
+
+<p>There are some defaults commands given by Rails but we can add more as per our requirement.</p>
+
+<h2>Transform Hash Values</h2>
+
+<p>To modify Hash values call <code>tarnsform_values</code> it accepts a block and apply the block operation to each value of hash</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">a</span> <span class="o">=</span> <span class="p">{</span><span class="ss">a</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="ss">b</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="ss">c</span><span class="p">:</span> <span class="mi">3</span><span class="p">}</span>
+</span><span class='line'><span class="n">a</span><span class="o">.</span><span class="n">transform_values</span><span class="p">{</span> <span class="o">|</span><span class="n">a</span><span class="o">|</span><span class="n">a</span><span class="o">*</span><span class="mi">2</span> <span class="p">}</span> <span class="c1">#=&gt; {:a=&gt;2, :b=&gt;4, :c=&gt;6}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>There is also a bang version <code>transform_values!</code> which change original hash</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">a</span> <span class="o">=</span> <span class="p">{</span><span class="ss">a</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="ss">b</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="ss">c</span><span class="p">:</span> <span class="mi">3</span><span class="p">}</span>
+</span><span class='line'><span class="n">a</span><span class="o">.</span><span class="n">transform_values!</span><span class="p">{</span> <span class="o">|</span><span class="n">a</span><span class="o">|</span><span class="n">a</span><span class="o">*</span><span class="mi">2</span> <span class="p">}</span> <span class="c1">#=&gt; {:a=&gt;2, :b=&gt;4, :c=&gt;6}</span>
+</span><span class='line'><span class="n">a</span> <span class="c1">#=&gt; {:a=&gt;2, :b=&gt;4, :c=&gt;6}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Truncate String by words</h2>
+
+<p>There is new method <code>truncate_words</code> which truncate a string by given number of words length</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="s1">&#39;This is fantastic place in this world&#39;</span><span class="o">.</span><span class="n">truncate_words</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="c1">#=&gt; &quot;This is fantastic...&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
 <h2>Pretty print for ActiveRecord object</h2>
 
 <p>Now in Rails console/logs we can print ActiveRecord object output nicely
@@ -355,88 +436,19 @@ just pass that object to <code>pp</code> method</p>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<h2>Empty your database</h2>
+<h3>References</h3>
 
-<p>Rails provides us few database related rake tasks such as to create/drop database and to run migrations.</p>
+<p>Here are some more articles about rails 4.2</p>
 
-<p>There is a new rake task added <code>rake db:purge</code> to empty database for current environment.</p>
-
-<p>It removes your data and tables from database and of course we can pass environment <code>RAILS_ENV</code> like any other rake task.</p>
-
-<h2>Transform Hash Values</h2>
-
-<p>To modify Hash values call <code>tarnsform_values</code> it accepts a block and apply the block operation to each value of hash</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">a</span> <span class="o">=</span> <span class="p">{</span><span class="ss">a</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="ss">b</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="ss">c</span><span class="p">:</span> <span class="mi">3</span><span class="p">}</span>
-</span><span class='line'><span class="n">a</span><span class="o">.</span><span class="n">transform_values</span><span class="p">{</span> <span class="o">|</span><span class="n">a</span><span class="o">|</span><span class="n">a</span><span class="o">*</span><span class="mi">2</span> <span class="p">}</span> <span class="c1">#=&gt; {:a=&gt;2, :b=&gt;4, :c=&gt;6}</span>
-</span></code></pre></td></tr></table></div></figure>
+<ul>
+<li><a href="http://edgeguides.rubyonrails.org/4_2_release_notes.html">http://edgeguides.rubyonrails.org/4_2_release_notes.html</a></li>
+<li><a href="http://blog.newrelic.com/2014/04/25/ponies-rails-adequaterecord/">http://blog.newrelic.com/2014/04/25/ponies-rails-adequaterecord/</a></li>
+<li><a href="http://blog.plataformatec.com.br/2014/07/the-new-html-sanitizer-in-rails-4-2/">http://blog.plataformatec.com.br/2014/07/the-new-html-sanitizer-in-rails-4-2/</a></li>
+<li><a href="http://www.justinweiss.com/blog/2014/08/25/the-lesser-known-features-in-rails-4-dot-2/">http://www.justinweiss.com/blog/2014/08/25/the-lesser-known-features-in-rails-4-dot-2/</a></li>
+</ul>
 
 
-<p>There is also a bang version <code>transform_values!</code> which change original hash</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">a</span> <span class="o">=</span> <span class="p">{</span><span class="ss">a</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="ss">b</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="ss">c</span><span class="p">:</span> <span class="mi">3</span><span class="p">}</span>
-</span><span class='line'><span class="n">a</span><span class="o">.</span><span class="n">transform_values!</span><span class="p">{</span> <span class="o">|</span><span class="n">a</span><span class="o">|</span><span class="n">a</span><span class="o">*</span><span class="mi">2</span> <span class="p">}</span> <span class="c1">#=&gt; {:a=&gt;2, :b=&gt;4, :c=&gt;6}</span>
-</span><span class='line'><span class="n">a</span> <span class="c1">#=&gt; {:a=&gt;2, :b=&gt;4, :c=&gt;6}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Truncate String by words</h2>
-
-<p>There is new method <code>truncate_words</code> which truncate a string by given number of words length</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="s1">&#39;This is fantastic place in this world&#39;</span><span class="o">.</span><span class="n">truncate_words</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="c1">#=&gt; &quot;This is fantastic...&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>New binstubs(bin/setup)</h2>
-
-<p>We always need some set of commands to bootstrap our application.</p>
-
-<p>Now in Rails 4.2 there is default <code>bin/setup</code> script where we can have all tasks to setup our application in quick and consistent way. It is place in bin directory.</p>
-
-<p>There are some defaults commands given by Rails but we can add more as per our requiremnt.</p>
-
-<h2>Support for PostgreSQL citext data type</h2>
-
-<p>Rails 4.2 added support for <a href='http://www.postgresql.org/docs/9.0/static/citext.html'><code>citext</code></a>
-column type in PostgreSQL adapter.</p>
-
-<p>But we have to enable extension before running migration because its additional supplied module</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">execute</span> <span class="s2">&quot;CREATE EXTENSION IF NOT EXISTS citext&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><code>citext</code> column type provides a case-insensitive character string type.</p>
-
-<p>For example we have a <code>users</code> table with bio column as <code>citext</code> type</p>
-
-<p>We have a user object with bio value as &lsquo;developer&rsquo; but we search with &lsquo;Developer&rsquo; it will return our user object in result</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">User</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="ss">bio</span><span class="p">:</span> <span class="s1">&#39;Developer&#39;</span><span class="p">)</span>
-</span><span class='line'><span class="c1">#=&gt;SELECT &quot;users&quot;.* FROM &quot;users&quot; WHERE &quot;users&quot;.&quot;bio&quot; = $1  [[&quot;bio&quot;, &quot;Developer&quot;]]</span>
-</span><span class='line'><span class="c1">#=&gt; #&lt;ActiveRecord::Relation [#&lt;User id: 1, name: nil, email: &quot;test@example.com&quot;, created_at: &quot;2014-08-30 17:51:17&quot;, updated_at: &quot;2014-08-30 17:51:17&quot;, role: nil, bio: &quot;developer&quot;&gt;]&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Internally <code>citext</code> calls lower when comparing values so we don&rsquo;t need to explicitly convert value in lowercase</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">SELECT</span> <span class="o">*</span> <span class="no">FROM</span> <span class="n">tab</span> <span class="no">WHERE</span> <span class="n">lower</span><span class="p">(</span><span class="n">col</span><span class="p">)</span> <span class="o">=</span> <span class="no">LOWER</span><span class="p">(</span><span class="sc">?)</span><span class="p">;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h1>References</h1>
+<p>Thanks to all Rails contributors for making Rails awesome :)</p>
 
     </div>
   </div>

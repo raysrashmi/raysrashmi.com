@@ -132,64 +132,6 @@ But in Rails 4.2 we can update multiple attributes at once with `touch` method
 a = Article.first
 a.touch(:published_at, :created_at) #=> true
 ```
-##Pretty print for ActiveRecord object
-Now in Rails console/logs we can print ActiveRecord object output nicely
-just pass that object to `pp` method
-```ruby
-pp User.last
-
-#<User:0x007f8fdf29f3a8
- id: 2,
- name: nil,
- email: nil,
- created_at: Tue, 02 Sep 2014 19:18:52 UTC +00:00,
- updated_at: Tue, 02 Sep 2014 19:18:52 UTC +00:00,
- role: "user",
- bio: nil>
-```
-
-## Skip gems
-
-We can skip default gems to Gem file while creating new app with `--skip-gems` option. They will not be added to our `Gemfile`
-
-```ruby
-rails new <app name> --skip-gems turbolinks coffee-rails
-```
-## Empty your database
-Rails provides us few database related rake tasks such as to create/drop database and to run migrations.
-
-There is a new rake task added `rake db:purge` to empty database for current environment.
-
-It removes your data and tables from database and of course we can pass environment `RAILS_ENV` like any other rake task.
-
-
-##Transform Hash Values
-To modify Hash values call `tarnsform_values` it accepts a block and apply the block operation to each value of hash
-
-```ruby
-a = {a: 1, b: 2, c: 3}
-a.transform_values{ |a|a*2 } #=> {:a=>2, :b=>4, :c=>6}
-```
-There is also a bang version `transform_values!` which change original hash
-```ruby
-a = {a: 1, b: 2, c: 3}
-a.transform_values!{ |a|a*2 } #=> {:a=>2, :b=>4, :c=>6}
-a #=> {:a=>2, :b=>4, :c=>6}
-```
-
-##Truncate String by words
-There is new method `truncate_words` which truncate a string by given number of words length
-
-```ruby
-'This is fantastic place in this world'.truncate_words(3) #=> "This is fantastic..."
-```
-##New binstubs(bin/setup)
-We always need some set of commands to bootstrap our application.
-
-Now in Rails 4.2 there is default `bin/setup` script where we can have all tasks to setup our application in quick and consistent way. It is place in bin directory.
-
-There are some defaults commands given by Rails but we can add more as per our requiremnt.
-
 ##Support for PostgreSQL citext data type
 Rails 4.2 added support for <a href='http://www.postgresql.org/docs/9.0/static/citext.html'>`citext`</a>
 column type in PostgreSQL adapter.
@@ -217,6 +159,71 @@ Internally `citext` calls lower when comparing values so we don't need to explic
 ```ruby
 SELECT * FROM tab WHERE lower(col) = LOWER(?);
 ```
+## Empty your database
+Rails provides us few database related rake tasks such as to create/drop database and to run migrations.
 
-#References
+There is a new rake task added `rake db:purge` to empty database for current environment.
 
+It removes your data and tables from database and of course we can pass environment `RAILS_ENV` like any other rake task.
+
+##New binstubs(bin/setup)
+We always need some set of commands to bootstrap our application.
+
+Now in Rails 4.2 there is default `bin/setup` script where we can have all tasks to setup our application in quick and consistent way. It is located in bin directory.
+
+There are some defaults commands given by Rails but we can add more as per our requirement.
+
+##Transform Hash Values
+To modify Hash values call `tarnsform_values` it accepts a block and apply the block operation to each value of hash
+
+```ruby
+a = {a: 1, b: 2, c: 3}
+a.transform_values{ |a|a*2 } #=> {:a=>2, :b=>4, :c=>6}
+```
+There is also a bang version `transform_values!` which change original hash
+```ruby
+a = {a: 1, b: 2, c: 3}
+a.transform_values!{ |a|a*2 } #=> {:a=>2, :b=>4, :c=>6}
+a #=> {:a=>2, :b=>4, :c=>6}
+```
+
+##Truncate String by words
+There is new method `truncate_words` which truncate a string by given number of words length
+
+```ruby
+'This is fantastic place in this world'.truncate_words(3) #=> "This is fantastic..."
+```
+
+##Pretty print for ActiveRecord object
+Now in Rails console/logs we can print ActiveRecord object output nicely
+just pass that object to `pp` method
+
+```ruby
+pp User.last
+
+#<User:0x007f8fdf29f3a8
+ id: 2,
+ name: nil,
+ email: nil,
+ created_at: Tue, 02 Sep 2014 19:18:52 UTC +00:00,
+ updated_at: Tue, 02 Sep 2014 19:18:52 UTC +00:00,
+ role: "user",
+ bio: nil>
+```
+## Skip gems
+
+We can skip default gems to Gem file while creating new app with `--skip-gems` option. They will not be added to our `Gemfile`
+
+```ruby
+rails new <app name> --skip-gems turbolinks coffee-rails
+```
+
+###References
+Here are some more articles about rails 4.2
+
+* http://edgeguides.rubyonrails.org/4_2_release_notes.html
+* http://blog.newrelic.com/2014/04/25/ponies-rails-adequaterecord/
+* http://blog.plataformatec.com.br/2014/07/the-new-html-sanitizer-in-rails-4-2/
+* http://www.justinweiss.com/blog/2014/08/25/the-lesser-known-features-in-rails-4-dot-2/
+
+Thanks to all Rails contributors for making Rails awesome :)
