@@ -4,7 +4,7 @@
   <title><![CDATA[Rashmi Yadav]]></title>
   <link href="http://raysrashmi.com/atom.xml" rel="self"/>
   <link href="http://raysrashmi.com/"/>
-  <updated>2014-09-02T22:13:46+02:00</updated>
+  <updated>2014-09-08T18:41:28+02:00</updated>
   <id>http://raysrashmi.com/</id>
   <author>
     <name><![CDATA[Rashmi Yadav]]></name>
@@ -247,7 +247,7 @@ column type in PostgreSQL adapter.</p>
 
 <h2>Transform Hash Values</h2>
 
-<p>To modify Hash values call <code>tarnsform_values</code> it accepts a block and apply the block operation to each value of hash</p>
+<p>To modify Hash values call <code>transform_values</code> it accepts a block and apply the block operation to each value of hash</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
