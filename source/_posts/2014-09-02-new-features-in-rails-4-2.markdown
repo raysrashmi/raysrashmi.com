@@ -174,7 +174,7 @@ Now in Rails 4.2 there is default `bin/setup` script where we can have all tasks
 There are some defaults commands given by Rails but we can add more as per our requirement.
 
 ##Transform Hash Values
-To modify Hash values call `tarnsform_values` it accepts a block and apply the block operation to each value of hash
+To modify Hash values call `transform_values` it accepts a block and apply the block operation to each value of hash
 
 ```ruby
 a = {a: 1, b: 2, c: 3}
