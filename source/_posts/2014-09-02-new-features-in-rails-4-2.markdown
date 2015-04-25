@@ -4,7 +4,7 @@ title: "New features in Rails 4.2"
 date: 2014-09-02 15:42
 comments: true
 categories:
-keywords: rails 4.2 beta, rails changelog rails, ruby
+keywords: rails 4, rails 4.2 beta, rails changelog rails, ruby
 ---
 
 <a href='http://edgeguides.rubyonrails.org/4_2_release_notes.html'>Rails 4.2 beta</a> has been released and final version is going to come out soon.
