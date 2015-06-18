@@ -3,11 +3,10 @@ layout: post
 title: "Announcing Ruby Raven"
 date: 2015-06-17 21:52
 comments: true
-categories: ruby raven rubyconferences conferences
+categories:
 keywords: rubyconferences, ruby raven, ruby raven ios app, rubyconferences ios app
 description: Ruby Raven List of Ruby Conferences happening around the world.
 ---
-
 [{% img /images/rubyraven.png 200 200 %}][rubyraven]
 
 We are pleases to announce [Ruby Raven][rubyraven] which is an iOS that will keep you updated about latest happening in Ruby Conferences world.
