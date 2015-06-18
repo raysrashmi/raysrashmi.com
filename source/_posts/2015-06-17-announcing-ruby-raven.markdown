@@ -9,7 +9,7 @@ description: Ruby Raven List of Ruby Conferences happening around the world.
 ---
 [{% img /images/rubyraven.png 200 200 %}][rubyraven]
 
-We are pleases to announce [Ruby Raven][rubyraven] which is an iOS that will keep you updated about latest happening in Ruby Conferences world.
+We are pleases to announce [Ruby Raven][rubyraven] which is an iOS app that will keep you updated about latest happening in Ruby Conferences world.
 
 Inside [Ruby Raven][rubyraven] App you can see all upcoming Ruby Conferences.
 
